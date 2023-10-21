@@ -1,13 +1,15 @@
 const express = require('express')
+var request = require('request')
 
 const app = express()
 
-app.listen(3000, () => console.log('Server listening at port 3000'))
+const port = 8080
+app.listen(port, () => console.log(`Server listening at port ${port}`))
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('Welcome to Stock Trainer backend')
 })
 
-app.get('/about', (req, res) => {
+app.get('/stocks', (req, res) => {
   res.send('About route')
 })
