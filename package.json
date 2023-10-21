@@ -1,0 +1,14 @@
+{
+  "name": "stock-trainer-backend",
+  "version": "1.0.0",
+  "description": "CS 5704 Software Engineering Project",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
