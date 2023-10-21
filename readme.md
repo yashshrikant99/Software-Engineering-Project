@@ -15,7 +15,7 @@ The bin directory is where you place scripts to start your web server. It's a go
 # config — Centralized Configuration
 The config directory is dedicated to holding configuration files. These files can contain settings like database connections, API keys, or environment-specific configurations. By centralizing these settings, you make it easier to manage and maintain your application across different environments.
 
-# Controllers — The Brains of Your Application
+# controllers — The Brains of Your Application
 Controllers are where the logic of your application resides. Each file in the controllers directory should handle a specific part of your application's functionality. For instance, you might have customer.js for customer-related operations and product.js for product-related operations.
 
 Controllers encapsulate the core business logic of your application, ensuring that it remains separated from the routing and other parts of your application.
