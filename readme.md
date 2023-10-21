@@ -1,5 +1,5 @@
-# app.js — The Control Center
-Your app.js file serves as the control center of your application. It's where you configure your Express server, set up middleware, and establish the essential components of your application.
+# index.js — The Control Center
+Your index.js file serves as the control center of your application. It's where you configure your Express server, set up middleware, and establish the essential components of your application.
 
 In app.js, you'll typically include:
 
