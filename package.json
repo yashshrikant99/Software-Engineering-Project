@@ -2,18 +2,22 @@
   "name": "stock-trainer-backend",
   "version": "1.0.0",
   "description": "CS 5704 Software Engineering Project",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "node index.js"
+    "test": "node server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "live-server": "^1.2.2",
+    "nodemon": "^3.0.1",
     "redis": "^4.6.10",
     "request": "^2.88.2"
   }
