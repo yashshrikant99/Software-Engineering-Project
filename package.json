@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +17,11 @@
     "live-server": "^1.2.2",
     "redis": "^4.6.10",
     "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "yahoo-finance": "^0.3.8",
     "yfinance": "^0.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
