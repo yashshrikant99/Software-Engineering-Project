@@ -1,0 +1,12 @@
+.icons{
+    display: flex;
+    /* flex-direction: row; */
+    padding-top:0.10em;
+    padding-left:66.5em;
+    padding-bottom:1em;
+    gap: 3em;
+    cursor:pointer;
+}
+.logo-text{
+    padding-top:0.40em;
+}

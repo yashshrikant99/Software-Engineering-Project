@@ -6,19 +6,37 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 import RegistrationForm from './components/RegistrationForm';
+import Dashboard from './components/Dashboard';
+import Holdings from './components/Holdings';
+import Funds from './components/Funds';
+import Watchlist from './components/Watchlist';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route, useParams,
+} from "react-router-dom"
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <NavBar/>
-      <LoginForm/>
-      {/* <RegistrationForm/> */}
+      <Routes>Home
+      <Route path="/signin"  element = {<LoginForm/>}> </Route>
+      <Route path ="/registration" element ={<RegistrationForm/>}></Route>
+      <Route path ="/dashboard" element ={<Dashboard/>}></Route>
+      <Route path ="/holdings" element ={<Holdings/>}></Route>
+      <Route path ="/funds" element ={<Funds/>}></Route>
+      <Route path ="/watchlist" element ={<Watchlist/>}></Route>
+
+
+      </Routes>
       <Footer/>
-    </div>
+      </Router>
   );
 }
 
