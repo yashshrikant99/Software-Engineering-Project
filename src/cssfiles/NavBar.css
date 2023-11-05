@@ -6,6 +6,11 @@
     padding-top:2em;
     gap:6em
 }
+@media (max-width: 600px) {
+    NavBar {
+        flex-direction: column;
+    }
+}
 .drop-name{
     padding-top:2em;
     /* padding-bottom:1em; */

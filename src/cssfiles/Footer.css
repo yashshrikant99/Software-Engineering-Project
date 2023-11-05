@@ -1,3 +1,12 @@
+.footer-class{
+    display: flex;
+    flex-direction: column;
+    /* width: 1200px; */
+    height: 150px;
+    justify-content: space-between;
+
+    /* background-color: red; */
+}
 .icons{
     display: flex;
     /* flex-direction: row; */
@@ -10,3 +19,8 @@
 .logo-text{
     padding-top:0.40em;
 }
+/* @media (max-width: 600px) {
+    footer {
+        flex-direction: column;
+    }
+} */
