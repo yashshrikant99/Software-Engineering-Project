@@ -31,10 +31,10 @@ export default function NavBar(){
             navbarScroll
           >
           <div className ="links">
-            <Link to ='/dashboard'className ="text-light fs-4 px-3" >Dashboard</Link>
-            <Link to='/holdings' className ="text-light fs-4 px-3">Holdings</Link>
-            <Link to = '/funds'className ="text-light fs-4 px-3">Funds</Link>
-            <Link to ='/watchlist' className ="text-light fs-4 px-3">Watchlist</Link>
+            <Link to ='/dashboard'className ="text-light fs-4 px-3 dashboard" >Dashboard</Link>
+            <Link to='/holdings' className ="text-light fs-4 px-3 holdings">Holdings</Link>
+            <Link to = '/funds'className ="text-light fs-4 px-3 funds">Funds</Link>
+            <Link to ='/watchlist' className ="text-light fs-4 px-3 watchlist">Watchlist</Link>
 
            </div>
             <NavDropdown

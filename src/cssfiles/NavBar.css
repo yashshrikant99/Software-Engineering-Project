@@ -4,7 +4,25 @@
     padding-left:41em;
     /* padding-bottom: 0.5em; */
     padding-top:2em;
-    gap:6em
+    gap:6em;
+    /* color:white; */
+}
+.dashboard{
+    text-decoration: none;
+}
+.holdings{
+    text-decoration: none;
+}
+.funds{
+    text-decoration: none;
+}
+.watchlist{
+    text-decoration: none;
+}
+@media (max-width: 600px) {
+    NavBar {
+        flex-direction: column;
+    }
 }
 .drop-name{
     padding-top:2em;

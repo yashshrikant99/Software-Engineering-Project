@@ -13,6 +13,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Formik, Form } from 'formik';
 import {Link} from "react-router-dom";
+import '../cssfiles/LoginForm.css';
+
 
 
 
@@ -68,6 +70,7 @@ export default function LoginForm() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+
     });
   };
   return (
@@ -168,7 +171,7 @@ export default function LoginForm() {
                               Forgot password?
                             </Link>
                           </Grid>
-                          <Grid item>
+                          <Grid item className='link'>
                             <Link to='/registration' variant="body2">
                               {"Don't have an account? Sign Up"}
                             </Link>
