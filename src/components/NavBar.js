@@ -19,10 +19,9 @@ export default function NavBar(){
     return (
       <div>
         {/* <img src = '/images/tt-logo.png'alt="logo"> </img> */}
-        <Navbar bg = "dark" expand="lg">
-      <Container fluid style={ {height:'120%'}}>
+        <Navbar bg = "dark">
+      <Container  maxWidth= {false} style={{height:'120%'}}>
         <Navbar.Brand className ="text-light"href="#"></Navbar.Brand>
-        {/* <img src = '../images/tt-logo.png'alt="logo"> </img> */}
         <Navbar.Toggle aria-controls="navbarScroll"  />
         <Navbar.Collapse id="navbarScroll">
           <Nav
