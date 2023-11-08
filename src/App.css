@@ -1,15 +1,16 @@
 .App {
   text-align: center;
+  
   /* height: 100vh; */
 }
 
-@media only screen and (orientation: portrait) {
-  /* styles for portrait orientation */
+/* @media only screen and (orientation: portrait) {
+  styles for portrait orientation
   }
   
 @media only screen and (orientation: landscape) {
-  /* styles for landscape orientation */
-}
+  styles for landscape orientation
+} */
 
 /* 
 {

@@ -24,18 +24,18 @@ import {
 function App() {
   return (
     <Router>
-      <NavBar/>
+      {/* <NavBar/> */}
       <Routes>Home
-      <Route path="/signin"  element = {<LoginForm/>}> </Route>
-      <Route path ="/registration" element ={<RegistrationForm/>}></Route>
-      <Route path ="/dashboard" element ={<Dashboard/>}></Route>
+      {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
+      {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
+      <Route path ="/dashboard" element ={<Dashboard/>}></Route> 
       <Route path ="/holdings" element ={<Holdings/>}></Route>
-      <Route path ="/funds" element ={<Funds/>}></Route>
-      <Route path ="/watchlist" element ={<Watchlist/>}></Route>
+      {/* <Route path ="/funds" element ={<Funds/>}></Route>
+      <Route path ="/watchlist" element ={<Watchlist/>}></Route> */}
 
 
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
       </Router>
   );
 }
