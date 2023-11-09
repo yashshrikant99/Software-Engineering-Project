@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     profile_img: DataTypes.TEXT,
     funds_available: DataTypes.INTEGER,
   }, {
-    sequelize,
+    seq: sequelize,
     modelName: 'User',
   });
   return User;
