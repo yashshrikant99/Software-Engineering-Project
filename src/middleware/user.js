@@ -1,5 +1,7 @@
 const {Op, sequelize, DataTypes} = require('sequelize');
-const User = require('../models/user')(sequelize, DataTypes);
+const db = require("../models")
+const User = db.user
+
 
 async function Create(data){
     try{
