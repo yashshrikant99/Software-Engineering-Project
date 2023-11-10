@@ -1,3 +1,6 @@
+const yfinance = require('yahoo-finance')
+var request = require('request')
+
 function getData (symbol, fromDate, toDate, period) {
   try {
     return yfinance.historical(
@@ -12,10 +15,9 @@ function getData (symbol, fromDate, toDate, period) {
       }
     )
   } catch (error) {
-    return
+    return []
   }
 }
-
 async function getStockName (query) {
   var options = {
     method: 'GET',
@@ -36,9 +38,10 @@ async function getStockName (query) {
     })
   })
 }
-// function to filter only stocks which are equity based
+// function to filter only stocks which are equity or index
 async function filterStockNames (response) {
   var finalResponse = []
+
   response.forEach(element => {
     if (element['quoteType'] == 'EQUITY' || element['quoteType'] == 'INDEX')
       finalResponse.push(element)
@@ -46,28 +49,4 @@ async function filterStockNames (response) {
   return finalResponse
 }
 
-app.get('/', (req, res) => {
-  res.send('Welcome to Stock Trainer backend')
-})
-
-app.get('/stock-data/:symbol', async (req, res) => {
-  const result = await getData(
-    req.params['symbol'],
-    req.query['fromDate'],
-    req.query['toDate'],
-    req.query['period']
-  )
-  res.send(result)
-})
-
-app.get('/stock-name/:query', async (req, res) => {
-  try {
-    var result = await getStockName(req.params['query'])
-    console.log(result)
-    res.send(result)
-  } catch (e) {
-    console.log(e)
-  }
-})
-
-module.exports = {}
+module.exports = { getStockName, getData }
