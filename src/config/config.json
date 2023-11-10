@@ -2,7 +2,7 @@
 
     "development": {
       "username": "root",
-      "password": "Sahil@123",
+      "password": "password",
       "database": "DB_CS5704",
       "host": "localhost",
       "dialect": "mysql"
@@ -25,4 +25,3 @@
     }
 
   }
-  
