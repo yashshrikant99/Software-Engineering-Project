@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import DashboardTable from "./DashboardTable";
 
 
 // import "react-datepicker/dist/react-datepicker.css";
@@ -13,26 +14,26 @@ import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 function Dashboard() {
 
   return (
-    <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", border: 1, height:"100%"}}>
-      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0"}}>
+    <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
+      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
           <Box className ="stockname-box" sx ={{height:"5%",width:"100%"}} >
-            <Box className ="typographyBox" sx={{display:"flex", flexDirection:"row", gap:"2em", pt:"5px", pl:"2px"}}>
-                <Typography sx ={{}}> 
+            <Box className ="typographyBox" sx={{display:"flex", flexDirection:"row", gap:"2em", pt:"5px", pl:"2px", ml:2}}>
+                <Typography sx ={{}}>
                       <strong sx={{ml:1}}>NIFTY 50</strong>
                       <span style={{color:"red", marginLeft:1}}>(19751.05)</span>
                         -42.95(-0.22%)</Typography>
                 <Typography sx ={{ p:"2px"}}>
-                      <strong>SENSEX</strong> 
+                      <strong>SENSEX</strong>
                       <span style={{color:"red"}}>(66282.74)</span>
                         -42.95(-0.22%)</Typography>
             </Box>
           {/* <Typography>SENSEX 50 19751.05 -42.95(-0.22%)</Typography> */}
           </Box>
-          <Box sx ={{height:"5%",width:"100%"}} >
+          <Box className="search-bar" sx ={{height:"5%"}} >
             <SearchBar/>
           </Box>
-          <Box sx ={{border:1, height:"90%",width:"100%"}} >
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em", border:1,p:2}}>
+          <Box sx ={{height:"90%",width:"100%", ml:1}} >
+            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2,bgcolor:"lightgray"}}>
               <Box className="stock-name-box" sx={{}}>
                 <Typography className ="stock-name" sx={{ml:1}}> NIFTY 50</Typography>
               </Box>
@@ -43,7 +44,7 @@ function Dashboard() {
               </Box>
             </Paper>
 
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em", border:1,p:2}}>
+            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2}}>
               <Box className="stock-name-box" sx={{}}>
                 <Typography className ="stock-name" sx={{ml:1}}> NIFTY BANK</Typography>
               </Box>
@@ -53,7 +54,7 @@ function Dashboard() {
                 <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretUp}/> &nbsp;44287.95</Typography>
               </Box>
             </Paper>
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em", border:1,p:2}}>
+            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2, bgcolor:"lightgray"}}>
               <Box className="stock-name-box" sx={{}}>
                 <Typography className ="stock-name" sx={{ml:1}}> RELIANCE</Typography>
               </Box>
@@ -67,8 +68,8 @@ function Dashboard() {
 
 
     </Box>
-      <Box sx = {{display:"flex", flexDirection:"column", border:1, height:"100%", width: "65%", bgcolor:"lightyellow"}}>
-         
+      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width: "65%", mt:5}}>
+         <DashboardTable/>
     </Box>
 
     </Container>

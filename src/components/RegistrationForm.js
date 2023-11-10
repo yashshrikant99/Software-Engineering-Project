@@ -4,8 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import {Link} from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -18,9 +18,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Formik, Form } from 'formik';
 import '../cssfiles/RegistrationForm.css';
-
+import axios from 'axios';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import dayjs, { Dayjs } from 'dayjs';
+ import dayjs, { Dayjs } from 'dayjs';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -28,6 +28,7 @@ const initialValues ={
   username: "",
   email: "",
   phonenumber: "",
+  dob:dayjs(Date.now()),
   password: ""
 };
 
@@ -37,31 +38,43 @@ const validate = (values) => {
 
   if(!values.username){
     errors.username ="Username is required";
-  }else if (!regex.test(values.username)){
-      errors.username ="Invalid Username";
+  }else if (values.username.length < 6){
+      errors.username ="Username should be atleast 6 characters";
   }
   if (!values.email) {
     errors.email = "Email is required";
   } else if (!regex.test(values.email)) {
     errors.email = "Invalid Email";
   }
-  if (!values.phonenumber) {
-    errors.phonenumber = "Phone Number is required";
-  } else if (values.phonenumber.length < 10) {
-    errors.phonenumber = "Invalid Phone Number";
+  if (!values.phone) {
+    errors.phone = "Phone Number is required";
+  } else if (values.phone.length < 10) {
+    errors.phone = "Invalid Phone Number";
   }
+  if (!values.dob) {
+    errors.dob = "DOB is required";
+  } else if (values.dob.length < 8) {
+    errors.dob = "Invalid DOB";
+  }
+
 
   if (!values.password) {
     errors.password = "Password is required";
   } else if (values.password.length < 4) {
     errors.password = "Password too short";
   }
- 
+
 
   return errors;
 };
-const submitForm = (values) => {
-  console.log(values);
+const submitForm = async(values) => {
+  // console.log(values);
+  axios.post("http://localhost:8081/users", values).then((response) => {
+    console.log("Hi there" + response);
+  })
+  .catch(err => {
+    console.error("This is error" + err);
+  })  
 };
 
 function RegistrationForm() {
@@ -73,6 +86,7 @@ function RegistrationForm() {
       username: data.get('username'),
       email: data.get('email'),
       phonenumber: data.get('phonenumber'),
+      dob: data.get('dob'),
       password: data.get('password'),
     });
   };
@@ -115,23 +129,22 @@ function RegistrationForm() {
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <TextField
-                      autoComplete="Username"
-                      name="Username"
+                  <TextField
                       required
                       fullWidth
                       id="username"
                       label="Username"
-                      // value = {values.username}
-                      // onChange={handleChange}
-                      // onBlur={handleBlur}
-                      // className ={errors.username && touched.username ?
-                      // "input-error": null}
-                      autoFocus
+                      name="username"
+                      autoComplete="username"
+                      value= {values.username}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={errors.username && touched.username?
+                      "input-error" : null}
                     />
-                    {/* {errors.username && touched.username && (
-                      <span className ="error">{errors.username}</span>
-                    )} */}
+                    {errors.username && touched.username && (
+                    <span className="error">{errors.username}</span>
+                    )}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -172,7 +185,17 @@ function RegistrationForm() {
                   <Grid item xs = {12}className='date-picker' >
                   <LocalizationProvider item xs = {12}dateAdapter={AdapterDayjs} >
                       <DemoContainer components={['DatePicker']} >
-                      <DatePicker label="DOB" />
+                      <DatePicker label="DOB"
+                      required
+                      fullWidth
+                      id ="dob"
+                      name="dob"
+                      autoComplete="dob"
+                      value={values.dob}
+                      onChange={(val)=>values.dob=val}
+                      className={errors.dob && touched.dob?
+                        "input-error" : null}
+                      />
                       </DemoContainer>
                   </LocalizationProvider>
                   </Grid>
@@ -198,8 +221,8 @@ function RegistrationForm() {
                 </Grid>
                 <Button
                   type="submit"
-                  className={dirty && isValid ? "" : "disabled-btn"}
-                  disabled={!(dirty && isValid)}
+                  // className={dirty && isValid ? "" : "disabled-btn"}
+                  // disabled={!(dirty && isValid)}
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}

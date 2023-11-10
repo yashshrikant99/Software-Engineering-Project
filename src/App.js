@@ -28,8 +28,8 @@ function App() {
     <Router>
       <NavBar1/>
       <Routes>Home
-      {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
-      {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
+      <Route path="/signin"  element = {<LoginForm/>}> </Route>
+      <Route path ="/registration" element ={<RegistrationForm/>}></Route>
       <Route path ="/dashboard" element ={<Dashboard/>}></Route> 
       <Route path ="/holdings" element ={<Holdings/>}></Route>
       {/* <Route path ="/funds" element ={<Funds/>}></Route>
