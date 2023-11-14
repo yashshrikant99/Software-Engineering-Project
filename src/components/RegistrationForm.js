@@ -27,8 +27,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const initialValues ={
   username: "",
   email: "",
-  phonenumber: "",
-  dob:dayjs(Date.now()),
+  phone: "",
+  DoB:dayjs(Date.now()),
   password: ""
 };
 
@@ -51,10 +51,10 @@ const validate = (values) => {
   } else if (values.phone.length < 10) {
     errors.phone = "Invalid Phone Number";
   }
-  if (!values.dob) {
-    errors.dob = "DOB is required";
-  } else if (values.dob.length < 8) {
-    errors.dob = "Invalid DOB";
+  if (!values.DoB) {
+    errors.DoB = "DOB is required";
+  } else if (values.DoB.length < 8) {
+    errors.DoB = "Invalid DOB";
   }
 
 
@@ -68,9 +68,9 @@ const validate = (values) => {
   return errors;
 };
 const submitForm = async(values) => {
-  // console.log(values);
+  console.log(values);
   axios.post("http://localhost:8081/users", values).then((response) => {
-    console.log("Hi there" + response);
+    console.log(response);
   })
   .catch(err => {
     console.error("This is error" + err);
@@ -85,8 +85,8 @@ function RegistrationForm() {
     console.log({
       username: data.get('username'),
       email: data.get('email'),
-      phonenumber: data.get('phonenumber'),
-      dob: data.get('dob'),
+      phone: data.get('phone'),
+      DoB: data.get('DoB'),
       password: data.get('password'),
     });
   };
@@ -168,32 +168,32 @@ function RegistrationForm() {
                     <TextField
                       required
                       fullWidth
-                      id="phonenumber"
+                      id="phone"
                       label="Phone Number"
-                      name="phonenumber"
-                      autoComplete="phonenumber"
-                      value={values.phonenumber}
+                      name="phone"
+                      autoComplete="phone"
+                      value={values.phone}
                       onChange={handleChange}
                       onBlur = {handleBlur}
-                      className={errors.phonenumber && touched.phonenumber?
+                      className={errors.phone && touched.phone?
                       "input-error" : null}
                     />
-                      {errors.phonenumber && touched.phonenumber && (
-                        <span className='error'>{errors.phonenumber}</span>
+                      {errors.phone && touched.phone && (
+                        <span className='error'>{errors.phone}</span>
                       )}
                   </Grid>
                   <Grid item xs = {12}className='date-picker' >
                   <LocalizationProvider item xs = {12}dateAdapter={AdapterDayjs} >
                       <DemoContainer components={['DatePicker']} >
-                      <DatePicker label="DOB"
+                      <DatePicker label="DoB"
                       required
                       fullWidth
-                      id ="dob"
-                      name="dob"
-                      autoComplete="dob"
-                      value={values.dob}
-                      onChange={(val)=>values.dob=val}
-                      className={errors.dob && touched.dob?
+                      id ="DoB"
+                      name="DoB"
+                      autoComplete="DoB"
+                      value={values.DoB}
+                      onChange={(val)=>values.DoB=val}
+                      className={errors.DoB && touched.DoB?
                         "input-error" : null}
                       />
                       </DemoContainer>

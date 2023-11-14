@@ -18,7 +18,7 @@ function NavBar1() {
             <Link to ='/dashboard'className ="text-light fs-4 px-3 dashboard" >Dashboard</Link>
             <Link to='/holdings' className ="text-light fs-4 px-3 holdings">Holdings</Link>
             <Link to = '/funds'className ="text-light fs-4 px-3 funds">Funds</Link>
-            <Link to ='/watchlist' className ="text-light fs-4 px-3 watchlist">Watchlist</Link>
+            
 
             </Box>
             <Box className="userprofile">

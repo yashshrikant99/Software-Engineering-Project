@@ -16,9 +16,9 @@ function Dashboard() {
 
   return (
     <Container className ="main-container" maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
-      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3, border:1}}>
+      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
 
-      <Box className ="typographyBox" sx={{display:"flex", flexDirection:"row", gap:"2em", pt:"5px", pl:"2px", ml:2}}>
+      {/* <Box className ="typographyBox" sx={{display:"flex", flexDirection:"row", gap:"2em", pt:"5px", pl:"2px", ml:2}}>
                 <Typography sx ={{}}>
                       <strong sx={{ml:1}}>NIFTY 50</strong>
                       <span style={{color:"red", marginLeft:1}}>(19751.05)</span>
@@ -27,16 +27,16 @@ function Dashboard() {
                       <strong>SENSEX</strong>
                       <span style={{color:"red"}}>(66282.74)</span>
                         -42.95(-0.22%)</Typography>
-        </Box>
+        </Box> */}
 
-      <Box className="search-bar" sx ={{height:"5%"}} >
+      <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
           <SearchBar/>
       </Box>
       <Box>
       <Watchlist/>
       </Box>
     </Box>
-      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width: "65%", mt:5, border:1}}>
+      <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width: "65%", mt:4}}>
          <DashboardTable/>
     </Box>
 
