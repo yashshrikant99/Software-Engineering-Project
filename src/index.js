@@ -52,3 +52,12 @@ app.get('/stock-name/:query', async (req, res) => {
     console.log(e)
   }
 })
+
+app.get('/top-gainers', async (req, res) => {
+  try {
+    var result = await stockData.fetchTopGainers()
+    res.send(result)
+  } catch (e) {
+    console.log(e)
+  }
+})
