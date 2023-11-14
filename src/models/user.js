@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+'use strict'
+const { Model } = require('sequelize')
 
 // module.exports = (sequelize, DataTypes) => {
 //   class User extends Model {
@@ -31,36 +29,36 @@ const {
 // };
 
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
-    id:{
+  const User = sequelize.define('user', {
+    id: {
       allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
     },
     username: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: false
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: false
     },
     email: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     phone: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
-    DoB:{
-      type: Sequelize.DATEONLY,
-    }, 
-    profile_img:{
-      type: Sequelize.TEXT,
+    DoB: {
+      type: Sequelize.DATEONLY
     },
-    funds_available:{
+    profile_img: {
+      type: Sequelize.STRING
+    },
+    funds_available: {
       type: Sequelize.INTEGER,
-        defaultValue: 0,
+      defaultValue: 0
     },
     createdAt: {
       allowNull: false,
@@ -70,8 +68,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       type: Sequelize.DATE
     }
-  });
-  User.associate = function (models) {
-  };
-  return User;
-};
+  })
+  User.associate = function (models) {}
+  return User
+}

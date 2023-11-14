@@ -24,7 +24,8 @@
     "nodemon": "^3.0.1",
     "redis": "^4.6.10",
     "request": "^2.88.2",
-    "sequelize": "^6.33.0",
+    "sequelize": "^6.35.0",
+    "sequelize-cli": "^6.6.2",
     "yahoo-finance": "^0.3.8"
   }
 }
