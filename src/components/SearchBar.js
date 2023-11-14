@@ -21,8 +21,8 @@ function SearchBar() {
         width: '100%',
         [theme.breakpoints.up('sm')]: {
           marginLeft: theme.spacing(1),
-        //   width: '100%',
-          width: 'auto',
+          width: '100%',
+          // width: 'auto',
 
         },
       }));

@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Formik, Form } from 'formik';
 import {Link} from "react-router-dom";
+import axios from 'axios';
 import '../cssfiles/LoginForm.css';
 
 
@@ -61,6 +62,9 @@ const validate = (values) => {
 
   const submitForm = (values) => {
     console.log(values);
+    axios.post("http://localhost:8081/users/login", values).then((response) => {
+      console.log(response);
+    })
   };
 
 export default function LoginForm() {
