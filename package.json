@@ -7,9 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node server.js",
-    "start": "node index.js",
-    "dev": "nodemon src/index.js"
+    "test": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +25,10 @@
     "request": "^2.88.2",
     "sequelize": "^6.35.0",
     "sequelize-cli": "^6.6.2",
-    "yahoo-finance": "^0.3.8"
+    "yahoo-finance": "^0.3.8",
+    "yfinance": "^0.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
