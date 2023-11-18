@@ -37,8 +37,8 @@ router.post('/users', async (req, res) => {
       }
       //hashing the password
       const passwordhash = await bcrypt.hash(newUser.password, 10)
-      //   if (passwordhash) newUser.password = passwordhash
-      //   await transporter.sendMail(mailOptions)
+      if (passwordhash) newUser.password = passwordhash
+      await transporter.sendMail(mailOptions)
       const userCreated = await User.Create(newUser)
       console.log('sent')
       if (userCreated) res.send('Created User')
