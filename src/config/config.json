@@ -1,0 +1,27 @@
+{
+
+    "development": {
+      "username": "root",
+      "password": "Sahil@123",
+      "database": "DB_CS5704",
+      "host": "localhost",
+      "dialect": "mysql"
+    },
+
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+
+    "production": {
+      "username": "root",
+      "password": null,
+      "database": "DB_CS5704",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+
+  }

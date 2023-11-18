@@ -2,7 +2,7 @@
   "name": "stock-trainer-backend",
   "version": "1.0.0",
   "description": "CS 5704 Software Engineering Project",
-  "main": "index.js",
+  "main": "src/index.js",
   "directories": {
     "test": "tests"
   },
@@ -13,11 +13,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "live-server": "^1.2.2",
+    "lodash": "^4.17.21",
+    "mysql2": "^3.6.2",
+    "nodemailer": "^6.9.7",
+    "nodemon": "^3.0.1",
     "redis": "^4.6.10",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6",
+    "sequelize": "^6.35.0",
+    "sequelize-cli": "^6.6.2",
     "yahoo-finance": "^0.3.8",
     "yfinance": "^0.0.6"
   },
