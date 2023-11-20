@@ -22,7 +22,7 @@ function SearchBar() {
   useEffect(() => {
     // Assuming this effect is triggered when the component mounts or when query changes
     // Make Axios GET request
-    axios.get(`http://localhost:8081/stock-name/${query}`)
+    axios.get(`http://localhost:8080/stock-name/${query}`)
       .then((response) => {
         console.log("axios response", response);
         setSearchResults(response.data);
