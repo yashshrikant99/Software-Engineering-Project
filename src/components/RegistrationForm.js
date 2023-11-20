@@ -12,12 +12,15 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { ToastContainer, toast } from 'react-toastify';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Formik, Form } from 'formik';
 import '../cssfiles/RegistrationForm.css';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
  import dayjs, { Dayjs } from 'dayjs';
@@ -67,17 +70,30 @@ const validate = (values) => {
 
   return errors;
 };
-const submitForm = async(values) => {
-  console.log(values);
-  axios.post("http://localhost:8081/users", values).then((response) => {
-    console.log(response);
-  })
-  .catch(err => {
-    console.error("This is error" + err);
-  })  
-};
 
 function RegistrationForm() {
+  const [userData, setUserData] = useState({});
+  const history = useNavigate();
+  const submitForm = async(values) => {
+    console.log(values);
+    axios.post("http://localhost:8080/users", values).then((response) => {
+      console.log(response);
+      setUserData(response.data);
+    })
+    .catch(err => {
+      console.error("This is error" + err);
+    })  
+  };
+  
+
+  const notify = (data) => { 
+    if(data==="Created User"){
+     toast.success("User Signed Up",{autoClose:3000, toastId: "success" });
+     setTimeout(()=>history("/dashboard"),"3000")
+    } 
+   if(!data)
+   toast.error("Error Signing Up",{autoClose:3000});
+    }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -222,13 +238,15 @@ function RegistrationForm() {
                 <Button
                   type="submit"
                   // className={dirty && isValid ? "" : "disabled-btn"}
-                  // disabled={!(dirty && isValid)}
+                  disabled={!(dirty && isValid)}
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={notify(userData)}
                 >
                   Sign Up
                 </Button>
+                <ToastContainer limit={1}/>
                 <Grid container justifyContent="flex-center">
                   <Grid item className='already-acct'>
                     <Link to="/signin" variant="body2">
