@@ -3,10 +3,43 @@ import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
+import {useEffect, useState, useParams} from "react";
+import axios from 'axios';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 
 
 
 function SearchBar() {
+
+  const [query, setQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [inValue, setInputValue] = useState("")
+  // const options = ['Option 1', 'Option 2'];
+
+
+  useEffect(() => {
+    // Assuming this effect is triggered when the component mounts or when query changes
+    // Make Axios GET request
+    axios.get(`http://localhost:8080/stock-name/${query}`)
+      .then((response) => {
+        console.log("axios response", response);
+        setSearchResults(response.data);
+        console.log("mapping response data", response.data);
+      })
+      .catch((error) => {
+        console.error("axios error", error);
+      });
+  }, [query]);
+
+
+  const handleInputChange = (e) => {
+    // Update the query state when input changes
+    alert(e.target.value)
+    setQuery(e.target.value);
+  };
+
 
 
     const Search = styled('div')(({ theme }) => ({
@@ -53,15 +86,35 @@ function SearchBar() {
       }));
   return (
     <div>
-      <Search>
-            <SearchIconWrapper>
+      {/* <Search> */}
+      {/* <SearchIconWrapper>
               <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
+            </SearchIconWrapper> */}
+            {/* <StyledInputBase
               placeholder="Search eg: infy bse"
               inputProps={{ 'aria-label': 'search' }}
+              value={query}
+              onChange= {handleInputChange}
+            /> */}
+
+            <Autocomplete
+            freeSolo
+            //  placeholder="Search eg: infy bse"
+            //  inputProps={{ 'aria-label': 'search' }}
+             value={query}
+            //  options= {searchResults.map((option) => (Object.values(option)).slice(0,2))}
+             options = {searchResults.map(option=>option["shortname"])}
+            onInputCapture={(event,newInputValue)=>{
+              setInputValue(newInputValue)
+            }}
+            onChange={(event, newValue) => setQuery(newValue)}
+            // onChange= {handleInputChange}
+             sx={{width:610, ml:1}}
+             renderInput={(params) => <TextField {...params}
+             /> }
             />
-          </Search>
+
+          {/* </Search> */}
     </div>
   )
 }

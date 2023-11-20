@@ -17,6 +17,9 @@ import Dashboard from './components/Dashboard';
 import Holdings from './components/Holdings';
 import Funds from './components/Funds';
 import Watchlist from './components/Watchlist';
+import ProfilePg from './components/ProfilePg';
+// import Profile from './components/Profile';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -32,6 +35,8 @@ function App() {
       <Route path ="/registration" element ={<RegistrationForm/>}></Route>
       <Route path ="/dashboard" element ={<Dashboard/>}></Route>
       <Route path ="/holdings" element ={<Holdings/>}></Route>
+      <Route path ="/profile" element ={<ProfilePg/>}></Route>
+
 
       <Route path ="/funds" element ={<Funds/>}></Route>
       {/* <Route path ="/watchlist" element ={<Watchlist/>}></Route> */}

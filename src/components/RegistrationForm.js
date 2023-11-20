@@ -1,9 +1,9 @@
 // import React from 'react';
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Checkbox from '@mui/material/Checkbox';
 import {Link} from "react-router-dom";
@@ -23,26 +23,25 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
- import dayjs, { Dayjs } from 'dayjs';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import dayjs, { Dayjs } from "dayjs";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
-const initialValues ={
+const initialValues = {
   username: "",
   email: "",
   phone: "",
-  DoB:dayjs(Date.now()),
-  password: ""
+  DoB: dayjs(Date.now()),
+  password: "",
 };
 
 const validate = (values) => {
   let errors = {};
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-  if(!values.username){
-    errors.username ="Username is required";
-  }else if (values.username.length < 6){
-      errors.username ="Username should be atleast 6 characters";
+  if (!values.username) {
+    errors.username = "Username is required";
+  } else if (values.username.length < 6) {
+    errors.username = "Username should be atleast 6 characters";
   }
   if (!values.email) {
     errors.email = "Email is required";
@@ -59,15 +58,11 @@ const validate = (values) => {
   } else if (values.DoB.length < 8) {
     errors.DoB = "Invalid DOB";
   }
-
-
   if (!values.password) {
     errors.password = "Password is required";
   } else if (values.password.length < 4) {
     errors.password = "Password too short";
   }
-
-
   return errors;
 };
 
@@ -99,11 +94,11 @@ function RegistrationForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      username: data.get('username'),
-      email: data.get('email'),
-      phone: data.get('phone'),
-      DoB: data.get('DoB'),
-      password: data.get('password'),
+      username: data.get("username"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+      DoB: data.get("DoB"),
+      password: data.get("password"),
     });
   };
   const defaultTheme = createTheme();
@@ -262,7 +257,7 @@ function RegistrationForm() {
       );
     }}
     </Formik>
-    );
+  );
 }
 
-export default RegistrationForm
+export default RegistrationForm;
