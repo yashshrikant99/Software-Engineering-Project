@@ -29,9 +29,9 @@ async function findUserCredential (email, password) {
     const user = await findEmail(email)
     if (user) {
       isMatch = await bcrypt.compare(password, user.password)
-      return isMatch
+      return {isMatch,user}
     }
-    return isMatch
+    return {isMatch,user}
   } catch (err) {
     console.log('Error checking credentials', err.message)
   }

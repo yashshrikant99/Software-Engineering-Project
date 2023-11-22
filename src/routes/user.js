@@ -38,7 +38,7 @@ router.post('/users', async (req, res) => {
       //hashing the password
       const passwordhash = await bcrypt.hash(newUser.password, 10)
       if (passwordhash) newUser.password = passwordhash
-      await transporter.sendMail(mailOptions)
+      //await transporter.sendMail(mailOptions)
       const userCreated = await User.Create(newUser)
       console.log('sent')
       if (userCreated) res.send('Created User')
@@ -55,8 +55,13 @@ router.post('/users', async (req, res) => {
 router.post('/users/login', async (req, res) => {
   try {
     const { email, password } = req.body
-    const user = await User.findUserCredential(email, password)
-    if (user) res.send({ allowLogin: user })
+    const {isMatch:LoggedIn, user} = await User.findUserCredential(email, password)
+    if (LoggedIn) res.send({ allowLogin: LoggedIn , 
+      id:user.dataValues.id,
+       email:user.dataValues.email,
+      username:user.dataValues.username,
+      funds_available:user.dataValues.funds_available,
+    })
     else res.send('Wrong Credentials')
   } catch (err) {
     console.log('Cant login', err)
