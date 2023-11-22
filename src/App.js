@@ -20,6 +20,7 @@ import {
   Routes,
   Route, useParams,
 } from "react-router-dom"
+import Landingpage from './components/Landingpage';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
       <Routes>Home
       {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
       {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
+      <Route path ="/welcome" element ={<Landingpage/>}></Route> 
+      {/* <Route path ="/popup" element ={<Popup/>}></Route>  */}
       <Route path ="/dashboard" element ={<Dashboard/>}></Route> 
       <Route path ="/holdings" element ={<Holdings/>}></Route>
       {/* <Route path ="/funds" element ={<Funds/>}></Route>
