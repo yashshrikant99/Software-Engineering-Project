@@ -69,4 +69,16 @@ router.post('/users/login', async (req, res) => {
   }
 })
 
+router.post('/users/holdings', async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const user = await User.findUserCredential(email, password)
+    if (user) res.send({ allowLogin: user })
+    else res.send('Wrong Credentials')
+  } catch (err) {
+    console.log('Cant login', err)
+    res.status(400).send(e.message)
+  }
+})
+
 module.exports = router
