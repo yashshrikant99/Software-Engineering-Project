@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';  //Fetching the database environment to use or by default environemnt
-const config = require(__dirname + '/../config/config.json')[env];   //using it in config file to fetch database environment 
+const config = require('../config/config.json')[env];   //using it in config file to fetch database environment 
 const db = {};
 
 let sequelize;
@@ -22,8 +22,7 @@ fs
     return (
       file.indexOf('.') !== 0 &&
       file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
+      file.slice(-3) === '.js'
     );
   })
   .forEach(file => {
@@ -40,5 +39,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.tutorials = require("./user")(sequelize, Sequelize);
+// db.tutorials = require("./user")(sequelize, Sequelize);
+
 module.exports = db;
