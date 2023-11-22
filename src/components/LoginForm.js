@@ -12,7 +12,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Formik, Form } from 'formik';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+import { useState } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../cssfiles/LoginForm.css';
 
 
@@ -28,6 +33,12 @@ function Copyright(props) {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
+  );
+}
+
+function notifyContainer(){
+  return (
+    <ToastContainer/>
   );
 }
 
@@ -59,11 +70,30 @@ const validate = (values) => {
     return errors;
   };
 
-  const submitForm = (values) => {
-    console.log(values);
-  };
+  
 
 export default function LoginForm() {
+  const [userData, setUserData] = useState({});
+  const history = useNavigate();
+  const submitForm = (values) => {
+    console.log(values);
+    axios.post("http://localhost:8080/users/login", values, {
+    }).then((response) => {
+      console.log(response.data)
+      if(response.data){
+      setUserData(response.data)
+      
+    }
+    })
+  };
+  const notify = (data) => { 
+         if(data.allowLogin){
+          toast.success("User Logged in",{autoClose:3000, toastId: "success" });
+          setTimeout(()=>history("/dashboard"),"3000")
+         } 
+        if(!data)
+        toast.error("Wrong Credentials",{autoClose:3000});
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -159,11 +189,13 @@ export default function LoginForm() {
                           fullWidth
                           variant="contained"
                           sx={{ mt: 3, mb: 2 }}
-                          className = {! (dirty && isValid) ? "disabled-btn" : ""}
-                          disabled={!(dirty && isValid)}
+                          className = {! (dirty && dirty) ? "disabled-btn" : ""}
+                          //disabled={!(dirty && isValid)}
+                          onClick={notify(userData)}
                         >
                           Sign In
                         </Button>
+                        <ToastContainer limit={1}/>
                         {/* </Formik> */}
                         <Grid container>
                           <Grid item xs>

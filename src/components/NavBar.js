@@ -1,70 +1,31 @@
-import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import '../cssfiles/NavBar.css';
+import React from 'react'
+import { Container,Paper, Typography,Box, Grid,Item } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-regular-svg-icons'
 import {faFacebook} from '@fortawesome/free-brands-svg-icons';
-import {faUser} from '@fortawesome/free-solid-svg-icons'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import {Link} from "react-router-dom"; 
+import '../cssfiles/NavBar.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-// import {Navbar, Nav, NavDropdown, Form, FormControl, Button,Container} from 'react-bootstrap';
 
-export default function NavBar(){
-//   render() {
-    return (
-      <div>
-        {/* <img src = '/images/tt-logo.png'alt="logo"> </img> */}
-        <Navbar bg = "dark" expand="lg">
-      <Container fluid style={ {height:'120%'}}>
-        <Navbar.Brand className ="text-light"href="#"></Navbar.Brand>
-        {/* <img src = '../images/tt-logo.png'alt="logo"> </img> */}
-        <Navbar.Toggle aria-controls="navbarScroll"  />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="my-2 my-lg-0 mx-auto"
-            style={{ maxHeight:'100%'}}
-            navbarScroll
-          >
-          <div className ="links">
-            <Link to ='/dashboard'className ="text-light fs-4 px-3 dashboard" >Dashboard</Link>
+function NavBar() {
+  return (
+     <Container  maxWidth= {false} sx={{display:"flex", flexDirection: "row",border:1, height:"100px", pt:4.55, gap:70}} className="bg-dark">
+            <Typography sx={{color:"white",fontSize: "20px", mr:5}}>TradeTrackr</Typography>
+
+            <Box className="header" sx={{display:"flex", flexDirection:"row", gap:2}}>
+            <Link to ='/dashboard' className ="text-light fs-4 px-3 dashboard" >Dashboard</Link>
             <Link to='/holdings' className ="text-light fs-4 px-3 holdings">Holdings</Link>
             <Link to = '/funds'className ="text-light fs-4 px-3 funds">Funds</Link>
-            <Link to ='/watchlist' className ="text-light fs-4 px-3 watchlist">Watchlist</Link>
 
-           </div>
-            <NavDropdown
-                 title= {
-                    <span className='text-light fs-4 px-auto'><FontAwesomeIcon icon={faUser} fontSize={30}/>
-                    </span>
 
-                 } className = 'drop-name ms-auto' id="navbarScrollingDropdown" style={{"--bs-caret-display":"none"}}>
-              <NavDropdown.Item  href="#action3">My Account</NavDropdown.Item>
-              <NavDropdown.Item   href="#action4">
-                Log In
-              </NavDropdown.Item>
-            </NavDropdown>
-            {/* <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link> */}
-          </Nav>
-          {/* <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-      </div>
-    );
-  }
-// }
+            </Box>
+            <Box className="userprofile">
+              <Link to ='/profile' className="text-light fs-4 px-3 profile">Profile</Link>
+            </Box>
+
+    </Container>
+  );
+}
+
+export default NavBar

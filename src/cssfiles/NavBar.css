@@ -19,6 +19,9 @@
 .watchlist{
     text-decoration: none;
 }
+.profile{
+    text-decoration: none;
+}
 @media (max-width: 600px) {
     NavBar {
         flex-direction: column;
