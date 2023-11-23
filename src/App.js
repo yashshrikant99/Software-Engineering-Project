@@ -23,12 +23,17 @@ import {
   Routes,
   Route, useParams,
 } from "react-router-dom"
+import Landingpage from './components/Landingpage';
 
 function App() {
   return (
     <Router>
       <NavBar/>
       <Routes>Home
+      {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
+      {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
+      <Route path ="/welcome" element ={<Landingpage/>}></Route> 
+      {/* <Route path ="/popup" element ={<Popup/>}></Route>  */}
       <Route path="/signin"  element = {<LoginForm/>}> </Route>
       <Route path ="/registration" element ={<RegistrationForm/>}></Route>
       <Route path ="/dashboard" element ={<Dashboard/>}></Route>
