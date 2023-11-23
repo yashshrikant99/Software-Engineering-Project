@@ -79,7 +79,7 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
     // <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
       // <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
      
-        <Box sx ={{height:"90%",width:"100%", ml:1, mt:2}} >
+        <Box sx ={{height:"90%",width:"100%", mt:2}} >
 
             {func()}
         </Box>

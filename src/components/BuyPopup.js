@@ -27,7 +27,7 @@ function BuyPopup({open, closeModal})
 </FormGroup>
       </Box>
     </Box>
-    <Box sx={{display:"flex", justifyContent: "space-between" }}>
+    <Box sx={{display:"flex", gap:"10px"}}>
     <Box >
          <Typography variant='h6'>Qty</Typography>
          <TextField

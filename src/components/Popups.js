@@ -6,7 +6,7 @@ function Popups()
 {
 
     return(
-        <Container sx={{bgcolor:"orange" , padding: "20px" }}>
+        <Container sx={{bgcolor:"green" , padding: "20px" }}>
    
         <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -73,7 +73,7 @@ function Popups()
                
                <Box>
                <Button sx={{color:"white", bgcolor:"blue"}}>Buy</Button>&nbsp;&nbsp;
-               <Button sx={{color:"white", border: "0.5px solid white"}}>Cancel</Button>
+               <Button sx={{color:"white",  bgcolor:"blue"}}>Cancel</Button>
                </Box>
                
           </Box>
