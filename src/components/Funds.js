@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container,Paper, Typography,Box, Grid,Item } from '@mui/material';
-import SearchBar from "./SearchBar";
+import {SearchBar} from "./SearchBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
