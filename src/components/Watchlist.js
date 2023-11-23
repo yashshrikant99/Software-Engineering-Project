@@ -17,7 +17,7 @@ function Watchlist() {
     // <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
       // <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
      
-        <Box sx ={{height:"90%",width:"100%", ml:1, mt:2}} >
+        <Box sx ={{height:"90%",width:"100%", mt:2}} >
 
             <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2,bgcolor:"lightgray"}}>
               <Box className="stock-name-box" sx={{}}>
