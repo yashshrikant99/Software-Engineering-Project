@@ -29,9 +29,9 @@ async function findUserCredential (email, password) {
     const user = await findEmail(email)
     if (user) {
       isMatch = await bcrypt.compare(password, user.password)
-      return {isMatch,user}
+      return { isMatch, user }
     }
-    return {isMatch,user}
+    return { isMatch, user }
   } catch (err) {
     console.log('Error checking credentials', err.message)
   }
@@ -46,8 +46,35 @@ async function checkUserExist (username, email) {
   }
 }
 
+// to fetch the user details given only the user-id (int)
+async function getUserDetails (id) {
+  try {
+    const exist = await User.findOne({ where: { id } })
+    return exist
+  } catch (err) {
+    console.log('Cant Find User Existence', err.message)
+  }
+}
+
+async function modifyFunds (id, amount) {
+  try {
+    const user = await User.findOne({ where: { id } })
+    if (user) {
+      // logic to take care of withdrawal when amount to be withdrawn > available funds
+      if (amount < 0 && Math.abs(amount) > user['funds_available']) return
+      user['funds_available'] += amount
+      await user.save()
+      return user
+    }
+  } catch (err) {
+    console.log('Cant Find User Existence', err.message)
+  }
+}
+
 module.exports = {
   Create,
   findUserCredential,
-  checkUserExist
+  checkUserExist,
+  getUserDetails,
+  modifyFunds
 }
