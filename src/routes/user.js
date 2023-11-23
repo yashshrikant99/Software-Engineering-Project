@@ -55,13 +55,18 @@ router.post('/users', async (req, res) => {
 router.post('/users/login', async (req, res) => {
   try {
     const { email, password } = req.body
-    const {isMatch:LoggedIn, user} = await User.findUserCredential(email, password)
-    if (LoggedIn) res.send({ allowLogin: LoggedIn , 
-      id:user.dataValues.id,
-       email:user.dataValues.email,
-      username:user.dataValues.username,
-      funds_available:user.dataValues.funds_available,
-    })
+    const { isMatch: LoggedIn, user } = await User.findUserCredential(
+      email,
+      password
+    )
+    if (LoggedIn)
+      res.send({
+        allowLogin: LoggedIn,
+        id: user.dataValues.id,
+        email: user.dataValues.email,
+        username: user.dataValues.username,
+        funds_available: user.dataValues.funds_available
+      })
     else res.send('Wrong Credentials')
   } catch (err) {
     console.log('Cant login', err)
@@ -69,14 +74,39 @@ router.post('/users/login', async (req, res) => {
   }
 })
 
-router.post('/users/holdings', async (req, res) => {
+// route to fetch the user details given the id
+router.get('/users/:uid', async (req, res) => {
   try {
-    const { email, password } = req.body
-    const user = await User.findUserCredential(email, password)
-    if (user) res.send({ allowLogin: user })
-    else res.send('Wrong Credentials')
-  } catch (err) {
-    console.log('Cant login', err)
+    const uid = req.params['uid']
+    var user = await User.getUserDetails(uid)
+    if (user) {
+      res.send(user)
+    } else {
+      res.status(400).send(`User with id ${uid} does not exist`)
+    }
+  } catch (e) {
+    console.log('Creation error', e.message)
+    res.status(400).send(e.message)
+  }
+})
+
+router.post('/users/:uid/modify-funds', async (req, res) => {
+  try {
+    const uid = req.params['uid']
+    var amount = req.body['amount']
+    var user = await User.getUserDetails(uid)
+    if (user) {
+      var details = await User.modifyFunds(uid, amount)
+      if (details) res.send(details)
+      else
+        res
+          .status(400)
+          .send(`Amount to be withdrawn is more than existing funds`)
+    } else {
+      res.status(400).send(`User with id ${uid} does not exist`)
+    }
+  } catch (e) {
+    console.log('Creation error', e.message)
     res.status(400).send(e.message)
   }
 })

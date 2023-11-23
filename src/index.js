@@ -8,16 +8,23 @@ var bodyParser = require('body-parser')
 const app = express()
 const userRouter = require('./routes/user')
 const userWatchListRouter = require('./routes/userWatchlist')
+const userHoldingsRouter = require('./routes/userHolding')
 
 //sequelize.authenticate();
 app.use(cors())
 const port = process.env.PORT || 8080
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  )
+  res.header(
+    'Access-Control-Allow-Headers',
+    'x-access-token, Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -35,6 +42,7 @@ db.sequelize
 
 app.use(userRouter)
 app.use(userWatchListRouter)
+app.use(userHoldingsRouter)
 app.listen(port, () => console.log(`Server listening at port ${port}`))
 
 app.get('/', (req, res) => {
