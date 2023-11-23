@@ -33,7 +33,10 @@ router.post('/holdings/:uid', async (req, res) => {
 
             // add funds once the stock has been sold
             if (created) {
-              await User.modifyFunds(uid, holding.buy_price * holding.quantity)
+              await User.modifyFunds(
+                uid,
+                -1 * holding.buy_price * holding.quantity
+              )
               res.send({ created })
             } else res.status(400).send(`Holdings not created`)
           } else
