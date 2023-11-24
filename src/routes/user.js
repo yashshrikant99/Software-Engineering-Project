@@ -111,4 +111,21 @@ router.post('/users/:uid/modify-funds', async (req, res) => {
   }
 })
 
+router.patch('/users/:uid/modify-details', async (req, res) => {
+  try {
+    const uid = req.params['uid']
+    const details = req.body
+    var user = await User.getUserDetails(uid)
+    if (user) {
+      // send the user object and details to be modified
+      var response = await User.modifyDetails(user, details)
+      res.send(response)
+    } else {
+      res.status(400).send(`User with id ${uid} does not exist`)
+    }
+  } catch (e) {
+    res.status(400).send(e.message)
+  }
+})
+
 module.exports = router
