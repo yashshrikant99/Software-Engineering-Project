@@ -36,10 +36,13 @@ router.post('/holdings/:uid', async (req, res) => {
 router.get('/holdings/:uid/raw', async (req, res) => {
   try {
     const uid = req.params['uid']
-    const Holdings = await UserHolding.getUserHoldingsRaw(uid)
-    if (Holdings) {
-      res.send(Holdings)
-    } else res.status(404).send('Holdings not found')
+    const userExists = await User.getUserDetails(uid)
+
+    if (userExists) {
+      const Holdings = await UserHolding.getUserHoldingsRaw(uid)
+      if (Holdings) res.send(Holdings)
+      else res.status(404).send('Holdings not found')
+    } else res.status(400).send(`User with id:${uid} doesnt exist`)
   } catch (e) {
     res.status(400).send(e.message)
   }
@@ -49,21 +52,24 @@ router.get('/holdings/:uid/raw', async (req, res) => {
 router.get('/holdings/:uid/formatted', async (req, res) => {
   try {
     const uid = req.params['uid']
-    const Holdings = await UserHolding.getUserHoldingsFormatted(uid)
-    if (Holdings) {
-      res.send(Holdings)
-    } else res.status(404).send('Holdings not found')
+    const userExists = await User.getUserDetails(uid)
+
+    if (userExists) {
+      const Holdings = await UserHolding.getUserHoldingsFormatted(uid)
+      if (Holdings) res.send(Holdings)
+      else res.status(404).send('Holdings not found')
+    } else res.status(400).send(`User with id:${uid} doesnt exist`)
   } catch (e) {
     res.status(400).send(e.message)
   }
 })
 
-router.delete('/holding/:uid', async (req, res) => {
+// clear the entire holdings db for the given user => USE ONLY INSTEAD OF DROP TABLE COMMAND
+router.delete('/holdings/:uid', async (req, res) => {
   try {
     const uid = req.params['uid']
-    const stockName = req.body['stock_name']
-    const qnty = req.body['quantity']
-    res.send(UserHolding.Delete(uid, stockName, qnty))
+    var result = await UserHolding.Delete(uid)
+    res.send(result)
   } catch (e) {
     console.log(`Error Deleting the error : ${e.message}`)
   }

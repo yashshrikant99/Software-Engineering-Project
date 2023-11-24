@@ -81,15 +81,14 @@ async function Create (data) {
   }
 }
 
-async function Delete (uid, stockName, qnty) {
+async function Delete (uid) {
   try {
     const delUser = await UserHolding.destroy({
       where: {
-        user_id: uid,
-        stock_name: stockName
+        user_id: uid
       }
     })
-    return delUser
+    return { deletedStatus: Boolean(delUser) }
   } catch (e) {
     console.log('Sequelize Error creating holdings', e.message)
   }
@@ -122,7 +121,7 @@ async function addHoldings (uid, holding, userExists, insertData) {
           }`
         ]
     } else {
-      return 'Cannot sell a stock which the user does not own'
+      return [400, 'Cannot sell a stock which the user does not own']
     }
   }
   // buy => dont allow if calc value is more than funds available
