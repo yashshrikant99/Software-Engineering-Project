@@ -1,6 +1,7 @@
 const { Op, sequelize, DataTypes } = require('sequelize')
 const db = require('../models')
 const UserHolding = db.user_holding
+const User = require('./user')
 
 // checks if holdings exists for any given user
 async function getUserHoldingsRaw (uid) {
@@ -94,10 +95,58 @@ async function Delete (uid, stockName, qnty) {
   }
 }
 
+async function addHoldings (uid, holding, userExists, insertData) {
+  // fetch the holdings for the given stock
+  const Holdings = await getUserHoldingsFormatted(uid)
+
+  // sell => dont allow if the qnty to be sold is more than available
+  if (holding.quantity < 0) {
+    // check if the stock is present in the user holdings - only then allow the sell to happen
+    if (Holdings.hasOwnProperty(holding.stock_name)) {
+      // if qnty to be sold <= present holding qnty -> allow sell to happen
+      if (
+        Math.abs(holding.quantity) <= Holdings[holding.stock_name]['quantity']
+      ) {
+        const created = await Create(insertData)
+
+        // add funds once the stock has been sold
+        if (created) {
+          await User.modifyFunds(uid, -1 * holding.buy_price * holding.quantity)
+          return [200, { created }]
+        } else return [400, `Holdings not created`]
+      } else
+        return [
+          400,
+          `Quantity to be sold:${holding.quantity} whereas present quantity: ${
+            Holdings[holding.stock_name]['quantity']
+          }`
+        ]
+    } else {
+      return 'Cannot sell a stock which the user does not own'
+    }
+  }
+  // buy => dont allow if calc value is more than funds available
+  else {
+    var fundsRequired = holding.buy_price * holding.quantity
+    if (fundsRequired <= userExists.funds_available) {
+      const created = await Create(insertData)
+      if (created) {
+        await User.modifyFunds(uid, -1 * (holding.buy_price * holding.quantity))
+        return [200, { created }]
+      } else return [400, `Holdings not created`]
+    } else
+      return [
+        400,
+        `Funds required is: ${fundsRequired} whereas available funds is only: ${userExists.funds_available}`
+      ]
+  }
+}
+
 module.exports = {
   getUserHoldingsRaw,
   getUserHoldingsFormatted,
   checkUserHoldings,
+  addHoldings,
   Create,
   Delete
 }
