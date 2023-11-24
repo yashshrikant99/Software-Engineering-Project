@@ -128,7 +128,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             }}
             onChange={(event, newValue) => setQuery(newValue)}
             // onChange= {handleInputChange}
-             sx={{ml:1}}
+             sx={{width:500, ml:1}}
              renderOption={(props, option) => <li {...props}>{loading?<CircularProgress
               size={68}
               sx={{

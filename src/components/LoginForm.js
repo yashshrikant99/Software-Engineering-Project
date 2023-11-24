@@ -81,13 +81,14 @@ export default function LoginForm() {
       console.log(response.data)
       if(response.data){
       setUserData(response.data) 
+      sessionStorage.setItem("userSession", JSON.stringify(response.data));
     }
     })
   };
   const notify = (data) => { 
          if(data.allowLogin){
           toast.success("User Logged in",{autoClose:3000, toastId: "success" });
-          setTimeout(()=>history("/dashboard",{state:data}),"3000")
+          setTimeout(()=>history("/dashboard",{state:data}),"1500")
          } 
         if(!data)
         toast.error("Wrong Credentials",{autoClose:3000});

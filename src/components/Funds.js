@@ -9,27 +9,49 @@ import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { grey, red } from '@mui/material/colors';
 import { CenterFocusStrong } from '@mui/icons-material';
 import Button from '@mui/material/Button';
+<<<<<<< HEAD
 
 import Popup from 'reactjs-popup';
 import Popups from './Popups';
 import BuyPopup from './BuyPopup';
+=======
+import Watchlist, { dataForWatchList } from './Watchlist';
+>>>>>>> frontend-dev
 import { useState } from 'react';
 
 
 
 function Funds() {
+<<<<<<< HEAD
   const [open, setOpen] = useState(false)
   const closeModal = () => setOpen(false)
 
+=======
+  const [watchlistData, setWatchListData] = useState([]);
+  const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
+  const setData = (data) =>{
+    setWatchListData([...data])
+  }
+  
+  
+ 
+>>>>>>> frontend-dev
   return (
     <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", height:"100%"}}>
     <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", marginRight:2}}>
   
     <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
+<<<<<<< HEAD
           {/* <SearchBar/> */}
       </Box>
         <Box sx ={{ height:"90%",width:"100%"}} >
           {/* <Watchlist/> */}
+=======
+          <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
+      </Box>
+        <Box sx ={{ height:"90%",width:"100%"}} >
+          <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData}/>
+>>>>>>> frontend-dev
           </Box>
   </Box>
     <Box sx = {{display:"flex", flexDirection:"column", height:"100%", width: "65%"}}>

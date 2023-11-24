@@ -37,7 +37,8 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
       )
     }
     useEffect(()=>{
-      axios.get(`http://localhost:8080/user_watchlist/${user.state.id}`).
+      console.log(user.id)
+      axios.get(`http://localhost:8080/user_watchlist/${user.id}`).
       then((response)=>{
           if(loading&&!success)
           renderLoading()
@@ -79,8 +80,8 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
     // <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
       // <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
      
-        <Box sx ={{height:"90%",width:"100%", ml:1, mt:2}} >
-
+        <Box sx ={{height:"90%",width:"100%", mt:2}} >
+                <Typography variant="h2" level="h2" component="h2">Watchlist</Typography>
             {func()}
         </Box>
 

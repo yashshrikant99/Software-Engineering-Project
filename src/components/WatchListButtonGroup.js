@@ -16,7 +16,7 @@ export default function WatchListBasicButtonGroup({user, watchlist, dataForWatch
             const values = {
                 long_name:watchlist["long_name"]
         }
-            const res = await axios.delete(`http://localhost:8080/rem_watchlist/${user.state.id}`,{data:values})
+            const res = await axios.delete(`http://localhost:8080/rem_watchlist/${user.id}`,{data:values})
             .then(response=>{   
                 console.log(response)
                 if(response){

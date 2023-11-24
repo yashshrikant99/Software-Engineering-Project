@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from "@emotion/styled";
+import {  Typography } from '@mui/material';
 
 // import { makeStyles } from '@material-ui/core';
 
@@ -45,6 +46,8 @@ function createData(name, high, low, lastprice, prevclose, change, gain) {
 //   })
 function DashboardTable() {
   return (
+    <>
+    <Typography variant="h2" level="h2" component="h2">Top Gainers</Typography>
     <TableContainer component={Paper} sx={{bgcolor:"lightgrey"}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{bgcolor:"darkgray"}}>
@@ -59,6 +62,7 @@ function DashboardTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+
           {rows.map((row) => (
             <TableRowStyled
               key={row.name}
@@ -79,6 +83,7 @@ function DashboardTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
   
 }
