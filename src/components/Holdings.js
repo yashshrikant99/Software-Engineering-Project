@@ -5,13 +5,17 @@ import Popups from './Popups';
 import BuyPopup from './BuyPopup';
 import { useState } from 'react';
 import Dashboard from './Dashboard';
-import SearchBar from './SearchBar';
-import Watchlist from './Watchlist';
+import {SearchBar} from './SearchBar';
+import Watchlist, { dataForWatchList } from './Watchlist';
 
 function Holdings() {
   const [open, setOpen] = useState(false)
   const closeModal = () => setOpen(false)
-
+  const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
+  const [watchlistData, setWatchListData] = useState([]);
+  const setData = (data) =>{
+    setWatchListData([...data])
+  }
   const dummyStocks = [
     {
       id: 1,
@@ -41,8 +45,8 @@ function Holdings() {
   return (
  <Container maxWidth={false} sx={{ display:"flex"}}>
  <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start"}}>
-  <SearchBar sx={{ width:"100%", marginTop:"32px" }}/>
-  <Watchlist  /> 
+  <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
+  <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
   </Container>
 <Container sx={{ height: "100vh",width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
   
