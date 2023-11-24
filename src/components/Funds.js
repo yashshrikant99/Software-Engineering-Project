@@ -9,20 +9,27 @@ import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { grey, red } from '@mui/material/colors';
 import { CenterFocusStrong } from '@mui/icons-material';
 import Button from '@mui/material/Button';
-import Watchlist from './Watchlist';
+
+import Popup from 'reactjs-popup';
+import Popups from './Popups';
+import BuyPopup from './BuyPopup';
+import { useState } from 'react';
 
 
 
 function Funds() {
+  const [open, setOpen] = useState(false)
+  const closeModal = () => setOpen(false)
+
   return (
     <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", height:"100%"}}>
     <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", marginRight:2}}>
   
     <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
-          <SearchBar/>
+          {/* <SearchBar/> */}
       </Box>
         <Box sx ={{ height:"90%",width:"100%"}} >
-          <Watchlist/>
+          {/* <Watchlist/> */}
           </Box>
   </Box>
     <Box sx = {{display:"flex", flexDirection:"column", height:"100%", width: "65%"}}>
@@ -31,14 +38,28 @@ function Funds() {
       <Typography variant="h3" sx={{mt:2, color:"secondary.main" }} >Equity</Typography>
       {/* <Typography className="equity"sx={{ml:5, p:5, mx: 'auto', justifyContent: 'center'}} >Equity</Typography> */}
       </Box>
-      <Box className="margin-box" sx={{display:"flex", flexDirection:"row", gap:"1em"}}>
+      <Box className="margin-box" sx={{display:"flex", flexDirection:"row", gap:"10em", justifyContent: "center"}}>
       <Paper className ="margin" sx={{m:1, pt:5, pb:5, pl: 64, pr:64}}>
-      <div>Available margin</div>
-      <div>Cash+Collateral</div>
-      <div>$ 49,239</div>
+      <div>Available cash</div>
+      {/* <div>Cash+Collateral</div>
+      <div>$ 49,239</div> */}
       </Paper>
       </Box>
       <Box className="add-funds-box" sx={{display:"flex", flexDirection:"row", gap:"1em", justifyContent: "center",alignItems:'center', gap:31 }} >
+      <Box>
+        <Popup 
+        trigger={<Button sx={{bgcolor:"black", color:"grey", width:290, height:66}}  
+        onClick={()=>setOpen(o=>!o)} >
+          <Typography variant='h5'><FontAwesomeIcon icon={faPlus} /> Add Funds</Typography>
+          </Button>
+        } 
+        position="right center" modal nested>
+        <div>
+          {<BuyPopup  open={open} onClose={closeModal}/>}
+        </div>
+        </Popup>
+        <Button onClick={()=>closeModal}></Button>
+         </Box>
       <Button variant="contained" sx={{ width:290, height:66}}><FontAwesomeIcon icon={faPlus} />Add Funds</Button>
       <Button variant="contained" sx={{width:290, height:66}}><FontAwesomeIcon icon={faRotateRight} />Withdraw</Button>
       {/* <Paper className ="add-funds" sx={{mx:3,my:1, pt:5, pb:5, pl: 25, pr:25  }}><FontAwesomeIcon icon={faPlus} />   Add Funds </Paper> */}
@@ -53,7 +74,7 @@ function Funds() {
       <div> 00.00</div> </Paper>
       </Box>
       <Box className="table-box" sx={{display:"flex" ,flexDirection:"column", gap:"1em", justifyContent: "space-between"}} >
-      <Box className="table" sx={{display:"flex", flexDirection:"row", gap:"1em",bgcolor: "grey", justifyContent: "space-between", }}>
+      {/* <Box className="table" sx={{display:"flex", flexDirection:"row", gap:"1em",bgcolor: "grey", justifyContent: "space-between", }}>
       <Typography className ="table-data" sx={{m:1,p:2}}> Opening Balance</Typography>
       <Typography className ="table-data" sx={{m:1,p:2 }}> 00.00</Typography>
       </Box>
@@ -64,7 +85,7 @@ function Funds() {
       <Box className="table" sx={{display:"flex", flexDirection:"row", gap:"1em", bgcolor: "grey" ,justifyContent: "space-between", }}>
       <Typography className ="table-data" sx={{m:1,p:2}}> Total Collateral</Typography>
       <Typography className ="table-data" sx={{m:1,p:2 }}> 46.2395</Typography>
-      </Box>
+      </Box> */}
      
       </Box>
 
