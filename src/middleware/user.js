@@ -71,10 +71,34 @@ async function modifyFunds (id, amount) {
   }
 }
 
+async function modifyDetails (user, details) {
+  try {
+    const validFields = [
+      'username',
+      'password',
+      'email',
+      'phone',
+      'DoB',
+      'profile_img',
+      'funds_available'
+    ]
+    for (i in details) {
+      if (validFields.indexOf(i) == -1)
+        return `Field "${i}" is not in the schema for Users DB`
+      user[i] = details[i]
+    }
+    await user.save()
+    return user
+  } catch (err) {
+    return `Error ${err.message} occured while modifying details`
+  }
+}
+
 module.exports = {
   Create,
   findUserCredential,
   checkUserExist,
   getUserDetails,
-  modifyFunds
+  modifyFunds,
+  modifyDetails
 }
