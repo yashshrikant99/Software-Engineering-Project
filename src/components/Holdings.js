@@ -1,9 +1,10 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import { useEffect, useState } from "react";
 import Popup from 'reactjs-popup';
 import Popups from './Popups';
 import BuyPopup from './BuyPopup';
-import { useState } from 'react';
+import axios from 'axios';
 import Dashboard from './Dashboard';
 import SearchBar from './SearchBar';
 import Watchlist from './Watchlist';
@@ -11,38 +12,53 @@ import Watchlist from './Watchlist';
 function Holdings() {
   const [open, setOpen] = useState(false)
   const closeModal = () => setOpen(false)
-
-  const dummyStocks = [
+  const [data, setData] = useState([
     {
       id: 1,
-      qty: 1000,
+      quantity: 1000,
       avgPrice: 320.0,
       changePercentage: 5.09,
-      stockName: 'Stock 1',
+      stock_name: 'Stock 1',
       pnl: 17293.92,
       invested: 392023.02,
       ltp: 342.22,
       ltpChange: -1.34,
     },
-    {
-      id: 2,
-      qty: 500,
-      avgPrice: 150.0,
-      changePercentage: 2.5,
-      stockName: 'Stock 2',
-      pnl: 5000.0,
-      invested: 75000.0,
-      ltp: 154.5,
-      ltpChange: 1.2,
-    },
   
-  ];
+  ])
+
+  useEffect(()=>{
+    axios.get(`http://localhost:8080/holdings/1`).
+    then((response)=>{
+        if(response){
+          setData(response.data)
+        }
+
+    }).catch(e=>{
+      console.error("Axios Error",e.message)
+    })
+  },[data])
+
+  // const dummyStocks = [
+  //   {
+  //     id: 1,
+  //     qty: 1000,
+  //     avgPrice: 320.0,
+  //     changePercentage: 5.09,
+  //     stockName: 'Stock 1',
+  //     pnl: 17293.92,
+  //     invested: 392023.02,
+  //     ltp: 342.22,
+  //     ltpChange: -1.34,
+  //   },
+  
+  // ];
 
   return (
  <Container maxWidth={false} sx={{ display:"flex"}}>
  <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start"}}>
-  <SearchBar sx={{ width:"100%", marginTop:"32px" }}/>
-  <Watchlist  /> 
+  {/* <SearchBar sx={{ width:"100%", marginTop:"32px" }}/> */}
+  {/* <Watchlist  />  */}
   </Container>
 <Container sx={{ height: "100vh",width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
   
@@ -76,13 +92,13 @@ function Holdings() {
 <Box sx={{backgroundColor:"black" , padding: "20px", width:"90%", }}>
    
   <Grid container spacing={2}>
-   { dummyStocks.map((stock)=>(
+   { data.map((stock)=>(
   <Grid item xs={12} key={stock.id}>
     
     <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"column", gap:"0.3em",  minWidth: 390, marginBottom:2, padding:"20px"}} >
     <Box sx={{display:"flex", justifyContent: "space-between", }}>
       <Box>
-         <Typography variant='h6'>Qty.<strong>{stock.qty}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avgPrice}</strong></Typography>
+         <Typography variant='h6'>Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avgPrice}</strong></Typography>
       </Box>
       <Box>
          <Typography variant='h6' sx={{color:"#03C04A"}}> 
@@ -91,7 +107,7 @@ function Holdings() {
       </Box>
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between",}}>
-         <Typography variant='h3' sx={{color:"secondary.main",}}>{stock.stockName}</Typography>
+         <Typography variant='h3' sx={{color:"secondary.main",}}>{stock.stock_name}</Typography>
          <Typography variant='h6' sx={{color:"#03C04A"}}>
           {stock.pnl}
          </Typography>
