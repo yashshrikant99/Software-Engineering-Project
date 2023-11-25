@@ -15,6 +15,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { green } from '@mui/material/colors';
 import BasicButtonGroup from './ButtonGroup'
 import Box from '@mui/material/Box';
+import { debounce } from '@mui/material/utils';
+
 
 
 
@@ -28,6 +30,7 @@ function SearchBar({user, watchlistData, setWatchList, dataForWatchList}) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   
+
   let watchListData = watchlistData;
   // const options = ['Option 1', 'Option 2'];
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -115,16 +118,21 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             </SearchIconWrapper> } */}
             <Autocomplete
             freeSolo
+            filterOptions={(x) => x}
+            autoComplete
             //  placeholder="Search eg: infy bse"
             //  inputProps={{ 'aria-label': 'search' }}
              value={query}
             //  options= {searchResults.map((option) => (Object.values(option)).slice(0,2))}
            // options = {searchResults.map(option=>option["shortname"])}
            options= {searchResults.map(option=>[option["shortname"], option["longname"], option["symbol"]])}
-           getOptionLabel={option=>option}
+           //getOptionLabel={searchResults.map(option=>`${option["shortname"]} - ${option["symbol"]}}`)}
+           noOptionsText={"No Available Stocks"}
+
             onInputCapture={(event,newInputValue)=>{
 
               setInputValue(newInputValue)
+             
             }}
             onChange={(event, newValue) => setQuery(newValue)}
             // onChange= {handleInputChange}
@@ -139,7 +147,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
                 zIndex: 1,
               }}
             />:<div style={{display:"flex"}}>
-              { <div style={{display:"inline-block"}}>{option} </div>}
+              { <div style={{display:"inline-block"}}>{`${option[0]} - ${option[2]}`} </div>}
              <BasicButtonGroup user={user} watchListData={watchListData} stockdata = {option} setWatchList={setWatchList} dataForWatchList={dataForWatchList}/></div>}</li>}
              renderInput={(params) => <TextField {...params}
              label="" 
