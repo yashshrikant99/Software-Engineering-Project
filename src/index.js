@@ -23,6 +23,12 @@ const theme= createTheme({
     },
   },
 
+  // styleOverrides: {
+  //   body: {
+  //     backgroundColor: '#000000', // Set background color to black
+  //   },
+  // },
+
   typography:
   {
     h3:

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container,Paper, Typography,Box, Grid,Item } from '@mui/material';
-import SearchBar from "./SearchBar";
+import {SearchBar} from "./SearchBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -9,20 +9,29 @@ import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { grey, red } from '@mui/material/colors';
 import { CenterFocusStrong } from '@mui/icons-material';
 import Button from '@mui/material/Button';
-import Watchlist from './Watchlist';
+import Watchlist, { dataForWatchList } from './Watchlist';
+import { useState } from 'react';
 
 
 
 function Funds() {
+  const [watchlistData, setWatchListData] = useState([]);
+  const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
+  const setData = (data) =>{
+    setWatchListData([...data])
+  }
+  
+  
+ 
   return (
     <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", height:"100%"}}>
     <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", marginRight:2}}>
   
     <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
-          <SearchBar/>
+          <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
       </Box>
         <Box sx ={{ height:"90%",width:"100%"}} >
-          <Watchlist/>
+          <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData}/>
           </Box>
   </Box>
     <Box sx = {{display:"flex", flexDirection:"column", height:"100%", width: "65%"}}>
