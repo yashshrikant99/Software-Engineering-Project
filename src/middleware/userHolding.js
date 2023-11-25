@@ -86,7 +86,9 @@ async function Delete (uid) {
     const delUser = await UserHolding.destroy({
       where: {
         user_id: uid
-      }
+      },
+      truncate: true,
+      restartIdentity: true
     })
     return { deletedStatus: Boolean(delUser) }
   } catch (e) {
