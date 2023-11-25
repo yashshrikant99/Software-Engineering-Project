@@ -45,7 +45,7 @@ app.use(userWatchListRouter)
 app.use(userHoldingsRouter)
 app.use(stockDataRouter)
 
-app.listen(port, () => console.log(`Server listening at port ${port}`))
+app.listen(port, () => console.log(`${process.env.NODE_ENV} Server listening at port ${port}`))
 
 app.get('/', (req, res) => {
   res.send('Welcome to Stock Trainer backend')
