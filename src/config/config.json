@@ -17,10 +17,10 @@
     },
 
     "production": {
-      "username": "root",
-      "password": null,
-      "database": "DB_CS5704",
-      "host": "127.0.0.1",
+      "username": "admin",
+      "password": "Software123",
+      "database": "db-cs5704",
+      "host": "db-cs5704.ccwhi7fw846f.us-east-2.rds.amazonaws.com",
       "dialect": "mysql"
     }
 
