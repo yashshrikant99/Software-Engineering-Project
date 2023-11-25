@@ -13,7 +13,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Formik, Form } from 'formik';
 import {Link, useNavigate} from "react-router-dom";
-
 import { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -81,15 +80,15 @@ export default function LoginForm() {
     }).then((response) => {
       console.log(response.data)
       if(response.data){
-      setUserData(response.data)
-      
+      setUserData(response.data) 
+      sessionStorage.setItem("userSession", JSON.stringify(response.data));
     }
     })
   };
   const notify = (data) => { 
          if(data.allowLogin){
           toast.success("User Logged in",{autoClose:3000, toastId: "success" });
-          setTimeout(()=>history("/dashboard"),"3000")
+          setTimeout(()=>history("/dashboard",{state:data}),"1500")
          } 
         if(!data)
         toast.error("Wrong Credentials",{autoClose:3000});

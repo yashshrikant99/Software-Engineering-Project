@@ -84,7 +84,7 @@ function RegistrationForm() {
   const notify = (data) => { 
     if(data==="Created User"){
      toast.success("User Signed Up",{autoClose:3000, toastId: "success" });
-     setTimeout(()=>history("/dashboard"),"3000")
+     setTimeout(()=>history("/dashboard"),"1500")
     } 
    if(!data)
    toast.error("Error Signing Up",{autoClose:3000});

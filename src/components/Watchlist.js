@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container,Paper, Typography,Box, Grid,Item } from '@mui/material';
 import { lightGreen } from "@mui/material/colors";
 import SearchBar from "./SearchBar";
@@ -7,49 +7,82 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import DashboardTable from "./DashboardTable";
+import CircularProgress from '@mui/material/CircularProgress';
+import WatchListBasicButtonGroup from "./WatchListButtonGroup";
+import { green } from '@mui/material/colors';
+
+import axios from 'axios';
 
 
 // import "react-datepicker/dist/react-datepicker.css";
+let dataForWatchList = ()=>{}
+function Watchlist({user, dataForWatchList, watchlistData}) {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+    const [data, setData] = useState([])
+    const renderLoading = () => {
+      (
+         <>
+                  <CircularProgress
+                  size={68}
+                  sx={{
+                    color: green[500],
+                    position: 'absolute',
+                    top: -6,
+                    left: -6,
+                    zIndex: 1,
+                  }}
+                  />
+                  </>
+      )
+    }
+    useEffect(()=>{
+      console.log(user.id)
+      axios.get(`http://localhost:8080/user_watchlist/${user.id}`).
+      then((response)=>{
+          if(loading&&!success)
+          renderLoading()
+          if(response){
+            setData(response.data)
+            setLoading(false)
+            setSuccess(true)
+          }
 
-function Watchlist() {
-
+      }).catch(e=>{
+        console.error("Axios Error",e.message)
+      })
+    },[data])
+    
+    dataForWatchList = setData;
+    const func = ()=>{
+    return data.map((obj)=>{
+        return (
+          <>
+          <div>
+          <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"10%",p:1,bgcolor:"lightgray"}}>
+        <Box className="stock-name-box" sx={{}}>
+          <Typography className ="stock-name" sx={{ml:2}}> {obj.long_name}</Typography>
+        </Box>
+        <Box className ="numbers" sx={{display:"flex", flexDirection:"row", gap:"2em"}}>
+          <Typography className ="num1" > {obj.price} </Typography>
+          {/* <Typography className ="num2"> -0.22% </Typography>
+          <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretDown}/> &nbsp;19751.05 </Typography> */}
+        </Box>
+        <WatchListBasicButtonGroup watchlist={obj} user={user} dataForWatchList={dataForWatchList} watchlistData={watchlistData}/>
+      </Paper>
+          </div>
+          
+          </>
+        )
+      })
+    }
   return (
     // <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
       // <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
      
-        <Box sx ={{height:"90%",width:"100%", ml:1, mt:2}} >
-
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2,bgcolor:"lightgray"}}>
-              <Box className="stock-name-box" sx={{}}>
-                <Typography className ="stock-name" sx={{ml:1}}> NIFTY 50</Typography>
-              </Box>
-              <Box className ="numbers" sx={{display:"flex", flexDirection:"row", gap:"2em"}}>
-                <Typography className ="num1"> -42.95 </Typography>
-                <Typography className ="num2"> -0.22% </Typography>
-                <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretDown}/> &nbsp;19751.05 </Typography>
-              </Box>
-            </Paper>
-
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2}}>
-               <Box className="stock-name-box" sx={{}}>
-                <Typography className ="stock-name" sx={{ml:1}}> NIFTY BANK</Typography>
-               </Box>
-               <Box className ="numbers" sx={{display:"flex", flexDirection:"row", gap:"2em"}}>
-                <Typography className ="num1"> -311.25 </Typography>
-                <Typography className ="num2"> -0.70% </Typography>
-                <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretUp}/> &nbsp;44287.95</Typography>
-               </Box>
-            </Paper>
-            <Paper elevation={2} className="watchlist-entry" sx={{ display:"flex", flexDirection:"row",justifyContent:"space-between", gap:"2em",p:2, bgcolor:"lightgray"}}>
-              <Box className="stock-name-box" sx={{}}>
-                <Typography className ="stock-name" sx={{ml:1}}> RELIANCE</Typography>
-              </Box>
-              <Box className ="numbers" sx={{display:"flex", flexDirection:"row", gap:"2em"}}>
-                <Typography className ="num1"> 1.85 </Typography>
-                <Typography className ="num2">0.08% </Typography>
-                <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretUp}/> &nbsp;2350.70</Typography>
-              </Box>
-            </Paper>
+        <Box sx ={{height:"90%",width:"100%", mt:2}} >
+                <Typography variant="h2" level="h2" component="h2">Watchlist</Typography>
+            {func()}
         </Box>
 
 
@@ -60,5 +93,7 @@ function Watchlist() {
   
   );
 }
-
 export default Watchlist
+export   { 
+  dataForWatchList,
+}
