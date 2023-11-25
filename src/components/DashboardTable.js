@@ -8,6 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from "@emotion/styled";
 import {  Typography } from '@mui/material';
+import {useEffect, useState} from "react";
+import axios from 'axios';
+
 
 // import { makeStyles } from '@material-ui/core';
 
@@ -42,7 +45,7 @@ function DashboardTable() {
 
   const [topGainers, setTopGainers] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:8081/top-gainers`)
+    axios.get(`http://localhost:8080/top-gainers`)
       .then((response) => {
         setTopGainers(response.data);
       })
