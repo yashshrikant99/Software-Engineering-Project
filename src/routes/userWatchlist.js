@@ -37,10 +37,11 @@ router.post("/add_watchlist/:uid",async(req,res)=>{
 
         const insertData = {
             user_id: uid,
-            long_name: watchlist.long_name,
+            long_name: watchlist.short_name,
             price: watchlist.close,
         }
-        const exist = await UserWatchList.checkUserWatchlist(uid,watchlist.long_name);
+        console.log(insertData)
+        const exist = await UserWatchList.checkUserWatchlist(uid, watchlist.short_name);
         if(!exist){
         const created = await UserWatchList.Create(insertData)
         if(created)
