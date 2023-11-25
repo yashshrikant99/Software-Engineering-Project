@@ -85,6 +85,9 @@ async function modifyDetails (user, details) {
     for (i in details) {
       if (validFields.indexOf(i) == -1)
         return `Field "${i}" is not in the schema for Users DB`
+
+      // if password is the field to be changed then ecncrypt and put it
+      if (i == 'password') details[i] = await bcrypt.hash(details[i], 10)
       user[i] = details[i]
     }
     await user.save()
