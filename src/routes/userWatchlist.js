@@ -18,9 +18,10 @@ router.get("/user_watchlist/:uid", async (req,res)=>{
 
 router.delete("/rem_watchlist/:uid",async (req,res)=>{
     try{
-        const uid = req["params"];
-        const watchlist = {...req.body}
-        const userDeleted = await UserWatchList.deleteWatchlist(watchlist.id, uid)
+        console.log("Requested")
+        const {uid} = req["params"];
+        const {short_name} = req.body
+        const userDeleted = await UserWatchList.deleteWatchlist(short_name, uid)
         res.send({userDeleted})
     }catch(e){
         res.status(400).send(e.message)
