@@ -6,26 +6,31 @@ import Popups from './Popups';
 import BuyPopup from './BuyPopup';
 import axios from 'axios';
 import Dashboard from './Dashboard';
-import SearchBar from './SearchBar';
-import Watchlist from './Watchlist';
+import {SearchBar} from './SearchBar';
+import Watchlist, { dataForWatchList } from './Watchlist';
 
 function Holdings() {
   const [open, setOpen] = useState(false)
   const closeModal = () => setOpen(false)
-  const [data, setData] = useState([
-    {
-      id: 1,
-      quantity: 1000,
-      avgPrice: 320.0,
-      changePercentage: 5.09,
-      stock_name: 'Stock 1',
-      pnl: 17293.92,
-      invested: 392023.02,
-      ltp: 342.22,
-      ltpChange: -1.34,
-    },
+  const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
+  const [watchlistData, setWatchListData] = useState([]);
+  const setData = (data) =>{
+    setWatchListData([...data])
+  }
+//   const dummyStocks = [
+//     {
+//       id: 1,
+//       quantity: 1000,
+//       avgPrice: 320.0,
+//       changePercentage: 5.09,
+//       stock_name: 'Stock 1',
+//       pnl: 17293.92,
+//       invested: 392023.02,
+//       ltp: 342.22,
+//       ltpChange: -1.34,
+//     },
   
-  ])
+// }]
 
   useEffect(()=>{
     axios.get(`http://localhost:8080/holdings/1`).
@@ -57,8 +62,8 @@ function Holdings() {
   return (
  <Container maxWidth={false} sx={{ display:"flex"}}>
  <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start"}}>
-  {/* <SearchBar sx={{ width:"100%", marginTop:"32px" }}/> */}
-  {/* <Watchlist  />  */}
+  <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
+  <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
   </Container>
 <Container sx={{ height: "100vh",width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
   

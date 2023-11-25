@@ -15,7 +15,7 @@ import { useLocation } from "react-router-dom";
 
 function Dashboard() {
   const [watchlistData, setWatchListData] = useState([]);
-  const userSessionData  = useLocation();
+  const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
   const setData = (data) =>{
     setWatchListData([...data])
   }
@@ -25,9 +25,11 @@ function Dashboard() {
       <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
 
       <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
+            
           <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
       </Box>
       <Box>
+  
       <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData}/>
       </Box>
     </Box>

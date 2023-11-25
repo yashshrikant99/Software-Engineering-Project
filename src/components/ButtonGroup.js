@@ -36,7 +36,7 @@ export default function BasicButtonGroup({user, watchListData, setWatchList, sto
                           }).catch(e=>{
                             console.error("Axios Error",e.message)
                           })
-          await axios.post(`http://localhost:8080/add_watchlist/${user.state.id}`,insertData).
+          await axios.post(`http://localhost:8080/add_watchlist/${user.id}`,insertData).
                         then(response=>{
                           if(response){
                            dataForWatchList([...watchListData])
