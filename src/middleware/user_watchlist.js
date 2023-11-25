@@ -16,37 +16,38 @@ async function getUserWatchlist(uid){
     }
 }
 
-async function checkUserWatchlist(uid, longname){
+async function checkUserWatchlist(uid, shortname){
     try{
         const exist = await UserWatchList.findOne({
             where:{
                 user_id:uid,
-                long_name:longname
+                long_name:shortname
             }
         })
         return exist;
     }catch(e){
-        console.log(`Unable to find user with watchlist ${uid} ${longname}`,e.message)
+        console.log(`Unable to find user with watchlist ${uid} ${shortname}`,e.message)
     }
 }
-/**async function deleteWatchlist(wid, uid){
+async function deleteWatchlist(short_name, uid){
     try{    
         const delUser = await UserWatchList.destroy({
             where:{
-                id: wid,
-                user_id:uid,
+                long_name: short_name,
+                user_id: uid,
             }
         })
         return delUser;
     }catch(e){
         console.log(`Error Deleting the error : ${e.message}`)
     }
-} */
+} 
 
 
 async function Create(data){
     try{
         const userWatchlist = await UserWatchList.create({...data})
+        db.sequelize.sync()
         return userWatchlist
     }catch(e){
         console.log("Sequelize Error creating watchlist",e.message)
@@ -57,4 +58,5 @@ module.exports = {
     getUserWatchlist,
     checkUserWatchlist,
     Create,
+    deleteWatchlist,
 }
