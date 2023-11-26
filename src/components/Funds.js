@@ -15,10 +15,18 @@ import axios from 'axios';
 
 function Funds(user) {
   const [watchlistData, setWatchListData] = useState([]);
-  const [fundsdata, setFunds] = useState([]);
   const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
   const [open, setOpen] = useState(false)
-  const closeModal = () => setOpen(false)
+  const [amount, setAmount] = useState(false)
+  const [fundsdata, setFunds] = useState(false)
+
+  const openModal = () => {
+    setOpen(true)
+  }
+
+  const closeModal = () => {
+    setOpen(false)
+  }
   const setData = (data) =>{
     setWatchListData([...data])
   
@@ -31,14 +39,15 @@ function Funds(user) {
     then((response)=>{
         if(response){
           setFunds(response.data)
-          console.log(fundsdata.funds_available)
         }
 
     }).catch(e=>{
       console.error("Axios Error",e.message)
     })
   },[fundsdata])
-  
+
+
+  const a = () => alert("Sahil")
   
   return (
 
@@ -91,8 +100,10 @@ function Funds(user) {
           <Popup trigger={<Button variant="contained" sx={{ width: '50%', height: 50, backgroundColor: '#2196f3', color: '#fff',borderRadius: '8px',boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
           '&:hover': {backgroundColor: '#4caf50', 
          },
-        }}  onClick={()=>setOpen(o=>!o)} ><FontAwesomeIcon icon={faPlus} style={{ marginRight: '8px' }} /> Add Funds</Button>} position="right center" modal nested>
-          <div>{<AddFundPopup  open={open} onClose={closeModal}/>}</div>
+        }}><FontAwesomeIcon icon={faPlus} style={{ marginRight: '8px' }} /> Add Funds</Button>} position="right center" modal nested>
+          
+          {closeModal=><div><AddFundPopup  open={open}  openPop={openModal} close={closeModal} user={userSessionData}/></div>}
+          
           </Popup>
         </Box>
     

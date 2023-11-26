@@ -1,13 +1,36 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
 import React from 'react'
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 
-function AddFundPopup({open, closeModal})
-{
+function AddFundPopup({open, openPop, close, user})
+{  
+
+  const [fundsdata, setFunds] = useState([]);
+
+    const addfunds= ()=> {
+        openPop()
+        console.log(user,"user")
+        axios.post(`http://localhost:8080/users/${user.id}/modify-funds`,{
+          amount: Number(fundsdata),
+        }).
+        then((response)=>{
+            if(response){
+
+            }
+    
+        }).catch(e=>{
+          console.error("Axios Error",e.message)
+        })
+        
+    }
+
+    // useEffect(addfunds,[]);
+     
    
     return(
         // <div className="modal">
-    
         <Container sx={{bgcolor:"black" , padding: "20px" }}>
    
   <Grid container spacing={2}>
@@ -22,9 +45,9 @@ function AddFundPopup({open, closeModal})
          <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography> */}
       </Box>
       <Box>
-      {/* <FormGroup>
+      <FormGroup>
   <FormControlLabel sx={{color: "white"}} control={<Switch defaultChecked />} label="Label" />
-</FormGroup> */}
+</FormGroup>
       </Box>
     </Box>
     <Box sx={{display:"flex", justifyContent:"center", alignItems:'center' ,gap:"10px"}}>
@@ -34,8 +57,9 @@ function AddFundPopup({open, closeModal})
          <TextField
                       
                       id="id"
-                      label="0"
                       name="amt"
+                      value={fundsdata}
+                      onChange={(event)=>setFunds(event.target.value)}
                       
           >1</TextField>
           <FormControl>
@@ -63,8 +87,8 @@ function AddFundPopup({open, closeModal})
    
          
          <Box>
-         <Button sx={{color:"black", bgcolor:"blue"}}>Add Fund</Button>&nbsp;&nbsp;
-         <Button sx={{color:"black", border: "0.5px solid white"}} onClick={closeModal}>Cancel</Button>
+         <Button sx={{color:"black", bgcolor:"blue"}} onClick={addfunds}>Add Fund</Button>&nbsp;&nbsp;
+         <Button sx={{color:"black", border: "0.5px solid white"}} onClick={()=>close()}>Cancel</Button>
          </Box>
          
     </Box>
