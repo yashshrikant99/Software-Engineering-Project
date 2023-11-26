@@ -8,23 +8,31 @@ function AddFundPopup({open, openPop, close, user})
 {  
 
   const [fundsdata, setFunds] = useState([]);
+  const [error, setError] = useState('');
 
+  
     const addfunds= ()=> {
-        openPop()
-        console.log(user,"user")
-        axios.post(`http://localhost:8080/users/${user.id}/modify-funds`,{
-          amount: Number(fundsdata),
-        }).
-        then((response)=>{
-            if(response){
+      openPop()
+      console.log(user,"user")
+      if (Number(fundsdata) <0){
+        setError('Error: Amount cannot be negative');
+        console.error("error: amount cannot be negative");
+        return;
+      }
+      else{
+      axios.post(`http://localhost:8080/users/${user.id}/modify-funds`,{
+        amount: Number(fundsdata),
+      }).
+      then((response)=>{
+          if(response){
 
-            }
-    
-        }).catch(e=>{
-          console.error("Axios Error",e.message)
-        })
-        
+          }
+  
+      }).catch(e=>{
+        console.error("Axios Error",e.message)
+      })
     }
+  }
 
     // useEffect(addfunds,[]);
      
@@ -87,6 +95,7 @@ function AddFundPopup({open, openPop, close, user})
    
          
          <Box>
+         {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
          <Button sx={{color:"black", bgcolor:"blue"}} onClick={addfunds}>Add Fund</Button>&nbsp;&nbsp;
          <Button sx={{color:"black", border: "0.5px solid white"}} onClick={()=>close()}>Cancel</Button>
          </Box>

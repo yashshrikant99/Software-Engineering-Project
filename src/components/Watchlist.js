@@ -47,7 +47,7 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
             setLoading(false)
             setSuccess(true)
           }
-
+          
       }).catch(e=>{
         console.error("Axios Error",e.message)
       })
