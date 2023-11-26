@@ -1,10 +1,51 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
-import React from 'react'
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 
-function BuyPopup({open, closeModal})
+function BuyPopup({open, closeModal,stockname,userid})
 {
+  // const [price,setPrice]=useState([]);
+  const [quantity,setQuantity]= useState([]);
+  let [stock,setStock]= useState({});
+  const [close,setClose]=useState(0);
+  console.log(quantity);
+  
+
+  const getStock = () => {
+   return stock
+  }
+
+  useEffect(()=>{
+    axios.get(`http://localhost:8080/stock-data?symbol=${stockname}&from=2023-11-21&to=2023-11-22&period=d`).
+    then((response)=>{
+        if(response){
+          stock={...response.data[0]}
+          setClose(stock.close)
+        }
+    }).catch(e=>{
+      console.error("Axios Error",e.message)
+    })
+  },[])
+
+  const buyStock= ()=>
+  {
+   axios.post(`http://localhost:8080/holdings/${userid}`, {
+      stock_name: stockname,
+      buy_price: 102,
+      quantity:quantity,
+    }).
+    then((response)=>{
+      console.log(response,"hiii");
+
+    }).catch(e=>{
+      console.error("Axios Error",e.message)
+    })
+  }
    
+  useEffect(buyStock,[]);
+
+
     return(
         // <div className="modal">
     
@@ -16,7 +57,7 @@ function BuyPopup({open, closeModal})
     <Box sx={{display:"flex", justifyContent: "space-between",  }}>
       <Box sx={{display:"flex" }}>
          <Typography><strong>Buy</strong>&nbsp;&nbsp;</Typography>
-         <Typography><strong>RELIANCE</strong>&nbsp;&nbsp;</Typography>
+         <Typography><strong>{stockname}</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>x</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>1</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography>
@@ -33,19 +74,21 @@ function BuyPopup({open, closeModal})
          <TextField
                       
                       id="quantity"
-                      label="1"
                       name="quantity"
+                      value={quantity}
+                      onChange={(event)=> setQuantity(event.target.value) }
                       
           >1</TextField>
     </Box>
     <Box >
          <Typography variant='h6'>Price</Typography>
+         <Typography></Typography>
          <TextField
                       
                       id="price"
-                      label="0"
                       name="price"
-                      
+                      disabled
+                      value={close}
           >1</TextField>
           <FormControl>
  
@@ -74,7 +117,7 @@ function BuyPopup({open, closeModal})
    
          
          <Box>
-         <Button sx={{color:"white", bgcolor:"blue"}}>Buy</Button>&nbsp;&nbsp;
+         <Button sx={{color:"white", bgcolor:"blue"}} onClick={buyStock}>Buy</Button>&nbsp;&nbsp;
          <Button sx={{color:"black", border: "0.5px solid white"}} onClick={closeModal}>Cancel</Button>
          </Box>
          
