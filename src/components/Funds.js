@@ -68,21 +68,15 @@ function Funds(user) {
     <Typography variant="h3" sx={{ mt: 6, mb: 6, color: "secondary.main" }}> FUNDS </Typography>
   </Box>
 
-  {/* <Box className="cash-box" sx={{ display: "flex", flexDirection: "column", gap: "1em",alignItems:'center', mt: 5, mb: 5, backgroundColor: "black", }}>
-    <Typography variant="h3" sx={{ display: "flex", flexDirection: "column",alignItems:'center',mt: 6, mb: 6, pt:9, pb:9 ,color: "secondary.main" }}>
-    <div sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>Available Cash</div> 
-    <div sx={{ fontSize: "2rem", fontWeight: "bold", display: 'flex', alignItems: 'center' }}>
-    <FontAwesomeIcon icon={faDollarSign} sx={{ fontSize: "1.5em", marginRight: 1 }} />
-    xxx</div>
-    </Typography>
-  </Box> */}
-
     <Box className="outer-box" sx={{ borderRadius: 8, padding: 6, border: '2px solid #fff' }}>
       <Box className="inner-box" sx={{ backgroundColor: "#f0f0f0", borderRadius: 8, padding:11 }}>
         <Typography variant="h3" sx={{ display: "flex", flexDirection: "column", alignItems: 'center', color: "secondary.main" }}>
           <div sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>Available Cash</div>
           <div sx={{ fontSize: "2rem", fontWeight: "bold", display: 'flex', alignItems: 'center' }}>
-            <FontAwesomeIcon icon={faDollarSign} sx={{ fontSize: "1.5em", marginRight: 1 }} /> {fundsdata.funds_available}
+            <FontAwesomeIcon icon={faDollarSign} sx={{ fontSize: "1.5em", marginRight: 1 }} /> 
+            {  fundsdata.funds_available < 0 ? (
+              <span style={{ color: 'red' }}>Error: Negative Value</span>
+              ) : (fundsdata.funds_available )}
           </div>
         </Typography>
       </Box>
