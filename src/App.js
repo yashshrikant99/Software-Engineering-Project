@@ -30,11 +30,12 @@ function App() {
     <Router>
       <NavBar/>
       <Routes>Home
+      <Route path="/"  element = {<LoginForm/>}>
+
       {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
       {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
       <Route path ="/welcome" element ={<Landingpage/>}></Route> 
       {/* <Route path ="/popup" element ={<Popup/>}></Route>  */}
-      <Route path="/signin"  element = {<LoginForm/>}> </Route>
       <Route path ="/registration" element ={<RegistrationForm/>}></Route>
       <Route path ="/dashboard" element ={<Dashboard/>}></Route>
       <Route path ="/holdings" element ={<Holdings/>}></Route>
@@ -42,8 +43,8 @@ function App() {
 
 
       <Route path ="/funds" element ={<Funds/>}></Route>
-      {/* <Route path ="/watchlist" element ={<Watchlist/>}></Route> */}
       <Route path ="/watchlist" element ={<Watchlist/>}></Route>
+      </Route>
       {/* <Route path ="/funds" element ={<Funds/>}></Route> */}
 
       </Routes>
