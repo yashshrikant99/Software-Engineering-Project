@@ -24,7 +24,7 @@ export default function BasicButtonGroup({user, watchListData, setWatchList, sto
       try{
           console.log("StockData",stockdata)
           const insertData = {
-            short_name: stockdata[0]
+            short_name: stockdata[2]
           }
           let to_date = moment(Date.now()).format("YYYY-MM-DD")
           let from_date = moment(Date.now()).subtract(10,'days').format('YYYY-MM-DD')

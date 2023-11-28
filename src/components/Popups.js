@@ -1,9 +1,31 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
 import React from 'react'
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 
-function Popups()
+function Popups({stockname,userid})
 {
+     // const [price,setPrice]=useState([]);
+  const [quantity,setQuantity]= useState('');
+  console.log(quantity);
+
+  const sellStock= ()=>
+  {
+   axios.post(`http://localhost:8080/holdings/${userid}`, {
+      stock_name: stockname,
+      buy_price: 102,
+      quantity:-quantity,
+    }).
+    then((response)=>{
+      console.log(response);
+
+    }).catch(e=>{
+      console.error("Axios Error",e.message)
+    })
+  }
+   
+  useEffect(sellStock,[]);
 
     return(
         <Container sx={{bgcolor:"green" , padding: "20px" }}>
@@ -14,7 +36,7 @@ function Popups()
           <Box sx={{display:"flex", justifyContent: "space-between",  }}>
             <Box sx={{display:"flex" }}>
                <Typography><strong>Sell</strong>&nbsp;&nbsp;</Typography>
-               <Typography><strong>RELIANCE</strong>&nbsp;&nbsp;</Typography>
+               <Typography><strong>{stockname}</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>x</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>1</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography>
@@ -31,20 +53,21 @@ function Popups()
                <TextField
                             
                             id="quantity"
-                            label="1"
                             name="quantity"
+                            value={quantity}
+                            onChange={(event)=> setQuantity(event.target.value) }
                             
-                >1</TextField>
+                            
+                ></TextField>
           </Box>
           <Box >
                <Typography variant='h6'>Price</Typography>
                <TextField
                             
                             id="price"
-                            label="0"
                             name="price"
                             
-                >1</TextField>
+                ></TextField>
                 <FormControl>
        
         <RadioGroup
@@ -72,7 +95,7 @@ function Popups()
          
                
                <Box>
-               <Button sx={{color:"white", bgcolor:"blue"}}>Buy</Button>&nbsp;&nbsp;
+               <Button sx={{color:"white", bgcolor:"blue"}} onClick={sellStock}>Sell</Button>&nbsp;&nbsp;
                <Button sx={{color:"white",  bgcolor:"blue"}}>Cancel</Button>
                </Box>
                
