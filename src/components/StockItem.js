@@ -9,12 +9,13 @@ import Dashboard from './Dashboard';
 import {SearchBar} from './SearchBar';
 import Watchlist, { dataForWatchList } from './Watchlist';
 
-function Holdings() {
+function StockItem(holdingsdata) {
+   
   const [open, setOpen] = useState(false)
   const closeModal = () => setOpen(false)
   const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
   const [watchlistData, setWatchListData] = useState([]);
-  const [holdingsdata, setHoldings] = useState([]);
+//   const [holdingsdata, setHoldings] = useState([]);
   const [close,setClose]=useState(0);
   let [stock,setStock]= useState({});
 
@@ -22,9 +23,24 @@ function Holdings() {
   const totalQuantity = Object.values(holdingsdata).reduce((p,stock) => p+stock.quantity, 0);
   const currentval=Math.round(close*totalQuantity);
  let pl=currentval-totalInvested;
-  if (pl<0)
+
+ const sendAxiosRequest = (name) => {
+  axios.get(`http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`).
+    then((response)=>{
+        if(response){
+          stock={...response.data[0]}
+          setClose(stock.close)
+        //   console.log(stock)
+        }
+    }).catch(e=>{
+      console.error("Axios Error",e.message)
+    })
+}
+
+
+  if (pl< 0)
   {
-    pl="-"+pl;
+    pl = "-" + Math.abs(pl);
   }
   else{
     pl="+"+pl;
@@ -35,39 +51,23 @@ function Holdings() {
     setWatchListData([...data])
   }
 
-const sendAxiosRequest = (name) => {
-  axios.get(`http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`).
-    then((response)=>{
-        if(response){
-          // console.log(response,"siddhi")
-          stock={...response.data[0]}
-          setClose(stock.close)
-          // console.log(close,"yoyoyo");
-          // alert(JSON.stringify(stock))
-          console.log(stock)
-        }
-    }).catch(e=>{
-      console.error("Axios Error",e.message)
-    })
-}
 
+//   useEffect(()=>{
+//     axios.get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`).
+//     then((response)=>{
+//         if(response){
+//           setHoldings(response.data)
+//           sendAxiosRequest(holdingsdata)
+//         }
 
-  useEffect(()=>{
-    axios.get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`).
-    then((response)=>{
-        if(response){
-          setHoldings(response.data)
-          sendAxiosRequest(holdingsdata)
-        }
-
-    }).catch(e=>{
-      console.error("Axios Error",e.message)
-    })
-  },[])
+//     }).catch(e=>{
+//       console.error("Axios Error",e.message)
+//     })
+//   },[])
 
   return (
  <Container maxWidth={false} sx={{ display:"flex"}}>
- <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start", color:"secondary.main" }}>
+ <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start"}}>
   {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/> */}
   {/* <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />  */}
   </Container>
@@ -94,43 +94,49 @@ const sendAxiosRequest = (name) => {
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between", alignItems:"center"}}>
          <Typography variant='h5'>P&L</Typography>
-         <Typography sx={{color:"#03C04A"}} variant='h5'>{pl}</Typography>
+        { pl> 0 ?
+         (<Typography sx={{color:"#03C04A"}} variant='h5'>{pl}</Typography>)
+         : ( <Typography sx={{color:"#FF0000"}} variant='h5'>{pl}</Typography>)
+        }
     </Box>
     </Paper>
 </Box>
 
 {/*------- stocklist -----*/}
-<Box sx={{backgroundColor:"black" , padding: "20px", width:"90%", }}>
+ <Box sx={{backgroundColor:"black" , padding: "20px", width:"90%", }}>
    
   <Grid container spacing={2}>
-   { Object.values(holdingsdata).map((stock,index)=>(
+
+   { Object.values(holdingsdata).map((stk,index)=>( 
+//   stock.quantity!==0? (
+    
   <Grid item xs={12} key={index}>
     
     <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"column", gap:"0.3em",  minWidth: 390, marginBottom:2, padding:"20px"}} >
     <Box sx={{display:"flex", justifyContent: "space-between", }}>
       <Box>
-         <Typography variant='h6'>Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avg_price}</strong></Typography>
+         <Typography variant='h6'>Qty.<strong>{stk.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stk.avg_price}</strong></Typography>
       </Box>
       <Box>
          <Typography variant='h6' sx={{color:"#03C04A"}}> 
-         {stock.changePercentage}
+         {stk.changePercentage}
          </Typography>
       </Box>
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between",}}>
          <Typography variant='h3' sx={{color:"secondary.main",}}>{Object.keys(holdingsdata)[index]}</Typography>
-         {/* {getPrice(Object.keys(holdingsdata)[index])} */}
+        
          {sendAxiosRequest(Object.keys(holdingsdata)[index])}
          <Typography variant='h6' sx={{color:"#03C04A"}}>
-         {close*stock.quantity}
+         {close*stk.quantity}
          </Typography>
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between", alignItems:"center"}}>
-         <Typography variant='h6'>Invested  <strong>{stock.invested_value}</strong></Typography>
+         <Typography variant='h6'>Invested  <strong>{stk.invested_value}</strong></Typography>
          <Typography variant='h6'>
           LTP <strong>{close}&nbsp;</strong> 
         
-          <span style={{color:"red"}}>({stock.ltpChange})</span>
+          <span style={{color:"red"}}>({stk.ltpChange})</span>
           
          </Typography>
     </Box>
@@ -150,7 +156,11 @@ const sendAxiosRequest = (name) => {
     
   </Paper>
 
-  </Grid>))}
+  </Grid>
+//   ) :null
+  
+  ))}
+  
   
   </Grid>
   
@@ -163,4 +173,4 @@ const sendAxiosRequest = (name) => {
   )
 }
 
-export default Holdings
+export default StockItem
