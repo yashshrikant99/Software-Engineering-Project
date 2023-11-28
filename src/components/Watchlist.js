@@ -17,9 +17,11 @@ import axios from 'axios';
 // import "react-datepicker/dist/react-datepicker.css";
 let dataForWatchList = ()=>{}
 function Watchlist({user, dataForWatchList, watchlistData}) {
+  
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
     const [data, setData] = useState([])
+    const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
     const renderLoading = () => {
       (
          <>
@@ -47,7 +49,7 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
             setLoading(false)
             setSuccess(true)
           }
-
+          
       }).catch(e=>{
         console.error("Axios Error",e.message)
       })
@@ -68,7 +70,7 @@ function Watchlist({user, dataForWatchList, watchlistData}) {
           {/* <Typography className ="num2"> -0.22% </Typography>
           <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretDown}/> &nbsp;19751.05 </Typography> */}
         </Box>
-        <WatchListBasicButtonGroup watchlist={obj} user={user} dataForWatchList={dataForWatchList} watchlistData={watchlistData}/>
+        <WatchListBasicButtonGroup watchlist={obj} user={user} dataForWatchList={dataForWatchList} watchlistData={watchlistData} price={obj.price} />
       </Paper>
           </div>
           

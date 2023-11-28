@@ -24,10 +24,10 @@ export default function BasicButtonGroup({user, watchListData, setWatchList, sto
       try{
           console.log("StockData",stockdata)
           const insertData = {
-            long_name: stockdata[1]
+            short_name: stockdata[2]
           }
           let to_date = moment(Date.now()).format("YYYY-MM-DD")
-          let from_date = moment(Date.now()).subtract(1,'days').format('YYYY-MM-DD')
+          let from_date = moment(Date.now()).subtract(10,'days').format('YYYY-MM-DD')
           const res = await axios.get(`http://localhost:8080/stock-data?symbol=${stockdata[2]}&from=${from_date}&to=${to_date}&period=d`).
                           then(response=>{
                             if(response.data){
@@ -42,7 +42,7 @@ export default function BasicButtonGroup({user, watchListData, setWatchList, sto
                            dataForWatchList([...watchListData])
                             }
                         }).catch(e=>{
-                          console.error("Axios error 1", e.message)
+                          console.error("Axios error", e.message)
                         })
       }catch(e){
 

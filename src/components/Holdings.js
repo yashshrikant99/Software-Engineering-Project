@@ -1,6 +1,6 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
 import React from 'react';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Popup from 'reactjs-popup';
 import Popups from './Popups';
 import BuyPopup from './BuyPopup';
@@ -118,9 +118,9 @@ const sendAxiosRequest = async (name) => {
 
   return (
  <Container maxWidth={false} sx={{ display:"flex"}}>
- <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start"}}>
-  <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
-  <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
+ <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start", color:"secondary.main" }}>
+  {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/> */}
+  {/* <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />  */}
   </Container>
 <Container sx={{ height: "100vh",width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
   
