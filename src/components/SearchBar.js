@@ -16,6 +16,7 @@ import { green } from '@mui/material/colors';
 import BasicButtonGroup from './ButtonGroup'
 import Box from '@mui/material/Box';
 import { debounce } from '@mui/material/utils';
+import {_} from 'lodash'
 
 
 
@@ -27,9 +28,19 @@ function SearchBar({user, watchlistData, setWatchList, dataForWatchList}) {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [inValue, setInputValue] = useState("")
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
-  
+  const loading = open && searchResults.length === 0;
+
+  function sleep(duration) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, duration);
+    });
+  }
+
 
   let watchListData = watchlistData;
   // const options = ['Option 1', 'Option 2'];
@@ -39,10 +50,39 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
   useEffect(() => {
     // Assuming this effect is triggered when the component mounts or when query changes
     // Make Axios GET request
+    let active = true;
     if (!loading) {
-      setSuccess(false);
-      setLoading(true);
+      return undefined;
+
     }
+
+    if (inValue === '') {
+      setSearchResults(query ? [query] : []);
+      return undefined;
+    }
+
+    (async () => {
+      await sleep(1e3); // For demo purposes.
+
+      if (active) {
+        const res = axios.get(`http://localhost:8080/stock-name/${query}`)
+        .then((response) => {
+          console.log("axios response", response);
+          setSearchResults([...response.data]);
+          console.log("mapping response data", response.data);
+          return response
+        })
+        .catch((error) => {
+          console.error("axios error", error);
+        });
+      }
+
+
+    })();
+    // if (!loading) {
+    //   setSuccess(false);
+    //   setLoading(true);
+    // }
     const res = axios.get(`http://localhost:8080/stock-name/${query}`)
       .then((response) => {
         console.log("axios response", response);
@@ -53,11 +93,20 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
       .catch((error) => {
         console.error("axios error", error);
       });
-      if(res){
-          setSuccess(true)
-          setLoading(false)
-      }
-  }, [query,watchListData]);
+      // if(res){
+      //     setSuccess(true)
+      //     setLoading(false)
+      // }
+      return () => {
+        active = false;
+      };
+  }, [query, loading, inValue]);
+
+  useEffect(() => {
+    if (!open) {
+      setSearchResults([]);
+    }
+  }, [open]);
 
 
   const handleInputChange = (e) => {
@@ -117,27 +166,49 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
               <SearchIcon />
             </SearchIconWrapper> } */}
             <Autocomplete
+            loading={loading}
             freeSolo
-            filterOptions={(x) => x}
             autoComplete
+            open={open}
+            onOpen={() => {
+              setOpen(true);
+            }}
+            onClose={() => {
+              setOpen(false);
+            }}
+            filterOptions={(x) => x}
             //  placeholder="Search eg: infy bse"
             //  inputProps={{ 'aria-label': 'search' }}
              value={query}
             //  options= {searchResults.map((option) => (Object.values(option)).slice(0,2))}
            // options = {searchResults.map(option=>option["shortname"])}
-           options= {searchResults.map(option=>[option["shortname"], option["longname"], option["symbol"]])}
+           options= {searchResults.map(option=>[option["shortname"], , option["symbol"]])}
            //getOptionLabel={searchResults.map(option=>`${option["shortname"]} - ${option["symbol"]}}`)}
            noOptionsText={"No Available Stocks"}
 
             onInputCapture={(event,newInputValue)=>{
-
+              setQuery(newInputValue)
               setInputValue(newInputValue)
-             
             }}
+            onInputChange={(event,newInputValue)=>{
+              debounce(axios.get(`http://localhost:8080/stock-name/${newInputValue}`)
+              .then((response) => {
+                console.log("axios response", response);
+                setSearchResults(response.data);
+                console.log("mapping response data", response.data);
+                return response
+              })
+              .catch((error) => {
+                console.error("axios error", error);
+              }),3000)
+            }}
+            autoHighlight
+            
+            filterSelectedOptions
             onChange={(event, newValue) => setQuery(newValue)}
             // onChange= {handleInputChange}
              sx={{width:500, ml:1}}
-             renderOption={(props, option) => <li {...props}>{loading?<CircularProgress
+             renderOption={(props, option) => <li {...props}>{loading&&!success?<CircularProgress
               size={68}
               sx={{
                 color: green[500],
@@ -150,11 +221,14 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
               { <div style={{display:"inline-block"}}>{`${option[0]} - ${option[2]}`} </div>}
              <BasicButtonGroup user={user} watchListData={watchListData} stockdata = {option} setWatchList={setWatchList} dataForWatchList={dataForWatchList}/></div>}</li>}
              renderInput={(params) => <TextField {...params}
-             label="" 
+             label="Search Watchlist" 
              placeholder="Search Infy, BSE etc" 
+  
             InputProps={{ ...params.InputProps, 
-            startAdornment: ( <InputAdornment position="start"> <SearchIcon/> 
-            </InputAdornment> ),
+            startAdornment: ( <>
+               {loading ? <CircularProgress color="inherit" size={20} /> : null}
+            <InputAdornment position="start"> <SearchIcon/> 
+            </InputAdornment></>),
              }}
              /> }
             />

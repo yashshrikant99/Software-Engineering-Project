@@ -30,22 +30,15 @@ function App() {
     <Router>
       <NavBar/>
       <Routes>Home
-      {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
-      {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
-      <Route path ="/welcome" element ={<Landingpage/>}></Route> 
-      {/* <Route path ="/popup" element ={<Popup/>}></Route>  */}
-      <Route path="/signin"  element = {<LoginForm/>}> </Route>
+      <Route path= "/"  element = {<LoginForm/>}> </Route>
+      <Route path ="/welcome" element ={<Landingpage/>}></Route>
       <Route path ="/registration" element ={<RegistrationForm/>}></Route>
       <Route path ="/dashboard" element ={<Dashboard/>}></Route>
       <Route path ="/holdings" element ={<Holdings/>}></Route>
       <Route path ="/profile" element ={<ProfilePg/>}></Route>
-
-
       <Route path ="/funds" element ={<Funds/>}></Route>
-      {/* <Route path ="/watchlist" element ={<Watchlist/>}></Route> */}
       <Route path ="/watchlist" element ={<Watchlist/>}></Route>
-      {/* <Route path ="/funds" element ={<Funds/>}></Route> */}
-
+     
       </Routes>
       <Footer/>
       </Router>
