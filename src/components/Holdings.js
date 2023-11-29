@@ -41,8 +41,8 @@ function Holdings() {
 
   const currentval1 = Math.round(sumWithInitial);
   const currentval = currentval1*totalQuantity
-let pl=currentval-totalInvested
- pl=0;
+let pl=Math.round(currentval-totalInvested)
+
   if (pl<0)
   {
     pl="-"+pl;
@@ -117,12 +117,12 @@ const sendAxiosRequest = async (name) => {
   },[holdingsdata])
 
   return (
- <Container maxWidth={false} sx={{ display:"flex"}}>
- <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start", color:"secondary.main" }}>
+ <Container maxWidth={false} sx={{ display:"flex", height: "100%",}}>
+ <Container sx={{  display:"flex", flexDirection:"column", width:"40%", padding:"15px", alignItems:"flex-start", color:"secondary.main",}}>
   {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/> */}
   {/* <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />  */}
   </Container>
-<Container sx={{ height: "100vh",width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
+<Container sx={{ width:"60%", display:"flex", flexDirection:"column", alignItems:"center" }}>
   
    <Typography variant="h3" 
      sx={{my:4, textAlign:'center', color:"secondary.main" }}
@@ -151,7 +151,7 @@ const sendAxiosRequest = async (name) => {
 </Box>
 
 {/*------- stocklist -----*/}
-<Box sx={{backgroundColor:"black" , padding: "20px", width:"90%", }}>
+<Box sx={{  padding: "20px", width:"70%", height:"100%", marginBottom: "3em" }}>
    
   <Grid container spacing={2}>
    { Object.values(holdingsdata).map((stock,index)=>a(stock,index))}

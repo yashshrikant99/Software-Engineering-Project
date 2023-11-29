@@ -16,11 +16,14 @@ function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks
     
     return (
         <>
-      <Grid item xs={12} key={index}>
-    
-    <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"column", gap:"0.3em",  minWidth: 390, marginBottom:2, padding:"20px"}} >
+    <Grid item xs={12} key={index}>
+    <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"row", gap:"2em", marginBottom:2, padding:"20px"}} >
+      <Box sx={{ minWidth:"600px",}}>
     <Box sx={{display:"flex", justifyContent: "space-between", }}>
-      <Box>
+      <Typography variant='h4' sx={{color:"secondary.main", fontweight:"bold"}}>{Object.keys(holdingsdata)[index]}</Typography>
+    </Box>
+    <Box sx={{display:"flex", justifyContent: "space-between",}}>
+         <Box>
          <Typography variant='h6'>Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avg_price}</strong></Typography>
       </Box>
       <Box>
@@ -28,9 +31,6 @@ function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks
          {stock.changePercentage}
          </Typography>
       </Box>
-    </Box>
-    <Box sx={{display:"flex", justifyContent: "space-between",}}>
-         <Typography variant='h3' sx={{color:"secondary.main",}}>{Object.keys(holdingsdata)[index]}</Typography>
          {/* {getPrice(Object.keys(holdingsdata)[index])} */}
          <Typography variant='h6' sx={{color:"#03C04A"}}>
          {currentPriceStocks[Object.keys(holdingsdata)[index]]}
@@ -45,8 +45,10 @@ function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks
           
          </Typography>
     </Box>
-      <Box sx={{display:"flex", flexDirection:"row", justifyContent:"center", gap:"10px", padding: "0.7em"}}>
-        <Box>
+    </Box>
+
+    <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", gap:"10px", padding: "0.4em"}}>
+        <Box sx={{display:"flex", justifyContent:"center"}}>
           <Popup trigger={<Button sx={{bgcolor:"secondary.main", color:"white"}}  onClick={()=>setOpen(o=>!o)} ><Typography variant='h5' 
           >Add</Typography></Button>} position="right center" modal nested>
           <div>{<BuyPopup  open={open} onClose={closeModal} stockname={Object.keys(holdingsdata)[index]} userid={userSessionData.id} />}</div>
@@ -58,9 +60,10 @@ function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks
           </Popup>
         </Box>
       </Box>
+
     
   </Paper>
-
+   
   </Grid>
     </>
     )
