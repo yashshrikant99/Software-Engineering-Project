@@ -68,8 +68,8 @@ function Funds(user) {
     <Typography variant="h3" sx={{ mt: 6, mb: 6, color: "secondary.main" }}> FUNDS </Typography>
   </Box>
 
-    <Box className="outer-box" sx={{ borderRadius: 8, padding: 6, border: '2px solid #fff' }}>
-      <Box className="inner-box" sx={{ backgroundColor: "#f0f0f0", borderRadius: 8, padding:11 }}>
+    <Box className="outer-box" sx={{ borderRadius: 8, padding: 6, border: '2px solid lightgray' }}>
+      <Box className="inner-box" sx={{ borderRadius: 8, padding:11 }}>
         <Typography variant="h3" sx={{ display: "flex", flexDirection: "column", alignItems: 'center', color: "secondary.main" }}>
           <div sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>Available Cash</div>
           <div sx={{ fontSize: "2rem", fontWeight: "bold", display: 'flex', alignItems: 'center' }}>

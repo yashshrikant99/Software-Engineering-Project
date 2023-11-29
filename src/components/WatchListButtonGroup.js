@@ -1,10 +1,20 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { Box } from '@mui/material';
 import axios from 'axios';
+import { useState } from 'react';
+import Popup from 'reactjs-popup';
+import { Typography, Box, Button } from '@mui/material'
+import BuyComponent from './BuyComponent';
+const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
 
-export default function WatchListBasicButtonGroup({user, watchlist, dataForWatchList, watchlistData}){
+export default function WatchListBasicButtonGroup({user, watchlist, dataForWatchList, watchlistData,price}){
+    // alert(price)
+    const [open, setOpen] = useState(false)
+    const closeModal = () => setOpen(false)
+    const [close,setClose]=useState(0);
+    const userSessionData  = JSON.parse(sessionStorage.getItem("userSession"));
+
+
     const delWatchlistUser = () => {
         delWatchlist(user,watchlist)
     }
@@ -30,6 +40,8 @@ export default function WatchListBasicButtonGroup({user, watchlist, dataForWatch
             console.error("Axios Error",e.message)
         }
     }
+
+
     return (
         <Box
     sx={{
@@ -39,10 +51,14 @@ export default function WatchListBasicButtonGroup({user, watchlist, dataForWatch
     }}
   >
 
-      <Button  color='success'>Buy</Button>
+    
+      <Popup trigger={<Button sx={{bgcolor:"secondary.main", color:"white"}} color='success' onClick={()=>setOpen(o=>!o)} ><Typography variant='h5' 
+          >Buy</Typography></Button>} position="" modal nested>
+          <div>{<BuyComponent  open={open} onClose={closeModal} userid={userSessionData.id} price={price} stockname={watchlist["long_name"]}/>}</div>
+       </Popup>
       <Button  onClick={delWatchlistUser} color='warning'>Remove</Button>
         
-
+    
     </Box>
     )
 }

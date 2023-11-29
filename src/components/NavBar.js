@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function NavBar() {
   return (
-     <Container  maxWidth= {false} sx={{display:"flex", flexDirection: "row",border:1, height:"100px", pt:4.55, gap:70}} className="bg-dark">
+     <Container   maxWidth ={false} sx={{display:"flex", flexDirection: "row",border:1, height:"100px",pt:4.55,width:"100%",  gap:50}} className="bg-dark">
             <Typography sx={{color:"white",fontSize: "20px", mr:5}}>TradeTrackr</Typography>
 
             <Box className="header" sx={{display:"flex", flexDirection:"row", gap:2}}>
@@ -20,9 +20,9 @@ function NavBar() {
 
 
             </Box>
-            <Box className="userprofile">
+            {/* <Box className="userprofile">
               <Link to ='/profile' className="text-light fs-4 px-3 profile">Profile</Link>
-            </Box>
+            </Box> */}
 
     </Container>
   );
