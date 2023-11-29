@@ -3,37 +3,22 @@ import axios from 'axios';
 import { useEffect, useState } from "react";
 
 
-function BuyPopup({open, closeModal,stockname,userid})
-{
+function BuyComponent({stockname,userid,price})
+{ 
+    // alert(price)
   // const [price,setPrice]=useState([]);
   const [quantity,setQuantity]= useState([]);
-  let [stock,setStock]= useState({});
   const [close,setClose]=useState(0);
   console.log(quantity);
   
 
-  const getStock = () => {
-   return stock
-  }
-
-  useEffect(()=>{
-    axios.get(`http://localhost:8080/stock-data?symbol=${stockname}&from=2023-11-21&to=2023-11-22&period=d`).
-    then((response)=>{
-        if(response){
-          stock={...response.data[0]}
-          setClose(stock.close)
-        }
-    }).catch(e=>{
-      console.error("Axios Error",e.message)
-    })
-  },[])
-
   const buyStock= ()=>
-  {
-   axios.post(`http://localhost:8080/holdings/${userid}`, {
+  { 
+      axios.post(`http://localhost:8080/holdings/${userid}`, {
       stock_name: stockname,
-      buy_price: 102,
+      buy_price: price,
       quantity:quantity,
+     
     }).
     then((response)=>{
       console.log(response,"hiii");
@@ -47,8 +32,6 @@ function BuyPopup({open, closeModal,stockname,userid})
 
 
     return(
-        // <div className="modal">
-    
         <Container sx={{bgcolor:"black" , padding: "20px" }}>
    
   <Grid container spacing={2}>
@@ -87,8 +70,7 @@ function BuyPopup({open, closeModal,stockname,userid})
                       
                       id="price"
                       name="price"
-                      disabled
-                      value={close}
+                      value={price}
           >1</TextField>
           <FormControl>
  
@@ -106,19 +88,15 @@ function BuyPopup({open, closeModal,stockname,userid})
     <Box sx={{display:"flex", alignItems:"center",justifyContent: "space-between"  }}>
       <Box sx={{display:"flex", alignItems:"center"  }}>
       <Box>
-        <Typography variant='h6'>Margin&nbsp;&nbsp;</Typography>
         </Box>
         <Box>
-         <Typography sx={{color:"white"}}>
-          Rs 2,000.00
-         </Typography>
+        
          </Box>
       </Box>
    
          
          <Box>
-         <Button sx={{color:"white", bgcolor:"blue"}} onClick={buyStock}>Buy</Button>&nbsp;&nbsp;
-         <Button sx={{color:"black", border: "0.5px solid white"}} onClick={closeModal}>Cancel</Button>
+         <Button sx={{color:"white", bgcolor:"blue"}} onClick={buyStock}>Add</Button>&nbsp;&nbsp;
          </Box>
          
     </Box>
@@ -138,4 +116,4 @@ function BuyPopup({open, closeModal,stockname,userid})
 }
 
 
-export default BuyPopup
+export default BuyComponent
