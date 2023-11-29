@@ -16,16 +16,22 @@ function NavBar() {
         display: "flex",
         flexDirection: "row",
         border: 1,
-        height: "100px",
+        height: "130px",
         width: "100%",
-        pt: 4.55,
-        gap: "30em",
+        // pt: 4.55
+        p: 2,
+        justifyContent: "space-between",
+        alignItems: "center",
       }}
       className="bg-dark"
     >
-      <Typography sx={{ color: "white", fontSize: "20px", mb: 3 }}>
+      {/* <Typography sx={{ color: "white", fontSize: "20px", mb: 3 }}>
         TradeMinds Playground
-      </Typography>
+      </Typography> */}
+      <img
+        src={require("../images/tt-logo.png")}
+        style={{ width: "5%", height: "100%" }}
+      />
 
       <Box
         className="header"
@@ -40,12 +46,15 @@ function NavBar() {
         <Link to="/funds" className="text-light fs-4 px-3 funds">
           Funds
         </Link>
-      </Box>
-      <Box className="userprofile">
         <Link to="/profile" className="text-light fs-4 px-3 profile">
           Profile
         </Link>
       </Box>
+      {/* <Box className="userprofile">
+        <Link to="/profile" className="text-light fs-4 px-3 profile">
+          Profile
+        </Link>
+      </Box> */}
     </Container>
   );
 }
