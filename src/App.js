@@ -34,7 +34,7 @@ function App () {
       <NavBar />
       <Routes>
         Home
-        <Route path='/' element={<LoginForm />}></Route>
+        <Route path='/' element={<Landingpage />}></Route>
         <Route path='/login' element={<LoginForm />}></Route>
         <Route path='/sign-in' element={<LoginForm />}></Route>
         <Route path='/welcome' element={<Landingpage />}></Route>

@@ -28,18 +28,22 @@ function NavBar () {
       {/* <Typography sx={{ color: "white", fontSize: "20px", mb: 3 }}>
         TradeMinds Playground
       </Typography> */}
-      <img
-        src={require('../images/tt-logo.png')}
-        style={{ width: '5%', height: '100%' }}
-      />
+      <Link to='/welcome'>
+        <img
+          src={require('../images/tt-logo.png')}
+          style={{ width: '50%', height: '100%' }}
+        />
+      </Link>
 
       <Box
         className='header'
         sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}
       >
-        {/* <Link to='/dashboard' className='text-light fs-4 px-3 dashboard'>
-          Dashboard
-        </Link> */}
+        {userSessionData && (
+          <Link to='/dashboard' className='text-light fs-4 px-3 dashboard'>
+            Dashboard
+          </Link>
+        )}
         {userSessionData && (
           <Link to='/holdings' className='text-light fs-4 px-3 holdings'>
             Holdings
