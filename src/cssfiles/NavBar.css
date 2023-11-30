@@ -1,38 +1,38 @@
-.links{
-    display: flex;
-    padding-right:36em;
-    padding-left:41em;
-    /* padding-bottom: 0.5em; */
-    padding-top:2em;
-    gap:6em;
-    /* color:white; */
+/* .links {
+  display: flex;
+  padding-right: 36em;
+  padding-left: 41em;
+  padding-bottom: 0.5em;
+  padding-top: 2em;
+  gap: 6em;
+  color: white;
+} */
+.dashboard {
+  text-decoration: none;
 }
-.dashboard{
-    text-decoration: none;
+.holdings {
+  text-decoration: none;
 }
-.holdings{
-    text-decoration: none;
+.funds {
+  text-decoration: none;
 }
-.funds{
-    text-decoration: none;
+.watchlist {
+  text-decoration: none;
 }
-.watchlist{
-    text-decoration: none;
+.profile {
+  text-decoration: none;
 }
-.profile{
-    text-decoration: none;
-}
-@media (max-width: 600px) {
-    NavBar {
-        flex-direction: column;
-    }
-}
-.drop-name{
-    padding-top:2em;
-    /* padding-bottom:1em; */
-    /* padding-left:8em; */
-    /* padding-right: 3em; */
-}
+/* @media (max-width: 600px) {
+  NavBar {
+    flex-direction: column;
+  }
+} */
+/* .drop-name {
+  padding-top: 2em;
+  padding-bottom:1em;
+  padding-left:8em;
+  padding-right: 3em;
+} */
 /* .drop-name::after{
     visibility: hidden;
     content:"";
