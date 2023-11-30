@@ -26,7 +26,7 @@ function Funds(user) {
     setOpen(false);
   };
   const setData = (data) => {
-    setWatchListData([...data]);
+    setWatchListData(data);
   };
 
   useEffect(() => {
@@ -74,6 +74,7 @@ function Funds(user) {
             user={userSessionData}
             dataForWatchList={dataForWatchList}
             watchlistData={watchlistData}
+            setWatchList={setData}
           />
         </Box>
       </Box>

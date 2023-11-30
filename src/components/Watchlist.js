@@ -18,7 +18,7 @@ import BuyPopup from "./BuyPopup";
 
 // import "react-datepicker/dist/react-datepicker.css";
 let dataForWatchList = () => {};
-function Watchlist({ user, dataForWatchList, watchlistData }) {
+function Watchlist({ user, dataForWatchList, watchlistData, setWatchList }) {
   
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -62,7 +62,11 @@ function Watchlist({ user, dataForWatchList, watchlistData }) {
       .catch((e) => {
         console.error("Axios Error", e.message);
       });
-  }, [data]);
+  }, [watchlistData]);
+
+  const a = (data) => {
+    setData(data)
+  }
 
   dataForWatchList = setData;
   const func = () => {
@@ -96,7 +100,7 @@ function Watchlist({ user, dataForWatchList, watchlistData }) {
                 {/* <Typography className ="num2"> -0.22% </Typography>
           <Typography className ="num3"> <FontAwesomeIcon  icon={faCaretDown}/> &nbsp;19751.05 </Typography> */}
         </Box>
-        <WatchListBasicButtonGroup watchlist={obj} user={user} dataForWatchList={dataForWatchList} watchlistData={watchlistData} price={obj.price} />
+        <WatchListBasicButtonGroup watchlist={obj} user={user} dataForWatchList={dataForWatchList} watchlistData={watchlistData} price={obj.price} setWatchList={setWatchList}/>
       </Paper>
           </div>
         </>

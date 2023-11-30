@@ -68,7 +68,7 @@ function Holdings() {
   }
   // const totalMarketprice = Object.values(holdingsdata).reduce((p,stock) => p+stock.invested_value, 0);
   const setData = (data) =>{
-    setWatchListData([...data])
+    setWatchListData(data)
   }
 
 
@@ -138,7 +138,7 @@ const sendAxiosRequest = async (name) => {
         }}
       >
         <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
-        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
+        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} setWatchList={setData} /> 
       </Container>
       <Container
         sx={{

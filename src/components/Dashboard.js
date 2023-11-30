@@ -28,7 +28,7 @@ function Dashboard() {
   const [watchlistData, setWatchListData] = useState([]);
   const userSessionData = JSON.parse(sessionStorage.getItem("userSession"));
   const setData = (data) => {
-    setWatchListData([...data]);
+    setWatchListData(data);
   };
   // console.log(watchlistData, "JJJJJJ");
 
@@ -71,6 +71,7 @@ function Dashboard() {
             user={userSessionData}
             dataForWatchList={dataForWatchList}
             watchlistData={watchlistData}
+            setWatchList={setData}
           />
 
           {/* <Popup
