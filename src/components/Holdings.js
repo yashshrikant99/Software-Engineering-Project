@@ -59,7 +59,7 @@ function Holdings() {
 
   const currentval1 =(sumWithInitial);
   const currentval = (currentval1 * totalQuantity).toFixed(2);
-  let pl = (currentval - totalInvested);.toFixed(2)
+  let pl = (currentval - totalInvested).toFixed(2)
 
   if (pl < 0) {
     pl = "-" + pl;
