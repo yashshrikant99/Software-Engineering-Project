@@ -15,9 +15,12 @@ router.post('/users', async (req, res) => {
       phone: user.phone,
       DoB: user.DoB
     }
-    const exist = await User.checkUserExist(newUser.username, newUser.email)
-    console.log('user exists:', exist)
-    if (!exist) {
+    const [userNameExist, emailExist] = await User.checkUserExist(
+      newUser.username,
+      newUser.email
+    )
+    console.log(userNameExist, emailExist)
+    if (!userNameExist && !emailExist) {
       let fromMail = 'noreply@meetingsApp.com'
       let toMail = user.email
       let subject = 'Verify Email'
@@ -41,9 +44,12 @@ router.post('/users', async (req, res) => {
       //await transporter.sendMail(mailOptions)
       const userCreated = await User.Create(newUser)
       console.log('sent')
-      if (userCreated) res.send('Created User')
+      if (userCreated) res.send(userCreated)
     } else {
-      res.send('User already Exist')
+      if (userNameExist && emailExist)
+        res.send('Username and Email Id already exists')
+      else if (userNameExist) res.send('Username already exists')
+      else res.send('Email Id already exists')
     }
   } catch (e) {
     console.log('Creation error', e.message)
