@@ -49,7 +49,7 @@ function Funds(user) {
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100vh", }}
+      sx={{ display: "flex", flexDirection: "row", height: "100vh" }}
     >
       <Box
         sx={{
@@ -83,10 +83,13 @@ function Funds(user) {
 
       <Box
         sx={{
+          className: "main-box",
           display: "flex",
           flexDirection: "column",
           height: "100%",
           width: "65%",
+
+          // backgroudColor: "blue",
         }}
       >
         <Box
@@ -109,7 +112,13 @@ function Funds(user) {
 
         <Box
           className="outer-box"
-          sx={{ borderRadius: 8, padding: 6, border: "2px solid lightgray" }}
+          sx={{
+            borderRadius: 8,
+            padding: 6,
+            border: "2px solid lightgray",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <Box className="inner-box" sx={{ borderRadius: 8, padding: 11 }}>
             <Typography
@@ -146,13 +155,6 @@ function Funds(user) {
           </Box>
         </Box>
         <br></br>
-        {/* <Box className="add-funds-box" sx={{ display: "flex", flexDirection: "row", gap: "1em", justifyContent: "center", alignItems: 'center', mt:2 ,mr:19 }}>
-      <Button variant="contained" sx={{ width: '50%', height: 50,backgroundColor: '#2196f3', color: '#fff',borderRadius: '8px',boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          '&:hover': {backgroundColor: '#4caf50', // Change to a slightly darker shade on hover
-         },
-        }}>
-      <FontAwesomeIcon icon={faPlus} style={{ marginRight: '8px' }} /> Add Funds</Button>
-    </Box> */}
 
         <Box>
           <Popup
@@ -167,6 +169,7 @@ function Funds(user) {
                   borderRadius: "8px",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
                   "&:hover": { backgroundColor: "#4caf50" },
+                  ml: 29,
                 }}
               >
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "8px" }} />{" "}
