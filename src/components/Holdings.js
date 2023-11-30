@@ -25,16 +25,16 @@ import { SearchBar } from './SearchBar'
 import Watchlist, { dataForWatchList } from './Watchlist'
 import { StockDataHoldings } from './StockDataHoldings'
 
-function Holdings() {
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  const userSessionData = JSON.parse(sessionStorage.getItem("userSession"));
-  const [watchlistData, setWatchListData] = useState([]);
-  let [holdingsdata, setHoldings] = useState([]);
-  const [close, setClose] = useState(0);
-  let [stock, setStock] = useState({});
-  var [currentPriceStocks, setCurrentPrice] = useState({});
-  var [openprice, setopenprice] = useState({});
+function Holdings () {
+  const [open, setOpen] = useState(false)
+  const closeModal = () => setOpen(false)
+  const userSessionData = JSON.parse(sessionStorage.getItem('userSession'))
+  const [watchlistData, setWatchListData] = useState([])
+  let [holdingsdata, setHoldings] = useState([])
+  const [close, setClose] = useState(0)
+  let [stock, setStock] = useState({})
+  var [currentPriceStocks, setCurrentPrice] = useState({})
+  var [openprice, setopenprice] = useState({})
 
   const abc = a => {
     return
@@ -57,9 +57,9 @@ function Holdings() {
     initialValue
   )
 
-  const currentval1 = sumWithInitial;
-  const currentval = (currentval1 * totalQuantity).toFixed(2);
-  let pl = (currentval - totalInvested).toFixed(2);
+  const currentval1 = sumWithInitial
+  const currentval = (currentval1 * totalQuantity).toFixed(2)
+  let pl = (currentval - totalInvested).toFixed(2)
 
   if (pl < 0) {
     pl = '-' + pl
@@ -67,12 +67,12 @@ function Holdings() {
     pl = '+' + pl
   }
   // const totalMarketprice = Object.values(holdingsdata).reduce((p,stock) => p+stock.invested_value, 0);
-  const setData = (data) => {
-    setWatchListData([...data]);
-  };
+  const setData = data => {
+    setWatchListData([...data])
+  }
 
   const a = (stock, index) => {
-    if (!holdingsdata && !currentPriceStocks) return <></>;
+    if (!holdingsdata && !currentPriceStocks) return <></>
     return (
       <StockDataHoldings
         abc={abc}
@@ -83,58 +83,55 @@ function Holdings() {
         holdingsdata={holdingsdata}
         openprice={openprice}
       />
-    );
-  };
+    )
+  }
 
-  const sendAxiosRequest = async (name) => {
+  const sendAxiosRequest = async name => {
     try {
-      console.log("i am called", name);
+      console.log('i am called', name)
       await axios
         .get(
           `http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`
         )
-        .then((response) => {
+        .then(response => {
           if (response.data) {
-            stock = { ...response.data[0] };
-            currentPriceStocks[`${name}`] = stock.close;
-            openprice[`${name}`] = stock.open;
-            setCurrentPrice((Prev) => ({ ...Prev, ...currentPriceStocks }));
-            setopenprice((Prev) => ({ ...Prev, ...openprice }));
-            console.log(stock, "hi");
-            console.log(currentPriceStocks, "hiw");
-            console.log(openprice, "hiw");
+            stock = { ...response.data[0] }
+            currentPriceStocks[`${name}`] = stock.close
+            openprice[`${name}`] = stock.open
+            setCurrentPrice(Prev => ({ ...Prev, ...currentPriceStocks }))
+            setopenprice(Prev => ({ ...Prev, ...openprice }))
+            console.log(stock, 'hi')
+            console.log(currentPriceStocks, 'hiw')
+            console.log(openprice, 'hiw')
           }
         })
-        .catch((e) => {
-          console.error("Axios Error", e.message);
-        });
+        .catch(e => {
+          console.error('Axios Error', e.message)
+        })
     } catch (e) {
-      console.log(e.message);
+      console.log(e.message)
     }
-  };
+  }
 
   useEffect(() => {
     const res = axios
       .get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`)
-      .then((response) => {
+      .then(response => {
         if (response) {
-          setHoldings({ ...response.data });
+          setHoldings({ ...response.data })
         }
       })
-      .catch((e) => {
-        console.error("Axios Error", e.message);
-      });
-  }, []);
-
-
-  
+      .catch(e => {
+        console.error('Axios Error', e.message)
+      })
+  }, [])
 
   useEffect(() => {
     for (let data of Object.keys(holdingsdata)) {
       console.log('2')
       sendAxiosRequest(data)
     }
-  }, [holdingsdata]);
+  }, [holdingsdata])
 
   return (
     <Container maxWidth={false} sx={{ display: 'flex', height: '100%' }}>
@@ -148,8 +145,17 @@ function Holdings() {
           color: 'secondary.main'
         }}
       >
-        {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
-        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />  */}
+        <SearchBar
+          user={userSessionData}
+          watchlistData={watchlistData}
+          setWatchList={setData}
+          dataForWatchList={dataForWatchList}
+        />
+        <Watchlist
+          user={userSessionData}
+          dataForWatchList={dataForWatchList}
+          watchlistData={watchlistData}
+        />
       </Container>
       <Container
         sx={{
@@ -161,7 +167,7 @@ function Holdings() {
       >
         <Typography
           variant='h3'
-          sx={{ my: 4, textAlign: 'center', color: 'secondary.main' }}
+          sx={{ my: 4, textAlign: 'center', color: 'black' }}
         >
           HOLDINGS
         </Typography>
@@ -207,14 +213,14 @@ function Holdings() {
                 alignItems: 'center'
               }}
             >
-              <Typography variant="h5">P&L</Typography>
-              <Typography sx={{ color: "#03C04A" }}>
+              <Typography variant='h5'>P&L</Typography>
+              <Typography sx={{ color: '#03C04A' }}>
                 {pl > 0 ? (
-                  <Typography sx={{ color: "#03C04A", fontSize: "1.1rem" }}>
+                  <Typography sx={{ color: '#03C04A', fontSize: '1.1rem' }}>
                     {pl}
                   </Typography>
                 ) : (
-                  <Typography sx={{ color: "#FF0000", fontSize: "1.1rem" }}>
+                  <Typography sx={{ color: '#FF0000', fontSize: '1.1rem' }}>
                     {pl}
                   </Typography>
                 )}
@@ -232,7 +238,7 @@ function Holdings() {
             marginBottom: '3em'
           }}
         >
-          <Grid container spacing={2} sx={{ backgroundColor: "black" }}>
+          <Grid container spacing={2} sx={{}}>
             {Object.values(holdingsdata).map((stock, index) => a(stock, index))}
           </Grid>
         </Box>
