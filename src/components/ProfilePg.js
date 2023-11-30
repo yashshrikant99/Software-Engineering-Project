@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { TextField } from "@mui/material";
 
 function UserProfile(user) {
   const [isEditing, setEditing] = useState(false);
   const [userdetails, setUserdetails] = useState([]);
   const userSessionData = JSON.parse(sessionStorage.getItem("userSession"));
-  const [userName, setUserName] = useState("");
-  // const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(userdetails.phone);
-  const [errors, setUserError] = useState({});
-  // const [phoneError, setPhoneError] = useState("");
+  const [userName, setUserName] = useState(user.username);
+  const [phoneNumber, setPhoneNumber] = useState(user.phone);
+  const [phoneError, setPhoneError] = useState("");
+  const [userNameError, setuserNameError] = useState("");
 
   const handleEditClick = () => {
     setEditing(true);
   };
 
-  const handleSaveClick = () => {
-    setEditing(false);
-  };
 
   const validateUsername = (userName) => {
     if (userName.length < 6) {
       return "Username should atleast be 6 characters";
+     
     }
     return null;
   };
   const validatePhonenumber = (phoneNumber) => {
     if (phoneNumber.length < 10) {
       return "Invalid Phone Number";
+      
     }
     return null;
   };
@@ -46,15 +45,36 @@ function UserProfile(user) {
 
   const handleClick = () => {
     // e.preventDefault();
-    // const userNameError = validateUsername(userName);
-    // const phoneError = validatePhonenumber(phoneNumber);
+    const userNameError = validateUsername(userName);
+    const phoneError = validatePhonenumber(phoneNumber);
     // if (userNameError || phoneError) {
-    //   errors({ userNameError, phoneError });
+    //   setUserError({ userNameError: userNameError || null, phoneError:phoneError || null});
+    //   console.log(errors)
+    //   // alert(errors[0]);
     //   return;
     // }
-    // if (phoneError) {
-    //   setPhoneError(phoneError);
-    // }
+  
+    if(userNameError && phoneError)
+    {
+      alert(`${userNameError || ''} and ${phoneError || ''}`);
+    }
+    else 
+    {
+      if (phoneError) {
+        setPhoneError(phoneError);
+        alert(phoneError)
+        console.log(phoneError)
+      }
+  
+      if (userNameError) {
+        setuserNameError(userNameError);
+        alert(userNameError)
+        console.log(userNameError)
+      } 
+    }
+
+    if(phoneError===null && userNameError===null)
+    {
     axios
       .patch(
         `http://localhost:8080/users/${userSessionData.id}/modify-details`,
@@ -71,12 +91,20 @@ function UserProfile(user) {
       .then((response) => {
         if (response) {
           console.log("jj", response);
+          setEditing(false);
+          setUserdetails((prevdetails)=>({
+            ...prevdetails,
+            username:response.data.username,
+            phone:response.data.phone
+          }));
         }
       })
       .catch((e) => {
         console.error("Axios Error", e.message);
       });
-  };
+  }
+
+  }
 
   useEffect(() => {
     axios
@@ -85,6 +113,8 @@ function UserProfile(user) {
         if (response) {
           setUserdetails(response.data);
           console.log(response.data);
+          setUserName(response.data.username);
+          setPhoneNumber(response.data.phone);
         }
       })
       .catch((e) => {
@@ -121,13 +151,13 @@ function UserProfile(user) {
       >
         <label>Username: &nbsp;</label>
         {isEditing ? (
-          <input
-            type="username"
-            value={userName}
+          <TextField
+            id="username"
+            name="username"
+            placeholder={userdetails.username}
             onChange={(e) => setUserName(e.target.value)}
             // onChange={handleChange}
           />
-          
         ) : (
           <span>{userdetails.username}</span>
         )}
@@ -140,9 +170,10 @@ function UserProfile(user) {
       <div className="number" style={{ fontSize: "28px", margin: "21px 11px" }}>
         <label>Phone Number: &nbsp;</label>
         {isEditing ? (
-          <input
-            type="text"
-            value={phoneNumber}
+          <TextField
+            id="phoneno"
+            name="phoneno"
+            placeholder={userdetails.phone}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         ) : (

@@ -49,7 +49,7 @@ function Funds(user) {
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100%" }}
+      sx={{ display: "flex", flexDirection: "row", height: "100vh", }}
     >
       <Box
         sx={{

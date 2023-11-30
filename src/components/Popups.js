@@ -68,7 +68,7 @@ function Popups({ open, closeModal, stockname, userid }) {
                   <strong>x</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
-                  <strong>1</strong>&nbsp;&nbsp;
+                  <strong>{quantity}</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
                   <strong>Qty</strong>&nbsp;&nbsp;

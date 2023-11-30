@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Holdings from './Holdings';
 
 function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
   // const [price,setPrice]=useState([]);
@@ -37,6 +38,7 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
         if (response) {
           stock = { ...response.data[0] };
           setClose(stock.close);
+         
         }
       })
       .catch((e) => {
@@ -91,7 +93,7 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
                   <strong>x</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
-                  <strong>1</strong>&nbsp;&nbsp;
+                  <strong>{quantity}</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
                   <strong>Qty</strong>&nbsp;&nbsp;
@@ -171,7 +173,8 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
                 >
                   Cancel
                 </Button>
-              </Box>
+              
+         </Box>
             </Box>
           </Paper>
         </Grid>
