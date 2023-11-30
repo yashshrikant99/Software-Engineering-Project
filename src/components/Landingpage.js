@@ -49,7 +49,7 @@ function Landingpage () {
             width: '100%',
             spaceBetween: 'justify-content',
             // border: "solid",
-            backgroundColor: 'beige'
+            backgroundColor: 'black'
           }}
         >
           <Box sx={{ display: 'flex', width: '100%' }} className='typo-box'>
@@ -58,7 +58,7 @@ function Landingpage () {
               sx={{
                 padding: '0.5em',
                 width: '100%',
-                color: 'black',
+                color: 'white',
                 fontSize: 45
               }}
             >
@@ -74,14 +74,14 @@ function Landingpage () {
               width: '100%'
             }}
           >
-            <Typography variant='h5' sx={{ padding: '0.5em' }}>
+            <Typography variant='h5' sx={{ padding: '0.5em', color: 'white' }}>
               TradeMinds Playground is a risk-free investing simulation website.
             </Typography>
-            <Typography variant='h5' sx={{ padding: '0.5em' }}>
+            <Typography variant='h5' sx={{ padding: '0.5em', color: 'white' }}>
               We simplfy the complexities of stock trading assisting you to
               confidently reach your financial goals.
             </Typography>
-            <Typography variant='h5' sx={{ padding: '0.5em' }}>
+            <Typography variant='h5' sx={{ padding: '0.5em', color: 'white' }}>
               You can start trading right away with your virtual currency!
             </Typography>
             <Box
