@@ -48,7 +48,7 @@ export default function BasicButtonGroup({
         .catch((e) => {
           console.error("Axios Error", e.message);
         });
-        alert(JSON.stringify(insertData))
+        //alert(JSON.stringify(insertData))
       await axios
         .post(`http://localhost:8080/add_watchlist/${user.id}`, insertData)
         .then((response) => {

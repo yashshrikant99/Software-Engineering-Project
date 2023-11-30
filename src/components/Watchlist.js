@@ -18,7 +18,7 @@ import BuyPopup from './BuyPopup'
 
 // import "react-datepicker/dist/react-datepicker.css";
 let dataForWatchList = () => {}
-function Watchlist ({ user, dataForWatchList, watchlistData }) {
+function Watchlist ({ user, dataForWatchList, watchlistData, setRender }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   // const flag = false;
@@ -105,6 +105,7 @@ function Watchlist ({ user, dataForWatchList, watchlistData }) {
                 dataForWatchList={dataForWatchList}
                 watchlistData={watchlistData}
                 price={obj.price}
+                setRender={setRender}
               />
             </Paper>
           </div>

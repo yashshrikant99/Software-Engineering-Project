@@ -171,7 +171,8 @@ function Funds (user) {
                   color: '#fff',
                   borderRadius: '11px',
                   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                  '&:hover': { backgroundColor: 'secondary.main' }
+                  '&:hover': { backgroundColor: 'secondary.main' },
+                  ml:29
                 }}
               >
                 <FontAwesomeIcon

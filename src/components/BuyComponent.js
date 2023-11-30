@@ -17,7 +17,7 @@ import {
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-function BuyComponent ({ stockname, userid, price }) {
+function BuyComponent ({ stockname, userid, price, setRender }) {
   // alert(price)
   // const [price,setPrice]=useState([]);
   const [quantity, setQuantity] = useState([])
@@ -33,13 +33,15 @@ function BuyComponent ({ stockname, userid, price }) {
       })
       .then(response => {
         console.log(response, 'hiii')
+        if(response)
+        setRender((o)=>!o)
       })
       .catch(e => {
         console.error('Axios Error', e.message)
       })
   }
 
-  useEffect(buyStock, [])
+ // useEffect(buyStock, [])
 
   return (
     <Container sx={{ bgcolor: 'black', padding: '20px' }}>

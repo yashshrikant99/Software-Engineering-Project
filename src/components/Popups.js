@@ -18,7 +18,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-function Popups ({ open, closeModal, stockname, userid }) {
+function Popups({ open, closeModal, stockname, userid, setRender }) {
   // const [price,setPrice]=useState([]);
   const [quantity, setQuantity] = useState('')
   const [close, setClose] = useState(0)
@@ -47,15 +47,17 @@ function Popups ({ open, closeModal, stockname, userid }) {
         buy_price: 102,
         quantity: -quantity
       })
-      .then(response => {
-        console.log(response)
+      .then((response) => {
+        console.log(response);
+        if(response)
+        setRender((o)=>!o)
       })
       .catch(e => {
         console.error('Axios Error', e.message)
       })
   }
 
-  useEffect(sellStock, [])
+  //useEffect(sellStock, []);
 
   return (
     <Container sx={{ bgcolor: 'black', padding: '20px' }}>

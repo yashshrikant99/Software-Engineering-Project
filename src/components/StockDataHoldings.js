@@ -30,7 +30,8 @@ function StockDataHoldings ({
   index,
   currentPriceStocks,
   holdingsdata,
-  openprice
+  openprice,
+  setRender,
 }) {
   console.log('hte', currentPriceStocks)
   const [open, setOpen] = useState(false)
@@ -96,7 +97,7 @@ function StockDataHoldings ({
                   ) : (
                     <Typography
                       sx={{
-                        color: isNaN(pc) ? '#03C04A' : '#FF0000',
+                        color: isNaN(pc)&&pc<0 ? '#03C04A' : '#FF0000',
                         fontSize: '1.1rem'
                       }}
                     >
@@ -120,7 +121,7 @@ function StockDataHoldings ({
                   <strong>
                     {currentPriceStocks[Object.keys(holdingsdata)[index]]}&nbsp;
                   </strong>
-                  <span style={{ color: 'red' }}>{sc}</span>
+                  <span style={{ color: 'red' }}>{`(${sc})`}</span>
                 </Typography>
               </Box>
             </Box>
@@ -155,6 +156,7 @@ function StockDataHoldings ({
                         onClose={closeModal}
                         stockname={Object.keys(holdingsdata)[index]}
                         userid={userSessionData.id}
+                        setRender={setRender}
                       />
                     }
                   </div>
@@ -177,6 +179,10 @@ function StockDataHoldings ({
                 >
                   <div>
                     <Popups
+                      open={open}
+                      setRender={setRender}
+                      openPop={openModal}
+                      closeModal={closeModal}
                       stockname={Object.keys(holdingsdata)[index]}
                       userid={userSessionData.id}
                     />
