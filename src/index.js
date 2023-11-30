@@ -1,24 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+// import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const theme= createTheme({
-  palette:
-  { 
+const theme = createTheme({
+  palette: {
     // mode: 'dark',
-    primary: 
-    {
-        main: "#071630",
+    primary: {
+      main: "#071630",
     },
 
-    secondary:
-    {
+    secondary: {
       main: "#008080",
     },
   },
@@ -29,26 +26,22 @@ const theme= createTheme({
   //   },
   // },
 
-  typography:
-  {
-    h3:
-    {
+  typography: {
+    h3: {
       fontWeight: 600,
     },
-    h4:
-    {
+    h4: {
       fontWeight: 600,
-    }
-  }
-
-})
+    },
+  },
+});
 
 root.render(
   // <React.StrictMode>
   <ThemeProvider theme={theme}>
-     <App/>
-   </ThemeProvider> 
-   
+    <App />
+  </ThemeProvider>
+
   // {/* </React.StrictMode> */}
 );
 

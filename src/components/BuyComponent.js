@@ -14,34 +14,35 @@ import {
   Switch,
   FormGroup,
 } from "@mui/material";
-import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Popups({ open, closeModal, stockname, userid }) {
+function BuyComponent({ stockname, userid, price }) {
+  // alert(price)
   // const [price,setPrice]=useState([]);
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState([]);
+  const [close, setClose] = useState(0);
   console.log(quantity);
 
-  const sellStock = () => {
+  const buyStock = () => {
     axios
       .post(`http://localhost:8080/holdings/${userid}`, {
         stock_name: stockname,
-        buy_price: 102,
-        quantity: -quantity,
+        buy_price: price,
+        quantity: quantity,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response, "hiii");
       })
       .catch((e) => {
         console.error("Axios Error", e.message);
       });
   };
 
-  useEffect(sellStock, []);
+  useEffect(buyStock, []);
 
   return (
-    <Container sx={{ bgcolor: "green", padding: "20px" }}>
+    <Container sx={{ bgcolor: "black", padding: "20px" }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Paper
@@ -59,7 +60,7 @@ function Popups({ open, closeModal, stockname, userid }) {
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box sx={{ display: "flex" }}>
                 <Typography>
-                  <strong>Sell</strong>&nbsp;&nbsp;
+                  <strong>Buy</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
                   <strong>{stockname}</strong>&nbsp;&nbsp;
@@ -68,7 +69,7 @@ function Popups({ open, closeModal, stockname, userid }) {
                   <strong>x</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
-                  <strong>{quantity}</strong>&nbsp;&nbsp;
+                  <strong>1</strong>&nbsp;&nbsp;
                 </Typography>
                 <Typography>
                   <strong>Qty</strong>&nbsp;&nbsp;
@@ -79,11 +80,12 @@ function Popups({ open, closeModal, stockname, userid }) {
                   <FormControlLabel
                     sx={{ color: "white" }}
                     control={<Switch defaultChecked />}
+                    label="Label"
                   />
                 </FormGroup>
               </Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box sx={{ display: "flex", gap: "10px" }}>
               <Box>
                 <Typography variant="h6">Qty</Typography>
                 <TextField
@@ -91,11 +93,16 @@ function Popups({ open, closeModal, stockname, userid }) {
                   name="quantity"
                   value={quantity}
                   onChange={(event) => setQuantity(event.target.value)}
-                ></TextField>
+                >
+                  1
+                </TextField>
               </Box>
               <Box>
                 <Typography variant="h6">Price</Typography>
-                <TextField id="price" name="price"></TextField>
+                <Typography></Typography>
+                <TextField id="price" name="price" value={price}>
+                  1
+                </TextField>
                 <FormControl>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
@@ -120,35 +127,26 @@ function Popups({ open, closeModal, stockname, userid }) {
               }}
             >
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Box>
-                  <Typography variant="h6">Margin&nbsp;&nbsp;</Typography>
-                </Box>
-                <Box>
-                  <Typography sx={{ color: "white" }}>Rs 2,000.00</Typography>
-                </Box>
+                <Box></Box>
+                <Box></Box>
               </Box>
 
               <Box>
                 <Button
                   sx={{ color: "white", bgcolor: "blue" }}
-                  onClick={sellStock}
+                  onClick={buyStock}
                 >
-                  Sell
+                  Add
                 </Button>
                 &nbsp;&nbsp;
-                <Button
-                  sx={{ color: "white", bgcolor: "blue" }}
-                  onClick={() => closeModal()}
-                >
-                  Cancel
-                </Button>
               </Box>
             </Box>
           </Paper>
         </Grid>
       </Grid>
     </Container>
+    /* </div> */
   );
 }
 
-export default Popups;
+export default BuyComponent;
