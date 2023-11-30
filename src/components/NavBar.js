@@ -27,10 +27,12 @@ function NavBar() {
       {/* <Typography sx={{ color: "white", fontSize: "20px", mb: 3 }}>
         TradeMinds Playground
       </Typography> */}
-      <img
-        src={require("../images/tt-logo.png")}
-        style={{ width: "5%", height: "100%" }}
-      />
+      <Link to="/welcome">
+        <img
+          src={require("../images/tt-logo.png")}
+          style={{ width: "50%", height: "100%" }}
+        />
+      </Link>
 
       <Box
         className="header"

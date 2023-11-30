@@ -72,35 +72,35 @@ function Holdings() {
   }
 
 
- const a = (stock,index) =>{
-  if(!holdingsdata&&!currentPriceStocks)
+  const a = (stock,index) =>{
+    if(!holdingsdata&&!currentPriceStocks)
   return <></>
-  return (
-    <StockDataHoldings abc={abc} user={userSessionData} stock={stock} index={index} currentPriceStocks={currentPriceStocks} holdingsdata={holdingsdata} openprice={openprice}/>
-  )
+    return (
+      <StockDataHoldings abc={abc} user={userSessionData} stock={stock} index={index} currentPriceStocks={currentPriceStocks} holdingsdata={holdingsdata} openprice={openprice}/>
+    )
  }
 
- 
-const sendAxiosRequest = async (name) => {
-  try{
-    console.log("i am called",name)
-    await axios.get(`http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`).
+
+  const sendAxiosRequest = async (name) => {
+    try{
+      console.log("i am called",name)
+      await axios.get(`http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`).
      then((response)=>{
-         if(response.data){
-           stock={...response.data[0]}
-           currentPriceStocks[`${name}`]=stock.close
-           openprice[`${name}`]=stock.open
-           setCurrentPrice((Prev)=>({...Prev,...currentPriceStocks}))
-           setopenprice((Prev)=>({...Prev,...openprice}))
-           console.log(stock,"hi")
-           console.log(currentPriceStocks,"hiw")
-           console.log(openprice,"hiw")
-         }
-     }).catch(e=>{
-       console.error("Axios Error",e.message)
-     })
+          if(response.data){
+            stock={...response.data[0]}
+            currentPriceStocks[`${name}`]=stock.close
+            openprice[`${name}`]=stock.open
+            setCurrentPrice((Prev)=>({...Prev,...currentPriceStocks}))
+            setopenprice((Prev)=>({...Prev,...openprice}))
+            console.log(stock,"hi")
+            console.log(currentPriceStocks,"hiw")
+            console.log(openprice,"hiw")
+          }
+        }).catch(e=>{
+          console.error("Axios Error",e.message)
+        })
   }catch(e){
-    console.log(e.message)
+      console.log(e.message)
   }
 
 }
@@ -138,7 +138,7 @@ const sendAxiosRequest = async (name) => {
         }}
       >
         <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
-        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
+        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />
       </Container>
       <Container
         sx={{
