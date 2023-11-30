@@ -68,7 +68,7 @@ function Holdings () {
   }
   // const totalMarketprice = Object.values(holdingsdata).reduce((p,stock) => p+stock.invested_value, 0);
   const setData = data => {
-    setWatchListData(data)
+    setWatchListData([...data])
   }
 
   const a = (stock, index) => {
@@ -169,14 +169,14 @@ function Holdings () {
           variant='h3'
           sx={{ my: 4, textAlign: 'center', color: 'secondary.main' }}
         >
-          Holdings
+          HOLDINGS
         </Typography>
 
         <Box sx={{ marginBottom: 7, width: '100%' }}>
           <Paper
             elevation={2}
             sx={{
-              bgcolor: 'black',
+              bgcolor: '#CB997E',
               p: '2em',
               display: 'flex',
               flexDirection: 'column',
@@ -214,7 +214,7 @@ function Holdings () {
               }}
             >
               <Typography variant='h5'>P&L</Typography>
-              <Typography sx={{ color: '#03C04A' }} variant='h5'>
+              <Typography sx={{ color: 'secondary.main' }} variant='h5'>
                 {pl}
               </Typography>
             </Box>
