@@ -19,14 +19,14 @@ function UserProfile(user) {
   const validateUsername = (userName) => {
     if (userName.length < 6) {
       return "Username should atleast be 6 characters";
-     
+
     }
     return null;
   };
   const validatePhonenumber = (phoneNumber) => {
     if (phoneNumber.length < 10) {
       return "Invalid Phone Number";
-      
+
     }
     return null;
   };
@@ -53,56 +53,53 @@ function UserProfile(user) {
     //   // alert(errors[0]);
     //   return;
     // }
-  
-    if(userNameError && phoneError)
-    {
+
+    if (userNameError && phoneError) {
       alert(`${userNameError || ''} and ${phoneError || ''}`);
     }
-    else 
-    {
+    else {
       if (phoneError) {
         setPhoneError(phoneError);
         alert(phoneError)
         console.log(phoneError)
       }
-  
+
       if (userNameError) {
         setuserNameError(userNameError);
         alert(userNameError)
         console.log(userNameError)
-      } 
+      }
     }
 
-    if(phoneError===null && userNameError===null)
-    {
-    axios
-      .patch(
-        `http://localhost:8080/users/${userSessionData.id}/modify-details`,
-        {
-          // if(userName) {
-          username: String(userName),
-          phone: String(phoneNumber),
-          // },
-          // if(phoneNumber) {
-          //   phone: String(phoneNumber);
-          // },
-        }
-      )
-      .then((response) => {
-        if (response) {
-          console.log("jj", response);
-          setEditing(false);
-          setUserdetails((prevdetails)=>({
-            ...prevdetails,
-            username:response.data.username,
-            phone:response.data.phone
-          }));
-        }
-      })
-      .catch((e) => {
-        console.error("Axios Error", e.message);
-      });
-  }
+    if (phoneError === null && userNameError === null) {
+      axios
+        .patch(
+          `http://localhost:8080/users/${userSessionData.id}/modify-details`,
+          {
+            // if(userName) {
+            username: String(userName),
+            phone: String(phoneNumber),
+            // },
+            // if(phoneNumber) {
+            //   phone: String(phoneNumber);
+            // },
+          }
+        )
+        .then((response) => {
+          if (response) {
+            console.log("jj", response);
+            setEditing(false);
+            setUserdetails((prevdetails) => ({
+              ...prevdetails,
+              username: response.data.username,
+              phone: response.data.phone
+            }));
+          }
+        })
+        .catch((e) => {
+          console.error("Axios Error", e.message);
+        });
+    }
 
   }
 
@@ -130,17 +127,17 @@ function UserProfile(user) {
         borderRadius: "23px",
         fontWeight: "bold",
         textAlign: "center",
-       
+
         border: "1px solid #ccc",
         borderRadius: "8px",
-        background: "#D3D3D3",
-        width:"800px",
+        background: "#CB997E",
+        width: "800px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding:"120px"
-      
+        padding: "120px"
+
       }}
     >
       <div className="pro-img">
@@ -163,7 +160,7 @@ function UserProfile(user) {
             name="username"
             placeholder={userdetails.username}
             onChange={(e) => setUserName(e.target.value)}
-            // onChange={handleChange}
+          // onChange={handleChange}
           />
         ) : (
           <span>{userdetails.username}</span>

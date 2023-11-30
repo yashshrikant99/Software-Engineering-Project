@@ -49,9 +49,10 @@ function StockDataHoldings({
             gap: "2em",
             marginBottom: 2,
             padding: "20px",
+            bgcolor: "#FFE8D6"
           }}
         >
-          <Box sx={{ minWidth: "600px" }}>
+          <Box sx={{ minWidth: "600px", color: "black" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography
                 variant="h4"
@@ -73,7 +74,7 @@ function StockDataHoldings({
                 </Typography>
               </Box>
               {/* {getPrice(Object.keys(holdingsdata)[index])} */}
-              <Typography variant="h6" sx={{ color: "#03C04A" }}>
+              <Typography variant="h6" sx={{ color: "secondary.main" }}>
                 {currentPriceStocks[Object.keys(holdingsdata)[index]]}
               </Typography>
             </Box>

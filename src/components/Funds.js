@@ -49,7 +49,7 @@ function Funds(user) {
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100vh", alignItems:"center", justifyContent: "center"}}
+      sx={{ display: "flex", flexDirection: "row", height: "100vh", alignItems: "center", justifyContent: "center" }}
     >
       <Box
         sx={{
@@ -85,7 +85,7 @@ function Funds(user) {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          width: "65%", alignContent:"center"
+          width: "65%", alignContent: "center"
         }}
       >
         <Box
@@ -108,9 +108,9 @@ function Funds(user) {
 
         <Box
           className="outer-box"
-          sx={{ borderRadius: 8, padding: 6, border: "2px solid lightgray" }}
+          sx={{ borderRadius: 8, padding: 6, border: "2px solid lightgray", bgcolor: "#CB997E" }}
         >
-          <Box className="inner-box" sx={{ borderRadius: 8, padding: 11 }}>
+          <Box className="inner-box" sx={{ borderRadius: 1, padding: 11 }}>
             <Typography
               variant="h3"
               sx={{
@@ -118,6 +118,8 @@ function Funds(user) {
                 flexDirection: "column",
                 alignItems: "center",
                 color: "secondary.main",
+
+
               }}
             >
               <div sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>
@@ -145,9 +147,9 @@ function Funds(user) {
           </Box>
         </Box>
         <br></br>
-      
 
-        <Box style={{display: "flex", flexDirection: "column"}}>
+
+        <Box style={{ display: "flex", flexDirection: "column" }}>
           <Popup
             trigger={
               <Button
