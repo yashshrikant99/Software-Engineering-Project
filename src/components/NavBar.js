@@ -37,9 +37,11 @@ function NavBar () {
         className='header'
         sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}
       >
-        {/* <Link to='/dashboard' className='text-light fs-4 px-3 dashboard'>
-          Dashboard
-        </Link> */}
+        {userSessionData && (
+          <Link to='/dashboard' className='text-light fs-4 px-3 dashboard'>
+            Dashboard
+          </Link>
+        )}
         {userSessionData && (
           <Link to='/holdings' className='text-light fs-4 px-3 holdings'>
             Holdings
