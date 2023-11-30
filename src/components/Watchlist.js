@@ -9,15 +9,28 @@ import DashboardTable from './DashboardTable'
 import CircularProgress from '@mui/material/CircularProgress'
 import WatchListBasicButtonGroup from './WatchListButtonGroup'
 import { green } from '@mui/material/colors'
-
+import InfoIcon from '@mui/icons-material/Info'
+import Popup from 'reactjs-popup'
+import Button from '@mui/material/Button'
+import WatchlistPopup from './WatchlistPopup'
 import axios from 'axios'
+import BuyPopup from './BuyPopup'
 
 // import "react-datepicker/dist/react-datepicker.css";
 let dataForWatchList = () => {}
-function Watchlist ({ user, dataForWatchList, watchlistData }) {
+function Watchlist ({ user, dataForWatchList, watchlistData, setWatchList }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  // const flag = false;
   const [data, setData] = useState([])
+  // const closeModal = () => setOpen(false);
+  const [open, setOpen] = useState(false)
+
+  const handleClick = () => {
+    // alert(open);
+    setOpen(!open)
+  }
+
   const userSessionData = JSON.parse(sessionStorage.getItem('userSession'))
   const renderLoading = () => {
     ;<>
@@ -34,7 +47,7 @@ function Watchlist ({ user, dataForWatchList, watchlistData }) {
     </>
   }
   useEffect(() => {
-    console.log(user)
+    console.log(user.id)
     axios
       .get(`http://localhost:8080/user_watchlist/${user.id}`)
       .then(response => {
@@ -48,7 +61,11 @@ function Watchlist ({ user, dataForWatchList, watchlistData }) {
       .catch(e => {
         console.error('Axios Error', e.message)
       })
-  }, [data])
+  }, [watchlistData])
+
+  const a = data => {
+    setData(data)
+  }
 
   dataForWatchList = setData
   const func = () => {
@@ -88,6 +105,7 @@ function Watchlist ({ user, dataForWatchList, watchlistData }) {
                 dataForWatchList={dataForWatchList}
                 watchlistData={watchlistData}
                 price={obj.price}
+                setWatchList={setWatchList}
               />
             </Paper>
           </div>
@@ -100,9 +118,21 @@ function Watchlist ({ user, dataForWatchList, watchlistData }) {
     // <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
 
     <Box sx={{ height: '90%', width: '100%', mt: 2 }}>
-      <Typography variant='h2' level='h2' component='h2'>
-        Watchlist
-      </Typography>
+      <Box className='popup-watchlist' sx={{ display: 'flex' }}>
+        <Typography variant='h2' level='h2' component='h2'>
+          Watchlist
+        </Typography>
+
+        <Button onClick={handleClick}>
+          <InfoIcon fontSize='medium'> </InfoIcon>
+        </Button>
+
+        {open ? (
+          <Box sx={{ mt: 1 }}>
+            <WatchlistPopup></WatchlistPopup>
+          </Box>
+        ) : null}
+      </Box>
       {func()}
     </Box>
 

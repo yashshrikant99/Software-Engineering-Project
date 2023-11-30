@@ -16,7 +16,10 @@ import Holdings from './components/Holdings'
 import Funds from './components/Funds'
 import Watchlist from './components/Watchlist'
 import ProfilePg from './components/ProfilePg'
+// import Landingpage from "./components/Landingpage";
+// import Welcome from "./components/Welcome";
 // import Profile from './components/Profile';
+import Landingpage from './components/Landingpage'
 
 import {
   BrowserRouter as Router,
@@ -24,7 +27,6 @@ import {
   Route,
   useParams
 } from 'react-router-dom'
-import Landingpage from './components/Landingpage'
 
 function App () {
   return (
