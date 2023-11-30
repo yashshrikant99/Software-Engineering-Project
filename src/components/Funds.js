@@ -26,7 +26,7 @@ function Funds(user) {
     setOpen(false);
   };
   const setData = (data) => {
-    setWatchListData([...data]);
+    setWatchListData(data);
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Funds(user) {
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100vh", }}
+      sx={{ display: "flex", flexDirection: "row", height: "100vh" }}
     >
       <Box
         sx={{
@@ -74,6 +74,7 @@ function Funds(user) {
             user={userSessionData}
             dataForWatchList={dataForWatchList}
             watchlistData={watchlistData}
+            setWatchList={setData}
           />
         </Box>
       </Box>
@@ -166,6 +167,7 @@ function Funds(user) {
                   borderRadius: "8px",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
                   "&:hover": { backgroundColor: "#4caf50" },
+                  ml: 29,
                 }}
               >
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "8px" }} />{" "}

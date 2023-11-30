@@ -12,6 +12,7 @@ export default function WatchListBasicButtonGroup({
   watchlist,
   dataForWatchList,
   watchlistData,
+  setWatchList,
   price,
 }) {
   // alert(price)
@@ -38,6 +39,7 @@ export default function WatchListBasicButtonGroup({
           console.log(response);
           if (response) {
             dataForWatchList([...watchlistData]);
+            setWatchList((prev)=>[...prev])
           }
         })
         .catch((e) => {

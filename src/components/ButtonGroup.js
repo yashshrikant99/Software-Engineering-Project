@@ -51,6 +51,7 @@ export default function BasicButtonGroup({
         .then((response) => {
           if (response) {
             dataForWatchList([...watchListData]);
+            setWatchList((prev)=>[...prev])
           }
         })
         .catch((e) => {

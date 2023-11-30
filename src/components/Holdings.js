@@ -12,18 +12,18 @@ import {
   Radio,
   Button,
   Switch,
-  FormGroup,
-} from "@mui/material";
-import React from "react";
-import { useEffect, useState } from "react";
-import Popup from "reactjs-popup";
-import Popups from "./Popups";
-import BuyPopup from "./BuyPopup";
-import axios from "axios";
-import Dashboard from "./Dashboard";
-import { SearchBar } from "./SearchBar";
-import Watchlist, { dataForWatchList } from "./Watchlist";
-import { StockDataHoldings } from "./StockDataHoldings";
+  FormGroup
+} from '@mui/material'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import Popup from 'reactjs-popup'
+import Popups from './Popups'
+import BuyPopup from './BuyPopup'
+import axios from 'axios'
+import Dashboard from './Dashboard'
+import { SearchBar } from './SearchBar'
+import Watchlist, { dataForWatchList } from './Watchlist'
+import { StockDataHoldings } from './StockDataHoldings'
 
 function Holdings() {
   const [open, setOpen] = useState(false);
@@ -36,35 +36,35 @@ function Holdings() {
   var [currentPriceStocks, setCurrentPrice] = useState({});
   var [openprice, setopenprice] = useState({});
 
-  const abc = (a) => {
-    return;
-  };
+  const abc = a => {
+    return
+  }
 
   const totalInvested = Object.values(holdingsdata).reduce(
     (p, stock) => p + stock.invested_value,
     0
-  );
+  )
   const totalQuantity = Object.values(holdingsdata).reduce(
     (p, stock) => p + stock.quantity,
     0
-  );
-  const initialValue = 0;
+  )
+  const initialValue = 0
   const sumWithInitial = Object.values(currentPriceStocks).reduce(
     (accumulator, currentValue) => {
-      if (currentValue === undefined) currentValue = 0;
-      return accumulator + Number(currentValue);
+      if (currentValue === undefined) currentValue = 0
+      return accumulator + Number(currentValue)
     },
     initialValue
-  );
+  )
 
   const currentval1 = sumWithInitial;
   const currentval = (currentval1 * totalQuantity).toFixed(2);
   let pl = (currentval - totalInvested).toFixed(2);
 
   if (pl < 0) {
-    pl = "-" + pl;
+    pl = '-' + pl
   } else {
-    pl = "+" + pl;
+    pl = '+' + pl
   }
   // const totalMarketprice = Object.values(holdingsdata).reduce((p,stock) => p+stock.invested_value, 0);
   const setData = (data) => {
@@ -131,21 +131,21 @@ function Holdings() {
 
   useEffect(() => {
     for (let data of Object.keys(holdingsdata)) {
-      console.log("2");
-      sendAxiosRequest(data);
+      console.log('2')
+      sendAxiosRequest(data)
     }
   }, [holdingsdata]);
 
   return (
-    <Container maxWidth={false} sx={{ display: "flex", height: "100%" }}>
+    <Container maxWidth={false} sx={{ display: 'flex', height: '100%' }}>
       <Container
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "40%",
-          padding: "15px",
-          alignItems: "flex-start",
-          color: "secondary.main",
+          display: 'flex',
+          flexDirection: 'column',
+          width: '40%',
+          padding: '15px',
+          alignItems: 'flex-start',
+          color: 'secondary.main'
         }}
       >
         {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
@@ -153,58 +153,58 @@ function Holdings() {
       </Container>
       <Container
         sx={{
-          width: "60%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          width: '60%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}
       >
         <Typography
-          variant="h3"
-          sx={{ my: 4, textAlign: "center", color: "secondary.main" }}
+          variant='h3'
+          sx={{ my: 4, textAlign: 'center', color: 'secondary.main' }}
         >
           Holdings
         </Typography>
 
-        <Box sx={{ marginBottom: 7, width: "100%" }}>
+        <Box sx={{ marginBottom: 7, width: '100%' }}>
           <Paper
             elevation={2}
             sx={{
-              bgcolor: "black",
-              p: "2em",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.3em",
+              bgcolor: 'black',
+              p: '2em',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.3em',
               minWidth: 390,
               border: 0.3,
-              width: "80%",
-              margin: "0 auto",
-              color: "white",
+              width: '80%',
+              margin: '0 auto',
+              color: 'white'
             }}
           >
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Box>
-                <Typography variant="h5">Invested</Typography>
+                <Typography variant='h5'>Invested</Typography>
               </Box>
               <Box>
-                <Typography variant="h5">Current</Typography>
+                <Typography variant='h5'>Current</Typography>
               </Box>
             </Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
               }}
             >
-              <Typography variant="h4">{totalInvested.toFixed(2)}</Typography>
-              {<Typography variant="h4">{currentval}</Typography>}
+              <Typography variant='h4'>{totalInvested.toFixed(2)}</Typography>
+              {<Typography variant='h4'>{currentval}</Typography>}
             </Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
               }}
             >
               <Typography variant="h5">P&L</Typography>
@@ -226,10 +226,10 @@ function Holdings() {
         {/*------- stocklist -----*/}
         <Box
           sx={{
-            padding: "20px",
-            width: "80%",
-            height: "100%",
-            marginBottom: "3em",
+            padding: '20px',
+            width: '80%',
+            height: '100%',
+            marginBottom: '3em'
           }}
         >
           <Grid container spacing={2} sx={{ backgroundColor: "black" }}>
@@ -238,7 +238,7 @@ function Holdings() {
         </Box>
       </Container>
     </Container>
-  );
+  )
 }
 
-export default Holdings;
+export default Holdings
