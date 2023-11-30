@@ -49,7 +49,7 @@ function Funds(user) {
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100vh", }}
+      sx={{ display: "flex", flexDirection: "row", height: "100vh", alignItems:"center", justifyContent: "center"}}
     >
       <Box
         sx={{
@@ -58,7 +58,7 @@ function Funds(user) {
           height: "100%",
           width: "35%",
           p: "0",
-          marginRight: 2,
+          marginRight: 2
         }}
       >
         <Box className="search-bar" sx={{ height: "5%", mt: 4, mb: 1 }}>
@@ -85,7 +85,7 @@ function Funds(user) {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          width: "65%",
+          width: "65%", alignContent:"center"
         }}
       >
         <Box
@@ -94,7 +94,7 @@ function Funds(user) {
             display: "flex",
             flexDirection: "row",
             gap: "1em",
-            justifyContent: "center",
+            justifyContent: "center"
           }}
         >
           <Typography
@@ -145,15 +145,9 @@ function Funds(user) {
           </Box>
         </Box>
         <br></br>
-        {/* <Box className="add-funds-box" sx={{ display: "flex", flexDirection: "row", gap: "1em", justifyContent: "center", alignItems: 'center', mt:2 ,mr:19 }}>
-      <Button variant="contained" sx={{ width: '50%', height: 50,backgroundColor: '#2196f3', color: '#fff',borderRadius: '8px',boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          '&:hover': {backgroundColor: '#4caf50', // Change to a slightly darker shade on hover
-         },
-        }}>
-      <FontAwesomeIcon icon={faPlus} style={{ marginRight: '8px' }} /> Add Funds</Button>
-    </Box> */}
+      
 
-        <Box>
+        <Box style={{display: "flex", flexDirection: "column"}}>
           <Popup
             trigger={
               <Button
@@ -161,14 +155,14 @@ function Funds(user) {
                 sx={{
                   width: "50%",
                   height: 50,
-                  backgroundColor: "#2196f3",
+                  backgroundColor: "black",
                   color: "#fff",
-                  borderRadius: "8px",
+                  borderRadius: "11px",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                  "&:hover": { backgroundColor: "#4caf50" },
+                  "&:hover": { backgroundColor: "secondary.main" },
                 }}
               >
-                <FontAwesomeIcon icon={faPlus} style={{ marginRight: "8px" }} />{" "}
+                <FontAwesomeIcon icon={faPlus} style={{ marginRight: "8px", color: "secondary.main" }} />{" "}
                 Add Funds
               </Button>
             }

@@ -126,14 +126,21 @@ function UserProfile(user) {
     <div
       className="profile-box"
       style={{
-        margin: "10%",
-        borderRadius: "290px",
+        margin: "auto",
+        borderRadius: "23px",
         fontWeight: "bold",
         textAlign: "center",
-        padding: "5%",
+       
         border: "1px solid #ccc",
         borderRadius: "8px",
         background: "#D3D3D3",
+        width:"800px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding:"120px"
+      
       }}
     >
       <div className="pro-img">
@@ -147,7 +154,7 @@ function UserProfile(user) {
       </div>
       <div
         className="username"
-        style={{ fontSize: "28px", margin: "21px 11px" }}
+        style={{ fontSize: "28px", margin: "11px 11px" }}
       >
         <label>Username: &nbsp;</label>
         {isEditing ? (

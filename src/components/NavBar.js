@@ -24,13 +24,16 @@ function NavBar() {
       }}
       className="bg-dark"
     >
-      {/* <Typography sx={{ color: "white", fontSize: "20px", mb: 3 }}>
-        TradeMinds Playground
-      </Typography> */}
+      <Box sx={{display:'flex', flexDirection:'row' ,gap:'1em'}}>
       <img
         src={require("../images/tt-logo.png")}
-        style={{ width: "5%", height: "100%" }}
+        style={{ width: "30%", height: "100%" }}
       />
+      <Typography sx={{ color: "white", fontSize: "20px", mb: 3,  marginTop:'2em' }}>
+        TradeMinds 
+        Playground
+      </Typography>
+      </Box>
 
       <Box
         className="header"
