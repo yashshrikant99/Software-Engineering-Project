@@ -158,12 +158,12 @@ function Popups ({ open, closeModal, stockname, userid }) {
                   Sell
                 </Button>
                 &nbsp;&nbsp;
-                <Button
+                {/* <Button
                   sx={{ color: 'white', bgcolor: 'blue' }}
                   onClick={() => closeModal()}
                 >
                   Cancel
-                </Button>
+                </Button> */}
               </Box>
             </Box>
           </Paper>

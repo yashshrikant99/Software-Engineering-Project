@@ -166,12 +166,12 @@ function BuyPopup ({ open, openpop, closeModal, stockname, userid }) {
                   Buy
                 </Button>
                 &nbsp;&nbsp;
-                <Button
+                {/* <Button
                   sx={{ color: 'black', border: '0.5px solid white' }}
                   onClick={() => closeModal()}
                 >
                   Cancel
-                </Button>
+                </Button> */}
               </Box>
             </Box>
           </Paper>
