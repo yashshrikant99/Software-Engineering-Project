@@ -16,7 +16,10 @@ import Holdings from "./components/Holdings";
 import Funds from "./components/Funds";
 import Watchlist from "./components/Watchlist";
 import ProfilePg from "./components/ProfilePg";
+// import Landingpage from "./components/Landingpage";
+// import Welcome from "./components/Welcome";
 // import Profile from './components/Profile';
+import Landingpage from "./components/Landingpage";
 
 import {
   BrowserRouter as Router,
@@ -24,7 +27,6 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
-import Landingpage from "./components/Landingpage";
 
 function App() {
   return (
@@ -32,8 +34,10 @@ function App() {
       <NavBar />
       <Routes>
         Home
-        <Route path="/" element={<LoginForm />}></Route>
-        {/* {/* <Route path="/signin"  element = {<LoginForm/>}> </Route> */}
+        <Route path="/" element={<Landingpage />}></Route>
+        <Route path="/signin" element={<LoginForm />}>
+          {" "}
+        </Route>
         {/* <Route path ="/registration" element ={<RegistrationForm/>}></Route> */}
         <Route path="/welcome" element={<Landingpage />}></Route>
         {/* <Route path ="/popup" element ={<Popup/>}></Route>  */}

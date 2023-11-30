@@ -44,7 +44,7 @@ function Dashboard() {
       sx={{
         display: "flex",
         flexDirection: "row",
-        height: "100%",
+        // height: "100%",
       }}
     >
       <Box

@@ -44,7 +44,7 @@ function Funds(user) {
       });
   }, [fundsdata]);
 
-  const a = () => alert("Sahil");
+  // const a = () => alert("Sahil");
 
   return (
     <Container

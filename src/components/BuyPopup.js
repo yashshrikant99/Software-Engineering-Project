@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function BuyPopup({ open, closeModal, stockname, userid }) {
+function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
   // const [price,setPrice]=useState([]);
   const [quantity, setQuantity] = useState([]);
   let [stock, setStock] = useState({});

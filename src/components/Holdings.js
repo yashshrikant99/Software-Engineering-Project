@@ -59,8 +59,8 @@ function Holdings() {
 
   const currentval1 = Math.round(sumWithInitial);
   const currentval = currentval1 * totalQuantity;
-  let pl = currentval - totalInvested;
-  pl = 0;
+  let pl = Math.round(currentval - totalInvested);
+
   if (pl < 0) {
     pl = "-" + pl;
   } else {
@@ -155,7 +155,6 @@ function Holdings() {
       </Container>
       <Container
         sx={{
-          // height: "100vh",
           width: "60%",
           display: "flex",
           flexDirection: "column",
@@ -221,11 +220,10 @@ function Holdings() {
         {/*------- stocklist -----*/}
         <Box
           sx={{
-            backgroundColor: "black",
             padding: "20px",
-            width: "90%",
-            display: "flex",
-            flexDirection: "column",
+            width: "70%",
+            height: "100%",
+            marginBottom: "3em",
           }}
         >
           <Grid container spacing={2}>

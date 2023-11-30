@@ -65,6 +65,7 @@ const validate = (values) => {
 function RegistrationForm() {
   const [userData, setUserData] = useState({});
   const history = useNavigate();
+
   const submitForm = async (values) => {
     console.log(values);
     axios
@@ -86,23 +87,23 @@ function RegistrationForm() {
     if (!data) toast.error("Error Signing Up", { autoClose: 3000 });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      email: data.get("email"),
-      phone: data.get("phone"),
-      DoB: data.get("DoB"),
-      password: data.get("password"),
-    });
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     username: data.get("username"),
+  //     email: data.get("email"),
+  //     phone: data.get("phone"),
+  //     DoB: data.get("DoB"),
+  //     password: data.get("password"),
+  //   });
+  // };
   const defaultTheme = createTheme();
   return (
     <Formik
       initialValues={initialValues}
       validate={validate}
-      onSubmit={submitForm}
+      onSubmit={submitForm} //submit form - for axios
     >
       {(formik) => {
         const {

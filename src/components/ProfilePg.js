@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const UserProfile = () => {
+function UserProfile(user) {
   const [isEditing, setEditing] = useState(false);
-  const [userName, setUserName] = useState("John Doe");
-  const [email, setEmail] = useState("john.doe@example.com");
-  const [phoneNumber, setPhoneNumber] = useState("123-456-7890");
+  const [userdetails, setUserdetails] = useState([]);
+  const userSessionData = JSON.parse(sessionStorage.getItem("userSession"));
+  const [userName, setUserName] = useState("");
+  // const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(userdetails.phone);
+  const [errors, setUserError] = useState({});
+  // const [phoneError, setPhoneError] = useState("");
 
   const handleEditClick = () => {
     setEditing(true);
@@ -13,6 +18,79 @@ const UserProfile = () => {
   const handleSaveClick = () => {
     setEditing(false);
   };
+
+  const validateUsername = (userName) => {
+    if (userName.length < 6) {
+      return "Username should atleast be 6 characters";
+    }
+    return null;
+  };
+  const validatePhonenumber = (phoneNumber) => {
+    if (phoneNumber.length < 10) {
+      return "Invalid Phone Number";
+    }
+    return null;
+  };
+
+  // const [formData, setFormData] = useState({
+  //   username: "",
+  //   phone: "",
+  // });
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  //   console.log("this is phone number", phone);
+  //   console.log("this is username", formData);
+  // };
+
+  const handleClick = () => {
+    // e.preventDefault();
+    // const userNameError = validateUsername(userName);
+    // const phoneError = validatePhonenumber(phoneNumber);
+    // if (userNameError || phoneError) {
+    //   errors({ userNameError, phoneError });
+    //   return;
+    // }
+    // if (phoneError) {
+    //   setPhoneError(phoneError);
+    // }
+    axios
+      .patch(
+        `http://localhost:8080/users/${userSessionData.id}/modify-details`,
+        {
+          // if(userName) {
+          username: String(userName),
+          phone: String(phoneNumber),
+          // },
+          // if(phoneNumber) {
+          //   phone: String(phoneNumber);
+          // },
+        }
+      )
+      .then((response) => {
+        if (response) {
+          console.log("jj", response);
+        }
+      })
+      .catch((e) => {
+        console.error("Axios Error", e.message);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/users/${userSessionData.id}`)
+      .then((response) => {
+        if (response) {
+          setUserdetails(response.data);
+          console.log(response.data);
+        }
+      })
+      .catch((e) => {
+        console.error("Axios Error", e.message);
+      });
+  }, []);
 
   return (
     <div
@@ -29,7 +107,6 @@ const UserProfile = () => {
       }}
     >
       <div className="pro-img">
-        {/* <img src={"..images/userprofile.png"} alt="Profile"/> */}
         <img
           src={require("../images/profileimg.png")}
           style={{ textAlign: "center", width: "15%", height: "51%" }}
@@ -42,53 +119,55 @@ const UserProfile = () => {
         className="username"
         style={{ fontSize: "28px", margin: "21px 11px" }}
       >
-        <label>Username: </label>
+        <label>Username: &nbsp;</label>
         {isEditing ? (
           <input
-            type="text"
+            type="username"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            // onChange={handleChange}
           />
+          
         ) : (
-          <span>{userName}</span>
+          <span>{userdetails.username}</span>
         )}
       </div>
       <div className="email" style={{ fontSize: "28px", margin: "21px 11px" }}>
-        <label>Email: </label>
-        {isEditing ? (
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        ) : (
-          <span>{email}</span>
-        )}
+        <label>Email: &nbsp;</label>
+
+        <span>{userdetails.email}</span>
       </div>
       <div className="number" style={{ fontSize: "28px", margin: "21px 11px" }}>
-        <label>Phone Number: </label>
+        <label>Phone Number: &nbsp;</label>
         {isEditing ? (
           <input
-            type="tel"
+            type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         ) : (
-          <span>{phoneNumber}</span>
+          <span>{userdetails.phone}</span>
         )}
+      </div>
+
+      <div className="dob" style={{ fontSize: "28px", margin: "21px 11px" }}>
+        <label>DOB: &nbsp;</label>
+        <span>{userdetails.DoB}</span>
       </div>
       <div
         className="buttons"
         style={{ fontSize: "20px", margin: "21px 11px" }}
       >
         {isEditing ? (
-          <button onClick={handleSaveClick}>Save</button>
+          <button sx={{ ml: 1 }} onClick={handleClick}>
+            Save
+          </button>
         ) : (
           <button onClick={handleEditClick}>Edit</button>
         )}
       </div>
     </div>
   );
-};
+}
 
 export default UserProfile;

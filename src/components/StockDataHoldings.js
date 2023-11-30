@@ -33,12 +33,9 @@ function StockDataHoldings({
 }) {
   console.log("hte", currentPriceStocks);
   const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   const openModal = () => {
     setOpen(true);
-  };
-
-  const closeModal = () => {
-    setOpen(false);
   };
   return (
     <>
@@ -48,63 +45,68 @@ function StockDataHoldings({
           sx={{
             p: "1em",
             display: "flex",
-            flexDirection: "column",
-            gap: "0.3em",
-            minWidth: 390,
+            flexDirection: "row",
+            gap: "2em",
             marginBottom: 2,
             padding: "20px",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box>
-              <Typography variant="h6">
-                Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.
-                <strong>{stock.avg_price}</strong>
+          <Box sx={{ minWidth: "600px" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography
+                variant="h4"
+                sx={{ color: "secondary.main", fontweight: "bold" }}
+              >
+                {Object.keys(holdingsdata)[index]}
               </Typography>
             </Box>
-            <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box>
+                <Typography variant="h6">
+                  Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.
+                  <strong>{stock.avg_price}</strong>
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="h6" sx={{ color: "#03C04A" }}>
+                  {stock.changePercentage}
+                </Typography>
+              </Box>
+              {/* {getPrice(Object.keys(holdingsdata)[index])} */}
               <Typography variant="h6" sx={{ color: "#03C04A" }}>
-                {stock.changePercentage}
+                {currentPriceStocks[Object.keys(holdingsdata)[index]]}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h6">
+                Invested <strong>{stock.invested_value}</strong>
+              </Typography>
+              <Typography variant="h6">
+                LTP{" "}
+                <strong>
+                  {currentPriceStocks[Object.keys(holdingsdata)[index]]}&nbsp;
+                </strong>
+                <span style={{ color: "red" }}>({stock.ltpChange})</span>
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography variant="h3" sx={{ color: "secondary.main" }}>
-              {Object.keys(holdingsdata)[index]}
-            </Typography>
-            {/* {getPrice(Object.keys(holdingsdata)[index])} */}
-            <Typography variant="h6" sx={{ color: "#03C04A" }}>
-              {currentPriceStocks[Object.keys(holdingsdata)[index]]}
-            </Typography>
-          </Box>
+
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="h6">
-              Invested <strong>{stock.invested_value}</strong>
-            </Typography>
-            <Typography variant="h6">
-              LTP{" "}
-              <strong>
-                {currentPriceStocks[Object.keys(holdingsdata)[index]]}&nbsp;
-              </strong>
-              <span style={{ color: "red" }}>({stock.ltpChange})</span>
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               justifyContent: "center",
               gap: "10px",
-              padding: "0.7em",
+              padding: "0.4em",
             }}
           >
-            <Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Popup
                 trigger={
                   <Button
