@@ -30,6 +30,7 @@ function StockDataHoldings({
   index,
   currentPriceStocks,
   holdingsdata,
+  setRender,
 }) {
   console.log("hte", currentPriceStocks);
   const [open, setOpen] = useState(false);
@@ -129,6 +130,7 @@ function StockDataHoldings({
                         closeModal={closeModal}
                         stockname={Object.keys(holdingsdata)[index]}
                         userid={userSessionData.id}
+                        setRender={setRender}
                       />
                     }
                   </div>
@@ -154,6 +156,7 @@ function StockDataHoldings({
                   <div>
                     <Popups
                       open={open}
+                      setRender={setRender}
                       openPop={openModal}
                       closeModal={closeModal}
                       stockname={Object.keys(holdingsdata)[index]}

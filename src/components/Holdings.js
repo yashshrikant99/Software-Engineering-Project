@@ -35,7 +35,7 @@ function Holdings() {
   let [stock, setStock] = useState({});
   var [currentPriceStocks, setCurrentPrice] = useState({});
   var [openprice,setopenprice] = useState({})
-
+   const [render,setRender]=useState(false)
   const abc = (a) => {
     return;
   };
@@ -76,7 +76,7 @@ function Holdings() {
   if(!holdingsdata&&!currentPriceStocks)
   return <></>
   return (
-    <StockDataHoldings abc={abc} user={userSessionData} stock={stock} index={index} currentPriceStocks={currentPriceStocks} holdingsdata={holdingsdata} openprice={openprice}/>
+    <StockDataHoldings setRender={setRender} abc={abc} user={userSessionData} stock={stock} index={index} currentPriceStocks={currentPriceStocks} holdingsdata={holdingsdata} openprice={openprice}/>
   )
  }
 
@@ -116,14 +116,14 @@ const sendAxiosRequest = async (name) => {
       .catch((e) => {
         console.error("Axios Error", e.message);
       });
-  }, [holdingsdata]);
+  }, [render]);
 
   useEffect(() => {
     for (let data of Object.keys(holdingsdata)) {
       console.log("2");
       sendAxiosRequest(data);
     }
-  },[])
+  },[holdingsdata])
 
   return (
     <Container maxWidth={false} sx={{ display: "flex", height: "100%" }}>

@@ -18,7 +18,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Holdings from './Holdings';
 
-function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
+function BuyPopup({ open, openpop, closeModal, stockname, userid, setRender }) {
   // const [price,setPrice]=useState([]);
   const [quantity, setQuantity] = useState([]);
   let [stock, setStock] = useState({});
@@ -55,6 +55,8 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
       })
       .then((response) => {
         console.log(response, "hiii");
+        if(response)
+        setRender((o)=>!o)
       })
       .catch((e) => {
         console.error("Axios Error", e.message);
