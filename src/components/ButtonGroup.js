@@ -18,7 +18,9 @@ export default function BasicButtonGroup({
     return arr;
   }
   const addStockData = () => {
+    console.log("in the add function");
     addWatchlistDb(stockdata, user);
+    console.log("data in stock", stockdata);
   };
   const remStockData = () => {
     setWatchList([...removeObjectWithId(watchListData, stockdata[0])]);
@@ -46,6 +48,7 @@ export default function BasicButtonGroup({
         .catch((e) => {
           console.error("Axios Error", e.message);
         });
+        //alert(JSON.stringify(insertData))
       await axios
         .post(`http://localhost:8080/add_watchlist/${user.id}`, insertData)
         .then((response) => {
