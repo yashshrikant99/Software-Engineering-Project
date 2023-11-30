@@ -9,39 +9,54 @@ import Dashboard from './Dashboard';
 import {SearchBar} from './SearchBar';
 import Watchlist, { dataForWatchList } from './Watchlist';
 
-function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks, holdingsdata}){
+function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks, holdingsdata, openprice}){
     console.log("hte",currentPriceStocks)
     const [open, setOpen] = useState(false)
     const closeModal = () => setOpen(false)
+    let pc= (((currentPriceStocks[Object.keys(holdingsdata)[index]]-stock.avg_price)/stock.avg_price)*100).toFixed(2);
+    let sc=((currentPriceStocks[Object.keys(holdingsdata)[index]])-(openprice[Object.keys(holdingsdata)[index]])/(openprice[Object.keys(holdingsdata)[index]])).toFixed(2);
+
+    if (pc< 0)
+  {
+    pc = "-" + pc;
+  }
+  else{
+    pc="+" + pc;
+  
+  }
     
     return (
+      (stock.quantity)!==0?
         <>
     <Grid item xs={12} key={index}>
-    <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"row", gap:"2em", marginBottom:2, padding:"20px"}} >
-      <Box sx={{ minWidth:"600px",}}>
+    <Paper elevation={3} sx={{p:"1em" , display:"flex", flexDirection:"row", gap:"1.5em", marginBottom:2, padding:"20px"}} >
+    <Box sx={{ minWidth:"550px",}}>
     <Box sx={{display:"flex", justifyContent: "space-between", }}>
-      <Typography variant='h4' sx={{color:"secondary.main", fontweight:"bold"}}>{Object.keys(holdingsdata)[index]}</Typography>
+      <Typography sx={{color:"secondary.main", fontSize:"1.6rem"}}><strong>{Object.keys(holdingsdata)[index]}</strong></Typography>
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between",}}>
-         <Box>
-         <Typography variant='h6'>Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avg_price}</strong></Typography>
+      <Box>
+         <Typography sx={{fontSize:"1.1rem"}}>Qty.<strong>{stock.quantity}</strong>&nbsp;&nbsp;Avg.<strong>{stock.avg_price.toFixed(2)}</strong></Typography>
       </Box>
       <Box>
-         <Typography variant='h6' sx={{color:"#03C04A"}}> 
+         {/* <Typography variant='h6' sx={{color:"#03C04A"}}> 
          {stock.changePercentage}
-         </Typography>
+         </Typography> */}
       </Box>
          {/* {getPrice(Object.keys(holdingsdata)[index])} */}
-         <Typography variant='h6' sx={{color:"#03C04A"}}>
-         {currentPriceStocks[Object.keys(holdingsdata)[index]]}
+         <Typography sx={{color:"#03C04A", }}>
+         { pc> 0 ?
+         (<Typography sx={{color:"#03C04A", fontSize:"1.1rem"}} >{pc}</Typography>)
+         : ( <Typography sx={{color:"#FF0000", fontSize:"1.1rem"}} >{pc}</Typography>)
+        }
          </Typography>
     </Box>
     <Box sx={{display:"flex", justifyContent: "space-between", alignItems:"center"}}>
-         <Typography variant='h6'>Invested  <strong>{stock.invested_value}</strong></Typography>
-         <Typography variant='h6'>
+         <Typography  sx={{fontSize:"1.1rem"}}>Invested  <strong>{stock.invested_value.toFixed(2)}</strong></Typography>
+         <Typography  sx={{fontSize:"1.1rem"}}>
           LTP <strong>{currentPriceStocks[Object.keys(holdingsdata)[index]]}&nbsp;</strong> 
         
-          <span style={{color:"red"}}>({stock.ltpChange})</span>
+          <span style={{color:"red"}}>{sc}</span>
           
          </Typography>
     </Box>
@@ -49,23 +64,23 @@ function StockDataHoldings({user:userSessionData,stock,index, currentPriceStocks
 
     <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", gap:"10px", padding: "0.4em"}}>
         <Box sx={{display:"flex", justifyContent:"center"}}>
-          <Popup trigger={<Button sx={{bgcolor:"secondary.main", color:"white"}}  onClick={()=>setOpen(o=>!o)} ><Typography variant='h5' 
+          <Popup trigger={<Button sx={{bgcolor:"secondary.main", color:"white",}}  onClick={()=>setOpen(o=>!o)} ><Typography variant='h6' 
           >Add</Typography></Button>} position="right center" modal nested>
           <div>{<BuyPopup  open={open} onClose={closeModal} stockname={Object.keys(holdingsdata)[index]} userid={userSessionData.id} />}</div>
           </Popup>
         </Box>
         <Box>
-          <Popup trigger={ <Button sx={{bgcolor:"secondary.main",}} ><Typography variant='h5' sx={{color:"white", fontweight:"bold"}}>Sell</Typography></Button>} position="right center" modal>
+          <Popup trigger={ <Button sx={{bgcolor:"secondary.main",}} ><Typography variant='h6' sx={{color:"white", fontweight:"bold"}}>Sell</Typography></Button>} position="right center" modal>
           <div><Popups stockname={Object.keys(holdingsdata)[index]} userid={userSessionData.id}/></div>
           </Popup>
         </Box>
-      </Box>
+    </Box>
 
     
   </Paper>
    
   </Grid>
-    </>
+    </> : <></>
     )
 }
 

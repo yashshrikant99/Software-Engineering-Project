@@ -21,7 +21,7 @@ function Dashboard() {
   }
   console.log(watchlistData,"JJJJJJ")
   return (
-    <Container className ="main-container" maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100%"}}>
+    <Container className ="main-container" maxWidth= {false} sx = {{display: "flex", flexDirection: "row",height:"100vh"}}>
       <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", mr:3}}>
 
       <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >

@@ -51,7 +51,7 @@ function Funds(user) {
   
   return (
 
-    <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", height:"100%"}}>
+    <Container  maxWidth= {false} sx = {{display: "flex", flexDirection: "row", height:"100vh",}}>
     <Box sx = {{display:"flex", flexDirection:"column",height:"100%", width:"35%", p:"0", marginRight:2}}>
     <Box className="search-bar" sx ={{height:"5%", mt:4, mb:1}} >
           <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>

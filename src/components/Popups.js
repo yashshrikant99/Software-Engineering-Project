@@ -38,7 +38,7 @@ function Popups({stockname,userid})
                <Typography><strong>Sell</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>{stockname}</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>x</strong>&nbsp;&nbsp;</Typography>
-               <Typography><strong>1</strong>&nbsp;&nbsp;</Typography>
+               <Typography><strong>{quantity}</strong>&nbsp;&nbsp;</Typography>
                <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography>
             </Box>
             <Box>

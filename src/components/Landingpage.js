@@ -5,9 +5,9 @@ import * as React from 'react';
 function Landingpage()
 {
     return(
-    <Grid container sx={{ p: "5em", m:"auto"}} >
+    <Grid container sx={{ p: "5em", m:"auto", height:"100vh"}} >
 
-    <Grid item xs={6} sx={{bgcolor: "black", color: "white", borderRadius: "20px", padding:"1em"}}>
+    <Grid item xs={6} sx={{bgcolor: "black", color: "white", borderRadius: "20px", padding:"1em", height:"50em"}}>
   
        <Box sx={{display:"flex", flexDirection:"column", gap:"0.5em",width:"100%" }}>
 
@@ -18,7 +18,8 @@ function Landingpage()
         <Typography variant='h5' sx={{padding: "0.5em"}}>→ TradeTrackr is an investing simulation game.</Typography>
         <Typography variant='h5' sx={{padding: "0.5em"}}>→ You know have cash in your portfolio account and some intraday trading limit.</Typography>
         <Typography variant='h5' sx={{padding: "0.5em"}}>→ You can start trading right away with this virtual money!</Typography>
-        <Button sx={{bgcolor:"white", width:"300px", borderRadius:"30px", border:"1px solid black", alignSelf:"center", fontSize:"1.3rem", padding: "0.7em", margin:"10px", cursor:"pointer"}}>Continue</Button>
+        <Button sx={{bgcolor:"white", width:"200px", borderRadius:"30px", border:"1px solid black", alignSelf:"center", fontSize:"1.3rem", padding: "0.7em", margin:"10px", cursor:"pointer"}}>SIGN IN</Button>
+        <Button sx={{bgcolor:"white", width:"200px", borderRadius:"30px", border:"1px solid black", alignSelf:"center", fontSize:"1.3rem", padding: "0.7em", margin:"10px", cursor:"pointer"}}>REGISTER</Button>
         </Box>
             
        </Box>
@@ -26,14 +27,10 @@ function Landingpage()
 
 
    <Grid item xs={6}>
-    <img src="src\images\stock-filter-charts.png"></img>
-   {/* <Card>
-      <CardMedia
-        component="img"
-        alt="Description of the image"
-        image="ssrc\images\stock-filter-charts.png"
-      />
-    </Card> */}
+   <img
+          src={require("../images/stock-filter-charts.png")}
+          style={{ textAlign: "center", width: "100%" }}
+        />
    </Grid>
     
 

@@ -1,6 +1,7 @@
 import { Container,Paper, Typography,Box, Grid,TextField, RadioGroup, FormControl,FormLabel,FormControlLabel,Radio, Button, Switch,FormGroup } from '@mui/material'
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import Holdings from './Holdings';
 
 
 function BuyPopup({open, closeModal,stockname,userid})
@@ -22,6 +23,7 @@ function BuyPopup({open, closeModal,stockname,userid})
         if(response){
           stock={...response.data[0]}
           setClose(stock.close)
+         
         }
     }).catch(e=>{
       console.error("Axios Error",e.message)
@@ -59,7 +61,7 @@ function BuyPopup({open, closeModal,stockname,userid})
          <Typography><strong>Buy</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>{stockname}</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>x</strong>&nbsp;&nbsp;</Typography>
-         <Typography><strong>1</strong>&nbsp;&nbsp;</Typography>
+         <Typography><strong>{quantity}</strong>&nbsp;&nbsp;</Typography>
          <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography>
       </Box>
       <Box>
@@ -119,6 +121,7 @@ function BuyPopup({open, closeModal,stockname,userid})
          <Box>
          <Button sx={{color:"white", bgcolor:"blue"}} onClick={buyStock}>Buy</Button>&nbsp;&nbsp;
          <Button sx={{color:"black", border: "0.5px solid white"}} onClick={closeModal}>Cancel</Button>
+         
          </Box>
          
     </Box>

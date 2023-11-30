@@ -22,6 +22,7 @@ function AddFundPopup({open, openPop, close, user})
       else{
       axios.post(`http://localhost:8080/users/${user.id}/modify-funds`,{
         amount: Number(fundsdata),
+        
       }).
       then((response)=>{
           if(response){
