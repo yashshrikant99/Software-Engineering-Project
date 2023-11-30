@@ -25,11 +25,13 @@ function NavBar () {
       }}
       className='bg-dark'
     >
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1em' }}>
-        <img
-          src={require('../images/tt-logo.png')}
-          style={{ width: '30%', height: '100%' }}
-        />
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0em' }}>
+        <Link to='/welcome'>
+          <img
+            src={require('../images/tt-logo.png')}
+            style={{ width: '60%', height: '100%' }}
+          />
+        </Link>
         <Typography
           sx={{ color: 'white', fontSize: '20px', mb: 3, marginTop: '2em' }}
         >
