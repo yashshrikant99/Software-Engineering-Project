@@ -56,7 +56,7 @@ function StockDataHoldings({
   };
   return stock.quantity !== 0 ? (
     <>
-      <Grid item xs={12} key={index} sx={{ backgroundColor: "yellow" }}>
+      <Grid item xs={12} key={index}>
         <Paper
           elevation={3}
           sx={{
@@ -65,16 +65,18 @@ function StockDataHoldings({
             flexDirection: "row",
             gap: "1.5em",
             padding: "20px",
-            width:"100%"
+            width: "95%",
           }}
         >
           <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
-            <Box sx={{ width: "100%", backgroundColor: "red" }}>
+            <Box sx={{ width: "100%" }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography
                   sx={{ color: "secondary.main", fontSize: "1.6rem" }}
                 >
-                  <strong>{(Object.keys(holdingsdata)[index].toLowerCase())}</strong>
+                  <strong>
+                    {Object.keys(holdingsdata)[index].toLowerCase()}
+                  </strong>
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>

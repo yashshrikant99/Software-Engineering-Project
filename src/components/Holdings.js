@@ -34,7 +34,7 @@ function Holdings() {
   const [close, setClose] = useState(0);
   let [stock, setStock] = useState({});
   var [currentPriceStocks, setCurrentPrice] = useState({});
-  var [openprice,setopenprice] = useState({})
+  var [openprice, setopenprice] = useState({});
 
   const abc = (a) => {
     return;
@@ -57,9 +57,9 @@ function Holdings() {
     initialValue
   );
 
-  const currentval1 =(sumWithInitial);
+  const currentval1 = sumWithInitial;
   const currentval = (currentval1 * totalQuantity).toFixed(2);
-  let pl = (currentval - totalInvested).toFixed(2)
+  let pl = (currentval - totalInvested).toFixed(2);
 
   if (pl < 0) {
     pl = "-" + pl;
@@ -67,63 +67,74 @@ function Holdings() {
     pl = "+" + pl;
   }
   // const totalMarketprice = Object.values(holdingsdata).reduce((p,stock) => p+stock.invested_value, 0);
-  const setData = (data) =>{
-    setWatchListData([...data])
-  }
+  const setData = (data) => {
+    setWatchListData([...data]);
+  };
 
+  const a = (stock, index) => {
+    if (!holdingsdata && !currentPriceStocks) return <></>;
+    return (
+      <StockDataHoldings
+        abc={abc}
+        user={userSessionData}
+        stock={stock}
+        index={index}
+        currentPriceStocks={currentPriceStocks}
+        holdingsdata={holdingsdata}
+        openprice={openprice}
+      />
+    );
+  };
 
- const a = (stock,index) =>{
-  if(!holdingsdata&&!currentPriceStocks)
-  return <></>
-  return (
-    <StockDataHoldings abc={abc} user={userSessionData} stock={stock} index={index} currentPriceStocks={currentPriceStocks} holdingsdata={holdingsdata} openprice={openprice}/>
-  )
- }
+  const sendAxiosRequest = async (name) => {
+    try {
+      console.log("i am called", name);
+      await axios
+        .get(
+          `http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`
+        )
+        .then((response) => {
+          if (response.data) {
+            stock = { ...response.data[0] };
+            currentPriceStocks[`${name}`] = stock.close;
+            openprice[`${name}`] = stock.open;
+            setCurrentPrice((Prev) => ({ ...Prev, ...currentPriceStocks }));
+            setopenprice((Prev) => ({ ...Prev, ...openprice }));
+            console.log(stock, "hi");
+            console.log(currentPriceStocks, "hiw");
+            console.log(openprice, "hiw");
+          }
+        })
+        .catch((e) => {
+          console.error("Axios Error", e.message);
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
- 
-const sendAxiosRequest = async (name) => {
-  try{
-    console.log("i am called",name)
-    await axios.get(`http://localhost:8080/stock-data?symbol=${name}&from=2023-11-21&to=2023-11-22&period=d`).
-     then((response)=>{
-         if(response.data){
-           stock={...response.data[0]}
-           currentPriceStocks[`${name}`]=stock.close
-           openprice[`${name}`]=stock.open
-           setCurrentPrice((Prev)=>({...Prev,...currentPriceStocks}))
-           setopenprice((Prev)=>({...Prev,...openprice}))
-           console.log(stock,"hi")
-           console.log(currentPriceStocks,"hiw")
-           console.log(openprice,"hiw")
-         }
-     }).catch(e=>{
-       console.error("Axios Error",e.message)
-     })
-  }catch(e){
-    console.log(e.message)
-  }
-
-}
-
-
-  useEffect( ()=>{
-    const res =  axios.get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`).
-    then((response)=>{
-        if(response){
-          setHoldings({...response.data})
+  useEffect(() => {
+    const res = axios
+      .get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`)
+      .then((response) => {
+        if (response) {
+          setHoldings({ ...response.data });
         }
       })
       .catch((e) => {
         console.error("Axios Error", e.message);
       });
-  }, [holdingsdata]);
+  }, []);
+
+
+  
 
   useEffect(() => {
     for (let data of Object.keys(holdingsdata)) {
       console.log("2");
       sendAxiosRequest(data);
     }
-  },[])
+  }, [holdingsdata]);
 
   return (
     <Container maxWidth={false} sx={{ display: "flex", height: "100%" }}>
@@ -197,12 +208,17 @@ const sendAxiosRequest = async (name) => {
               }}
             >
               <Typography variant="h5">P&L</Typography>
-              <Typography sx={{color:"#03C04A", }}>
-         { pl> 0 ?
-         (<Typography sx={{color:"#03C04A", fontSize:"1.1rem"}} >{pl}</Typography>)
-         : ( <Typography sx={{color:"#FF0000", fontSize:"1.1rem"}} >{pl}</Typography>)
-        }
-         </Typography>
+              <Typography sx={{ color: "#03C04A" }}>
+                {pl > 0 ? (
+                  <Typography sx={{ color: "#03C04A", fontSize: "1.1rem" }}>
+                    {pl}
+                  </Typography>
+                ) : (
+                  <Typography sx={{ color: "#FF0000", fontSize: "1.1rem" }}>
+                    {pl}
+                  </Typography>
+                )}
+              </Typography>
             </Box>
           </Paper>
         </Box>
@@ -216,7 +232,7 @@ const sendAxiosRequest = async (name) => {
             marginBottom: "3em",
           }}
         >
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ backgroundColor: "black" }}>
             {Object.values(holdingsdata).map((stock, index) => a(stock, index))}
           </Grid>
         </Box>
