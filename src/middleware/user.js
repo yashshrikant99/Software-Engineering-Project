@@ -39,8 +39,9 @@ async function findUserCredential (email, password) {
 
 async function checkUserExist (username, email) {
   try {
-    const exist = await User.findOne({ where: { email } })
-    return exist
+    const userNameExist = await User.findOne({ where: { username } })
+    const emailExist = await User.findOne({ where: { email } })
+    return [userNameExist, emailExist]
   } catch (err) {
     console.log('Cant Find User Existence', err.message)
   }
