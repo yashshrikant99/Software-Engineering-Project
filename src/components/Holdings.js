@@ -163,14 +163,14 @@ function Holdings() {
           variant='h3'
           sx={{ my: 4, textAlign: 'center', color: 'secondary.main' }}
         >
-          Holdings
+          HOLDINGS
         </Typography>
 
         <Box sx={{ marginBottom: 7, width: '100%' }}>
           <Paper
             elevation={2}
             sx={{
-              bgcolor: 'black',
+              bgcolor: '#CB997E',
               p: '2em',
               display: 'flex',
               flexDirection: 'column',

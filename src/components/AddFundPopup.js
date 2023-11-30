@@ -79,13 +79,13 @@ function AddFundPopup({ open, openPop, close, user }) {
          <Typography><strong>Qty</strong>&nbsp;&nbsp;</Typography>
       </Box> */}
               <Box>
-                <FormGroup>
+                {/* <FormGroup>
                   <FormControlLabel
                     sx={{ color: "white" }}
                     control={<Switch defaultChecked />}
                     label="Label"
                   />
-                </FormGroup>
+                </FormGroup> */}
               </Box>
             </Box>
             <Box
@@ -109,13 +109,13 @@ function AddFundPopup({ open, openPop, close, user }) {
                 <FormControl>
                   <br></br>
                   <br></br>
-                  <RadioGroup
+                  {/* <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="market"
                     name="radio-buttons-group"
                   >
-                    {/* <FormControlLabel value="account" control={<Radio />} label="Adding to your account" /> */}
-                  </RadioGroup>
+                    <FormControlLabel value="account" control={<Radio />} label="Adding to your account" />
+                  </RadioGroup> */}
                 </FormControl>
               </Box>
             </Box>

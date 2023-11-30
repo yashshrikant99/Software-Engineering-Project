@@ -100,13 +100,13 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
                 </Typography>
               </Box>
               <Box>
-                <FormGroup>
+                {/* <FormGroup>
                   <FormControlLabel
                     sx={{ color: "white" }}
                     control={<Switch defaultChecked />}
                     label="Label"
                   />
-                </FormGroup>
+                </FormGroup> */}
               </Box>
             </Box>
             <Box sx={{ display: "flex", gap: "10px" }}>
@@ -128,7 +128,7 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
                   1
                 </TextField>
                 <FormControl>
-                  <RadioGroup
+                  {/* <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="market"
                     name="radio-buttons-group"
@@ -138,7 +138,7 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid }) {
                       control={<Radio />}
                       label="Market"
                     />
-                  </RadioGroup>
+                  </RadioGroup> */}
                 </FormControl>
               </Box>
             </Box>

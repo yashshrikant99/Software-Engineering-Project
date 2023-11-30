@@ -51,10 +51,10 @@ let rows = [];
 
 const TableRowStyled = styled(TableRow)`
   &:nth-of-type(odd) {
-    background-color: lightgray;
+    background-color: #FFE8D6 ;
   }
   &:nth-of-type(even) {
-    background-color: #999999;
+    background-color: #CB997E ;
   }
   & > td {
     color: black;
@@ -119,7 +119,7 @@ function DashboardTable() {
       </Box>
       <TableContainer component={Paper} sx={{ bgcolor: "lightgrey" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead sx={{ bgcolor: "darkgray" }}>
+          <TableHead sx={{ bgcolor: "#CB997E" }}>
             <TableRow>
               <TableCell>Company Symbol</TableCell>
               <TableCell align="right">Short Name</TableCell>
