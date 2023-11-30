@@ -21,7 +21,24 @@ import { useEffect, useState } from 'react'
 function Popups ({ open, closeModal, stockname, userid }) {
   // const [price,setPrice]=useState([]);
   const [quantity, setQuantity] = useState('')
-  console.log(quantity)
+  const [close, setClose] = useState(0)
+  let [stock, setStock] = useState({})
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/stock-data?symbol=${stockname}&from=2023-11-21&to=2023-11-30&period=d`
+      )
+      .then(response => {
+        if (response) {
+          stock = { ...response.data[0] }
+          setClose(stock.close)
+        }
+      })
+      .catch(e => {
+        console.error('Axios Error', e.message)
+      })
+  }, [])
 
   const sellStock = () => {
     axios
@@ -95,7 +112,12 @@ function Popups ({ open, closeModal, stockname, userid }) {
               </Box>
               <Box>
                 <Typography variant='h6'>Price</Typography>
-                <TextField id='price' name='price'></TextField>
+                <TextField
+                  id='price'
+                  name='price'
+                  disabled
+                  value={close}
+                ></TextField>
                 <FormControl>
                   {/* <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
