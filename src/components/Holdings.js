@@ -137,8 +137,8 @@ const sendAxiosRequest = async (name) => {
           color: "secondary.main",
         }}
       >
-        <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
-        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} /> 
+        {/* <SearchBar  user={userSessionData} watchlistData={watchlistData} setWatchList={setData} dataForWatchList={dataForWatchList}/>
+        <Watchlist user={userSessionData} dataForWatchList={dataForWatchList} watchlistData={watchlistData} />  */}
       </Container>
       <Container
         sx={{
@@ -197,9 +197,12 @@ const sendAxiosRequest = async (name) => {
               }}
             >
               <Typography variant="h5">P&L</Typography>
-              <Typography sx={{ color: "#03C04A" }} variant="h5">
-                {pl}
-              </Typography>
+              <Typography sx={{color:"#03C04A", }}>
+         { pl> 0 ?
+         (<Typography sx={{color:"#03C04A", fontSize:"1.1rem"}} >{pl}</Typography>)
+         : ( <Typography sx={{color:"#FF0000", fontSize:"1.1rem"}} >{pl}</Typography>)
+        }
+         </Typography>
             </Box>
           </Paper>
         </Box>
