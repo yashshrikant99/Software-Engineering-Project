@@ -14,6 +14,7 @@ export default function WatchListBasicButtonGroup({
   watchlistData,
   setWatchList,
   price,
+  setRender,
 }) {
   // alert(price)
   const [open, setOpen] = useState(false);
@@ -80,6 +81,7 @@ export default function WatchListBasicButtonGroup({
               userid={userSessionData.id}
               price={price}
               stockname={watchlist["long_name"]}
+              setRender={setRender}
             />
           }
         </div>

@@ -1,67 +1,73 @@
-import React, { useEffect } from "react";
-import { Container, Button, Typography, Box, Grid, Item } from "@mui/material";
-import { SearchBar } from "./SearchBar";
-import Watchlist, { dataForWatchList } from "./Watchlist";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import Popup from "reactjs-popup";
-import BuyPopup from "./BuyPopup";
-import AddFundPopup from "./AddFundPopup";
-import axios from "axios";
+import React, { useEffect } from 'react'
+import { Container, Button, Typography, Box, Grid, Item } from '@mui/material'
+import { SearchBar } from './SearchBar'
+import Watchlist, { dataForWatchList } from './Watchlist'
+import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import Popup from 'reactjs-popup'
+import BuyPopup from './BuyPopup'
+import AddFundPopup from './AddFundPopup'
+import axios from 'axios'
 
-function Funds(user) {
-  const [watchlistData, setWatchListData] = useState([]);
-  const userSessionData = JSON.parse(sessionStorage.getItem("userSession"));
-  const [open, setOpen] = useState(false);
-  const [amount, setAmount] = useState(false);
-  const [fundsdata, setFunds] = useState(false);
+function Funds (user) {
+  const [watchlistData, setWatchListData] = useState([])
+  const userSessionData = JSON.parse(sessionStorage.getItem('userSession'))
+  const [open, setOpen] = useState(false)
+  const [amount, setAmount] = useState(false)
+  const [fundsdata, setFunds] = useState(false)
 
   const openModal = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const closeModal = () => {
-    setOpen(false);
-  };
-  const setData = (data) => {
-    setWatchListData(data);
-  };
+    setOpen(false)
+  }
+  const setData = data => {
+    setWatchListData(data)
+  }
 
   useEffect(() => {
-    const userid = user.id;
-    console.log(user.id);
+    const userid = user.id
+    console.log(user.id)
     axios
       .get(`http://localhost:8080/users/${userSessionData.id}`)
-      .then((response) => {
+      .then(response => {
         if (response) {
-          setFunds(response.data);
+          setFunds(response.data)
         }
       })
-      .catch((e) => {
-        console.error("Axios Error", e.message);
-      });
-  }, [fundsdata]);
+      .catch(e => {
+        console.error('Axios Error', e.message)
+      })
+  }, [fundsdata])
 
   // const a = () => alert("Sahil");
 
   return (
     <Container
       maxWidth={false}
-      sx={{ display: "flex", flexDirection: "row", height: "100vh" }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
     >
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "35%",
-          p: "0",
-          marginRight: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          width: '35%',
+          p: '0',
+          marginRight: 2
         }}
       >
-        <Box className="search-bar" sx={{ height: "5%", mt: 4, mb: 1 }}>
+        <Box className='search-bar' sx={{ height: '5%', mt: 4, mb: 1 }}>
           <SearchBar
             user={userSessionData}
             watchlistData={watchlistData}
@@ -69,7 +75,7 @@ function Funds(user) {
             dataForWatchList={dataForWatchList}
           />
         </Box>
-        <Box sx={{ height: "90%", width: "100%" }}>
+        <Box sx={{ height: '90%', width: '100%' }}>
           <Watchlist
             user={userSessionData}
             dataForWatchList={dataForWatchList}
@@ -83,70 +89,67 @@ function Funds(user) {
 
       <Box
         sx={{
-          className: "main-box",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "65%",
-
-          // backgroudColor: "blue",
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          width: '65%',
+          alignContent: 'center'
         }}
       >
         <Box
-          className="funds-box"
+          className='funds-box'
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "1em",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '1em',
+            justifyContent: 'center'
           }}
         >
           <Typography
-            variant="h3"
-            sx={{ mt: 6, mb: 6, color: "secondary.main" }}
+            variant='h3'
+            sx={{ mt: 6, mb: 6, color: 'secondary.main' }}
           >
-            {" "}
-            FUNDS{" "}
+            {' '}
+            FUNDS{' '}
           </Typography>
         </Box>
 
         <Box
-          className="outer-box"
+          className='outer-box'
           sx={{
             borderRadius: 8,
             padding: 6,
-            border: "2px solid lightgray",
-            display: "flex",
-            flexDirection: "column",
+            border: '2px solid lightgray',
+            bgcolor: '#CB997E'
           }}
         >
-          <Box className="inner-box" sx={{ borderRadius: 8, padding: 11 }}>
+          <Box className='inner-box' sx={{ borderRadius: 1, padding: 11 }}>
             <Typography
-              variant="h3"
+              variant='h3'
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                color: "secondary.main",
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                color: 'secondary.main'
               }}
             >
-              <div sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+              <div sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                 Available Cash
               </div>
               <div
                 sx={{
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                  display: "flex",
-                  alignItems: "center",
+                  fontSize: '2rem',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center'
                 }}
               >
                 <FontAwesomeIcon
                   icon={faDollarSign}
-                  sx={{ fontSize: "1.5em", marginRight: 1 }}
+                  sx={{ fontSize: '1.5em', marginRight: 1 }}
                 />
                 {fundsdata.funds_available < 0 ? (
-                  <span style={{ color: "red" }}>Error: Negative Value</span>
+                  <span style={{ color: 'red' }}>Error: Negative Value</span>
                 ) : (
                   fundsdata.funds_available
                 )}
@@ -156,31 +159,34 @@ function Funds(user) {
         </Box>
         <br></br>
 
-        <Box>
+        <Box style={{ display: 'flex', flexDirection: 'column' }}>
           <Popup
             trigger={
               <Button
-                variant="contained"
+                variant='contained'
                 sx={{
-                  width: "50%",
+                  width: '50%',
                   height: 50,
-                  backgroundColor: "#2196f3",
-                  color: "#fff",
-                  borderRadius: "8px",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                  "&:hover": { backgroundColor: "#4caf50" },
-                  ml: 29,
+                  backgroundColor: 'black',
+                  color: '#fff',
+                  borderRadius: '11px',
+                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                  '&:hover': { backgroundColor: 'secondary.main' },
+                  ml:29
                 }}
               >
-                <FontAwesomeIcon icon={faPlus} style={{ marginRight: "8px" }} />{" "}
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  style={{ marginRight: '8px', color: 'secondary.main' }}
+                />{' '}
                 Add Funds
               </Button>
             }
-            position="right center"
+            position='right center'
             modal
             nested
           >
-            {(closeModal) => (
+            {closeModal => (
               <div>
                 <AddFundPopup
                   open={open}
@@ -194,7 +200,7 @@ function Funds(user) {
         </Box>
       </Box>
     </Container>
-  );
+  )
 }
 
-export default Funds;
+export default Funds
