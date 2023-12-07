@@ -61,7 +61,7 @@ function NavBar () {
         )}
         {userSessionData && (
           <Link to='/profile' className='text-light fs-4 px-3 profile'>
-            Profile
+              {`Hello ${userSessionData.username},`}
           </Link>
         )}
       </Box>

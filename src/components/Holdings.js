@@ -149,7 +149,7 @@ function Holdings() {
       .get(`http://localhost:8080/holdings/${userSessionData.id}/formatted`)
       .then((response) => {
         if (response) {
-          setHoldings({ ...response.data });
+          setHoldings(response.data);
         }
       })
       .catch((e) => {
@@ -165,7 +165,7 @@ function Holdings() {
   }, [holdingsdata]);
 
   return (
-    <Container maxWidth={false} sx={{ display: "flex", height: "100vh" }}>
+    <Container maxWidth={false} sx={{ display: "flex", height: "100%" }}>
       <Container
         sx={{
           display: "flex",
@@ -174,6 +174,7 @@ function Holdings() {
           padding: "15px",
           alignItems: "flex-start",
           color: "secondary.main",
+          height:"100vh"
         }}
       >
         <SearchBar
@@ -186,6 +187,7 @@ function Holdings() {
           user={userSessionData}
           dataForWatchList={dataForWatchList}
           watchlistData={watchlistData}
+          setWatchList={setData}
           setRender={setRender}
         />
       </Container>
@@ -195,6 +197,7 @@ function Holdings() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+        
         }}
       >
         <Typography

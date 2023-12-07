@@ -17,6 +17,7 @@ import {
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Holdings from './Holdings'
+import { ToastContainer, toast } from "react-toastify";
 
 function BuyPopup({ open, openpop, closeModal, stockname, userid, setRender }) {
   // const [price,setPrice]=useState([]);
@@ -28,6 +29,8 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid, setRender }) {
   const getStock = () => {
     return stock
   }
+  const notify = (data) => toast.error(`${data}`, { autoClose: 3000  });
+  
 
   useEffect(() => {
     axios
@@ -57,8 +60,9 @@ function BuyPopup({ open, openpop, closeModal, stockname, userid, setRender }) {
         if(response)
         setRender((o)=>!o)
       })
-      .catch(e => {
-        console.error('Axios Error', e.message)
+      .catch(error => {
+        notify(error.response.data)
+        console.error('Axios Error', error.respons.data)
       })
   }
 

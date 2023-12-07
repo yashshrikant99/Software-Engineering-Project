@@ -90,6 +90,7 @@ function UserProfile (user) {
               username: response.data.username,
               phone: response.data.phone
             }))
+            sessionStorage.setItem("userSession", JSON.stringify(response.data));
           }
         })
         .catch(e => {

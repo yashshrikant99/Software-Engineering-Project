@@ -53,8 +53,8 @@ export default function BasicButtonGroup({
         .post(`http://localhost:8080/add_watchlist/${user.id}`, insertData)
         .then((response) => {
           if (response) {
-            dataForWatchList([...watchListData]);
-            setWatchList((prev)=>[...prev])
+           dataForWatchList([...watchListData]);
+           setWatchList([...watchListData])
           }
         })
         .catch((e) => {
@@ -74,6 +74,7 @@ export default function BasicButtonGroup({
       <Button onClick={addStockData} color="error">
         Add
       </Button>
+      
       <Button onClick={addStockData} color="success">
         Buy
       </Button>

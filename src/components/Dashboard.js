@@ -62,7 +62,7 @@ function Dashboard () {
           <SearchBar
             user={userSessionData}
             watchlistData={watchlistData}
-            setWatchList={setData}
+            setWatchList={setWatchListData}
             dataForWatchList={dataForWatchList}
           />
         </Box>
@@ -71,7 +71,7 @@ function Dashboard () {
             user={userSessionData}
             dataForWatchList={dataForWatchList}
             watchlistData={watchlistData}
-            setWatchList={setData}
+            setWatchList={setWatchListData}
           />
 
           {/* <Popup
