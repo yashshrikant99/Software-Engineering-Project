@@ -40,13 +40,15 @@ export default function WatchListBasicButtonGroup({
           console.log(response);
           if (response.data) {
             dataForWatchList([...watchlistData]);
-           setWatchList([...watchlistData])
+            setWatchList([...watchlistData]);
           }
         })
         .catch((e) => {
+          alert("Fund not available");
           console.error("Axios error", e.message);
         });
     } catch (e) {
+      alert("Fund not available");
       console.error("Axios Error", e.message);
     }
   }
