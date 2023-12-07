@@ -186,6 +186,7 @@ function Holdings() {
           user={userSessionData}
           dataForWatchList={dataForWatchList}
           watchlistData={watchlistData}
+          setWatchList={setData}
           setRender={setRender}
         />
       </Container>

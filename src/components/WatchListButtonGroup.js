@@ -36,11 +36,11 @@ export default function WatchListBasicButtonGroup({
         .delete(`http://localhost:8080/rem_watchlist/${user.id}`, {
           data: values,
         })
-        .then((response) => {
+        .then(async (response) => {
           console.log(response);
-          if (response) {
+          if (response.data) {
             dataForWatchList([...watchlistData]);
-            setWatchList((prev)=>[...prev])
+           setWatchList([...watchlistData])
           }
         })
         .catch((e) => {
