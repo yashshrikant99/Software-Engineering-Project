@@ -74,6 +74,7 @@ export default function BasicButtonGroup({
       <Button onClick={addStockData} color="error">
         Add
       </Button>
+      
       <Button onClick={addStockData} color="success">
         Buy
       </Button>

@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
 
 function BuyComponent ({ stockname, userid, price, setRender }) {
   // alert(price)
@@ -23,6 +24,7 @@ function BuyComponent ({ stockname, userid, price, setRender }) {
   const [quantity, setQuantity] = useState([])
   const [close, setClose] = useState(0)
   console.log(quantity)
+  const notify = (data) => toast.error(`${data}`, { autoClose: 3000, toastId: "error" });
 
   const buyStock = () => {
     axios
@@ -36,8 +38,9 @@ function BuyComponent ({ stockname, userid, price, setRender }) {
         if(response)
         setRender((o)=>!o)
       })
-      .catch(e => {
-        console.error('Axios Error', e.message)
+      .catch(error => {
+        notify(error.response.data)
+        console.error('Axios Error', error.response.data)
       })
   }
 
@@ -146,6 +149,7 @@ function BuyComponent ({ stockname, userid, price, setRender }) {
           </Paper>
         </Grid>
       </Grid>
+     <ToastContainer limit={1} />
     </Container>
     /* </div> */
   )
