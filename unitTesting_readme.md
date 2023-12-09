@@ -79,6 +79,11 @@ expect(response.status).toBe(200);
 expect(Array.isArray(response.body)).toBeTruthy();
 // ... more assertions ...
 
+
+# Screenshot
+
+
+
 # Exploring Further:
 
 This guide provides a basic foundation for testing Node.js/Express APIs. As you gain experience, you can explore more advanced features of Jest and SuperTest, such as:
