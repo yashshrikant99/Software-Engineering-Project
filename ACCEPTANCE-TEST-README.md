@@ -6,6 +6,29 @@ The users along with the stock name can see the add button in the results of the
 
 The user clicks on the add button and the stock along with its current price, a buy button, and a remove button is added to the watchlist. 
 
+# What You'll Need:
+
+- React
+- Jest
+- SuperTest
+- Getting Started:
+
+# Checkout to following branch before testing:
+
+  git checkout frontend-test
+
+# Install the tools:
+
+- Terminal : install the Jest and Supertest framework library
+
+ npm install -g --save-dev jest supertest
+
+ # How to run the tests
+ - Terminal write the command 
+
+npm test
+
+
 
 # Acceptance testing search bar results mimicked.
 ![image](https://github.com/yashshrikant99/Software-Engineering-Project/assets/58352099/b7421465-6e54-4e22-a1bf-f734eb49f208)
