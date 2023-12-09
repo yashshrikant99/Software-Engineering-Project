@@ -61,10 +61,11 @@ const validate = (values) => {
   }
   return errors;
 };
-
+let formToTest = ()  => {}
 function RegistrationForm() {
   const [userData, setUserData] = useState({});
-  const history = useNavigate();
+  global.fetch = jest.fn()
+ // const history = useNavigate();
   const submitForm = async (values) => {
     console.log(values);
     axios
@@ -90,7 +91,7 @@ function RegistrationForm() {
         console.error("This is error " + err);
       });
   };
-
+  formToTest = submitForm
   const notify = (data) => {
     if (data === "Created User") {
       toast.success("User Signed Up", { autoClose: 3000, toastId: "success" });
@@ -137,9 +138,9 @@ function RegistrationForm() {
                   <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                     <LockOutlinedIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">
+                  {/* <Typography component="h1" variant="h5">
                     Sign up
-                  </Typography>
+                  </Typography> */}
                   <Box
                     component="form"
                     noValidate
@@ -266,9 +267,9 @@ function RegistrationForm() {
                     <ToastContainer limit={1} />
                     <Grid container justifyContent="flex-center">
                       <Grid item className="already-acct">
-                        <Link to="/sign-in" variant="body2">
+                        {/* <Link to="/sign-in" variant="body2">
                           Already have an account? Sign in
-                        </Link>
+                        </Link> */}
                       </Grid>
                     </Grid>
                   </Box>
@@ -282,4 +283,5 @@ function RegistrationForm() {
   );
 }
 
-export default RegistrationForm;
+export default RegistrationForm
+export {formToTest};

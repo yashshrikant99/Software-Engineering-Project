@@ -45,7 +45,7 @@
     "eject": "react-scripts eject",
     "proxy": "http://localhost:3000",
     "type": "module",
-    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\""
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --coverage"
   },
   "eslintConfig": {
     "extends": [
