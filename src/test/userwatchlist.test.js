@@ -14,9 +14,9 @@ it('Testing to see if Jest works', () => {
      */
     test("POST Add Holdings api-watchlists/add_watchlist/:uid", async()=>{
         const testdata = {
-            username:"sahil1",
-            password:"sahil1@123",
-            email:"sahil2@othao.com",
+            username:"sahil12232323",
+            password:"sahil123332233@123",
+            email:"sahil223232233@othao.com",
             phone:"abc",
             DoB:"2020-10-21"
     }
