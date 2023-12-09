@@ -15,18 +15,16 @@ The user clicks on the add button and the stock along with its current price, a 
 
 # Checkout to following branch before testing:
 
-  git checkout frontend-test
+  `git checkout frontend-test`
 
 # Install the tools:
 
 - Terminal : install the Jest and Supertest framework library
 
- npm install -g --save-dev jest supertest
+ `npm install -g --save-dev jest supertest`
 
  # How to run the tests
- - Terminal write the command 
-
-npm test
+ Command to run: `npm test`
 
 
 
