@@ -82,7 +82,13 @@ expect(Array.isArray(response.body)).toBeTruthy();
 
 # Screenshot
 
-- ![alt text](https://github.com/yashshrikant99/Software-Engineering-Project/blob/Backend-unit-testing/screenshots/coverage.png)
+- We are calculating code coaverage using command "jest --coverage"
+![alt text](https://github.com/yashshrikant99/Software-Engineering-Project/blob/Backend-unit-testing/screenshots/coverage.png)
+  
+- We have created 3-4 test modules for user, user_holdings, user_watchlists, stock_data and testing all the routes within them 
+![alt text](https://github.com/yashshrikant99/Software-Engineering-Project/blob/Backend-unit-testing/screenshots/test1.png)
+- ![alt text](https://github.com/yashshrikant99/Software-Engineering-Project/blob/Backend-unit-testing/screenshots/test2.png)
+- ![alt text](https://github.com/yashshrikant99/Software-Engineering-Project/blob/Backend-unit-testing/screenshots/test3.png)
 
 
 
