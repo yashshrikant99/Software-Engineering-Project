@@ -26,6 +26,11 @@ It ensures you are building the thing, right.
 
  npm install -g --save-dev jest supertest
 
+ # How to run the tests
+ - Terminal write the command 
+
+npm test
+
 
 
 # Add a test script:
