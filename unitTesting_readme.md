@@ -1,13 +1,16 @@
 # Testing Node.js/Express APIs with Jest and SuperTest
 Ever wondered how to ensure your Node.js/Express API is working as it should? Testing is the answer! This guide will show you how to test your API using Jest and SuperTest, two powerful tools for developers.
 
-# Why Test?
+# Why Unit Test?
 
 Testing isn't just a suggestion, it's a crucial skill for any developer. It helps you:
 
 Catch bugs early: Identify and fix problems before they reach users.
 Prevent regressions: Ensure changes don't break existing functionality.
 Build confidence: Gain trust in your code's quality and stability.
+
+It ensures you are building the thing, right.
+
 
 # What You'll Need:
 
@@ -19,16 +22,18 @@ Build confidence: Gain trust in your code's quality and stability.
 
 # Install the tools:
 
-- Terminal
+- Terminal : install the Jest and Supertest framework library
+
  npm install -g --save-dev jest supertest
- Use code with caution. Learn more
+
+
 
 # Add a test script:
 JSON
 // package.json
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose --coverage"
   }
 }
 
@@ -44,8 +49,8 @@ const app = express();
 // ... your middlewares and routes ...
 
 module.exports = app;
-Use code with caution. Learn more
-Connect to MongoDB and clean up data in your test files:
+
+
 JavaScript
 const app = require("../server");
 const mongoose = require("mongoose");
@@ -56,7 +61,7 @@ afterEach(() => mongoose.connection.db.dropDatabase().then(() => mongoose.connec
 Use code with caution. Learn more
 Testing Your Routes:
 
-Send requests to your app using SuperTest:
+# Send requests to your app using SuperTest:
 JavaScript
 test("GET /api/posts", async () => {
   // ... create some data ...
@@ -66,14 +71,15 @@ test("GET /api/posts", async () => {
     .expect(200)
     // ... verify the response ...
 });
-Use code with caution. Learn more
-Use Jest matchers to confirm the expected behavior:
+
+
+# Use Jest matchers to confirm the expected behavior:
 JavaScript
 expect(response.status).toBe(200);
 expect(Array.isArray(response.body)).toBeTruthy();
 // ... more assertions ...
-Use code with caution. Learn more
-Exploring Further:
+
+# Exploring Further:
 
 This guide provides a basic foundation for testing Node.js/Express APIs. As you gain experience, you can explore more advanced features of Jest and SuperTest, such as:
 

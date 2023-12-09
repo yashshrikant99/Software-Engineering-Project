@@ -5,7 +5,7 @@ const db = require('../models')
 it('Testing to see if Jest works', () => {
     expect(1).toBe(1)
   })
-
+  let user_id = 1;
   describe('Testing User Watchlist API Module',  ()=>{
 
     
@@ -21,6 +21,8 @@ it('Testing to see if Jest works', () => {
             DoB:"2020-10-21"
     }
     const user =  await db.user.create(testdata);
+    if(user)
+    user_id=user.id
     const watchlist = {
         short_name:"Apple1",
         close:22.44
@@ -34,7 +36,7 @@ it('Testing to see if Jest works', () => {
         await expect(Number(response.body.created.user_id)).toBe(user.id)
         await expect(response.body.created.long_name).toBe(watchlist.short_name)
         await expect(response.body.created.price).toBe(watchlist.close)
-    
+        
         // //Check if created in database
         // const user = await db.user.findOne({where:{username:response.body.username, email:response.body.email}})
         // await expect(user).toBeTruthy();

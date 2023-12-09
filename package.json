@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "export NODE_ENV=development && npm i && nodemon src/index.js ",
     "prod": "export NODE_ENV=production && npm i && nodemon src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose --coverage"
   },
   "author": "",
   "license": "ISC",
