@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node index.js",
     "dev": "export NODE_ENV=development && npm i && nodemon src/index.js ",
-    "prod": "export NODE_ENV=production && npm i && nodemon src/index.js"
+    "prod": "export NODE_ENV=production && npm i && nodemon src/index.js",
+    "test": "jest --verbose --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "request": "^2.88.2",
     "sequelize": "^6.35.0",
     "sequelize-cli": "^6.6.2",
+    "supertest": "^6.3.3",
     "yahoo-finance": "^0.3.8",
     "yfinance": "^0.0.6"
   },
